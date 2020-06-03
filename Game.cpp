@@ -63,7 +63,6 @@ void Game::initAssets()
 
     //Entites
     Assets::Get().textures["PLAYER_SHEET"].loadFromFile("Assets/Images/Sprites/Player/player_sprite_sheet.png");
-    Assets::Get().textures["BACKGROUND"].loadFromFile("Assets/Images/Sprites/logo.png");
     Assets::Get().textures["REGULAR_ENEMY"].loadFromFile("Assets/Images/Sprites/Enemies/regular enemy spritesheet.png");
     Assets::Get().textures["COMMANDO_ENEMY"].loadFromFile("Assets/Images/Sprites/Enemies/commando enemy spritesheet.png");
     Assets::Get().textures["STATIONARY_ENEMY"].loadFromFile("Assets/Images/Sprites/Enemies/stationary enemy spritesheet.png");

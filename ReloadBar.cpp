@@ -28,7 +28,6 @@ gui::ReloadBar::ReloadBar(int offset_x, int offset_y, int width, int height,
 void gui::ReloadBar::reloadAnimationStart(const float reload_time_max)
 {
 	if (this->reloading == false) {
-		std::cout << "reloading started\n";
 		this->reloading = true;
 		this->reloadTimeMax = reload_time_max;
 		this->speed = (this->background.getGlobalBounds().width - this->verticalBar.getGlobalBounds().width) / reload_time_max;

@@ -27,6 +27,7 @@ Player::Player(const sf::Vector2f& pos, sf::Texture& texture_sheet)
 
 
 	this->hitSound.setBuffer(Assets::Get().soundBuffers.at("HIT"));
+	this->hitSound.setVolume(30);
 
 }
 
