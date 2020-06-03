@@ -4,6 +4,5 @@
 int main() {
 	Game game;
 	game.run();
-	//What the fuck
 	return 0;
 }
