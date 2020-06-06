@@ -28,7 +28,7 @@ std::vector<Bullet> ShotGun::shootBullet()
         this->readyToShoot = false;
 
         std::vector<Bullet> bullets;
-        sf::Vector2f central = util::rotateVector(this->direction, static_cast<float>(rand() % 20) - 10.f);
+        sf::Vector2f central = util::rotateVector(this->direction, RNG::get().randomI(-10, 10));
 
         int bullet_num = 11;
         float spread_angle = 90.f;

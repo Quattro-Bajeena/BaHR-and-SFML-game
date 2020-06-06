@@ -10,7 +10,7 @@ class ShootingComponent;
 
 class Enemy :
 	public Entity{
-private:
+protected:
 	std::vector<Bullet> bullets;
 
 	enemyType type;
@@ -27,10 +27,10 @@ private:
 
 	float shootTimer;
 	float shootTimerMax;
-
+	float animationSwitchTimer;
+	float animationSwitchTimerMax;
 	
 	sf::Text text;
-	sf::Texture* texture;
 
 	//Initializers
 	void initVariables();
@@ -40,16 +40,16 @@ private:
 	void updateColor();
 
 public:
-	Enemy(sf::Vector2f position, float size, enemyType type, sf::Texture* texture);
+	Enemy(sf::Vector2f position);
 		
 	//Accesors
 	bool isDead();
 
 	//Function
 	void move(const sf::Vector2f& target, const float& dt);
-	void shoot(sf::Vector2f targetPos);
+	virtual void shoot(sf::Vector2f targetPos);
 	void updateBullets(const float dt);
-	void updateAnimations(const float& dt);
+	virtual void updateAnimations(const float& dt);
 	void update(const sf::Vector2f& target, const float& dt);
 	void render(sf::RenderTarget& target) const;
 

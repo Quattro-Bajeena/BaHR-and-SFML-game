@@ -67,6 +67,7 @@ void Game::initAssets()
     Assets::Get().textures["COMMANDO_ENEMY"].loadFromFile("Assets/Images/Sprites/Enemies/commando enemy spritesheet.png");
     Assets::Get().textures["STATIONARY_ENEMY"].loadFromFile("Assets/Images/Sprites/Enemies/stationary enemy spritesheet.png");
     Assets::Get().textures["BOSS_ENEMY"].loadFromFile("Assets/Images/Sprites/Enemies/boss enemy spritesheet.png");
+
     //Objects, UI
     Assets::Get().textures["POWER_UP"].loadFromFile("Assets/Images/Sprites/PowerUpIcons.png");
     Assets::Get().textures["HEARTS"].loadFromFile("Assets/Images/Sprites/hearts_sheet.png");
@@ -75,6 +76,7 @@ void Game::initAssets()
     //Backgrouds
     Assets::Get().textures["MENU_BACKGROUND"].loadFromFile("Assets/Images/Backgrounds/background.png");
     Assets::Get().textures["END_SCREEN_BACKGROUND"].loadFromFile("Assets/Images/Backgrounds/end_screen_background.png");
+
     //Tiles
     Assets::Get().textures["TILE_MAP"].loadFromFile("Assets/Images/Tiles/Tilemap.png");
 
@@ -95,7 +97,7 @@ void Game::initAssets()
 
    //Sounds
    Assets::Get().soundBuffers["HIT"].loadFromFile("Assets/Sounds/uguu.wav");
-   Assets::Get().sounds["HIT"].setBuffer(Assets::Get().soundBuffers.at("HIT"));
+   //Assets::Get().sounds["HIT"].setBuffer(Assets::Get().soundBuffers.at("HIT"));
 }
 
 

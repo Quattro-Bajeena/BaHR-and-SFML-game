@@ -37,7 +37,8 @@ public:
 	~Player();
 
 	//Functions
-	void roll();
+	void roll(const float& dt);
+	void endRoll();
 	void shoot(sf::Vector2f mousePos);
 	void reload();
 	void recievePowerUp(powerUpType type);

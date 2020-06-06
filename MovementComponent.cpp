@@ -30,7 +30,7 @@ const sf::Vector2f& MovementComponent::getVelocity() const
 
 const bool MovementComponent::getState(const movement_states state) const
 {
-
+	//Movemnts states are like cones 90 degrees
 	switch (state) {
 	case movement_states::IDLE:
 		return (this->velocity.x == 0.f && this->velocity.y == 0.f);
@@ -73,6 +73,7 @@ void MovementComponent::stopVelocityY()
 
 void MovementComponent::startRoll()
 {
+
 	this->rolling = true;
 	this->maxVelocity = this->maxRollVelocity;
 	this->velocity.x = util::sgn(this->velocity.x) * this->maxRollVelocity;

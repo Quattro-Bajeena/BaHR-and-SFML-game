@@ -233,18 +233,19 @@ void GameState::updatePlayerInput(const float& dt)
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-		this->player->roll();
+		this->player->roll(dt);
 	}
 	else if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 		player->shoot(mousePosView);
 	}
-
+	
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
 		if (this->player->canReload()) {
 			this->player->reload();
 			this->reloadBar->reloadAnimationStart(this->player->getReloadTime());
 		}
 	}
+	//Swapping weapons with mouse scroll
 	if (this->scroll != 0) {
 		this->player->changeCurrGunAdjacent(this->scroll);
 		this->weaponSlot->setCurrentGun(this->player->getCurrentGunModel(), this->player->getMagazineInfo());
@@ -291,13 +292,13 @@ void GameState::update(const float& dt) {
 
 		this->updatePlayerInput(dt); //Player move and shoot
 
-		this->world->update(this->player, dt);
-		this->world->updateCollision(this->player, dt);
-		this->world->updateBulletCollisions(this->player->getBullets());
+		this->world->update(this->player, dt); //Updating Enemies and PowerUps
+		this->world->updateCollision(this->player, dt); //Player's collision with map
+		this->world->updateBulletCollisions(this->player->getBullets());//Player's bullets collison with map and enemies
 
 		this->player->update(dt);
-		this->player->updateWeapon(this->mousePosView, dt);
-		this->player->updateBullets(this->world->getEnemies(), dt);
+		this->player->updateWeapon(this->mousePosView, dt); //updating gun position, handling reloads
+		this->player->updateBullets(this->world->getEnemies(), dt); //Collision of player bullets withe enemies
 		
 
 		this->updateView(dt); //camera following player

@@ -44,8 +44,8 @@ const bool& AnimationComponent::play(std::string key, const float& dt,
 {
 
 	if (this->priorityAnimation) { //if there is a priority animation
-		if (this->priorityAnimation == this->animations[key]) {
-			if (this->lastAnimation != this->animations[key])
+		if (this->priorityAnimation == this->animations[key]) { //if this animtion is a priority aimation
+			if (this->lastAnimation != this->animations[key]) //if this is a new animation, reset the old
 			{
 				if (this->lastAnimation != nullptr)
 					this->lastAnimation->reset();
@@ -55,6 +55,23 @@ const bool& AnimationComponent::play(std::string key, const float& dt,
 
 			//if the priority animtion is done remove it
 			if (this->animations[key]->play(dt, abs(modifier / modifier_max))) {
+				this->priorityAnimation = nullptr;
+			}
+			
+		}
+		else {
+			//std::cout << "non pririty animation tried to be played during priority one, but it wasnt\n";
+			if (this->lastAnimation != this->animations[key]) //if this is a new animation, reset the old
+			{
+				if (this->lastAnimation != nullptr)
+					this->lastAnimation->reset();
+				this->lastAnimation = this->animations[key];
+			}
+
+			//I'm not sure if this works
+			//play the priority animtion instead, if the priority animtion is done remove it
+			if (this->priorityAnimation->play(dt)) {
+				
 				this->priorityAnimation = nullptr;
 			}
 		}
@@ -73,10 +90,10 @@ const bool& AnimationComponent::play(std::string key, const float& dt,
 
 
 
-		this->animations[key]->play(dt, abs(modifier / modifier_max));
+		this->animations[key]->play(dt, abs(modifier / modifier_max)); //Play the animation
 	}
 
-	return this->animations[key]->isDone();
+	return this->animations[key]->isDone(); //animation done = currently on first frame
 
 }
 

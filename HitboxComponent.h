@@ -18,6 +18,8 @@ private:
 	const float offsetXDefault;
 	const float offsetYDefault;
 
+	std::map<std::string, sf::FloatRect> hitboxPresets;
+
 public:
 	HitboxComponent(sf::Sprite& sprite,
 		const float offset_x, const float offset_y,
@@ -38,8 +40,11 @@ public:
 	void setPosition(const float& x, const float& y);
 
 	//functions
-	void reset();
+	void addHitboxPreset(const std::string key, const float& offset_x, const float& offset_y, const float& width, const float& height);
+	void setHitbox(const std::string key);
 	void changeHitbox(const float& offset_x, const float& offset_y, const float& width, const float& height);
+	void reset();
+
 	bool intersects(const sf::FloatRect& frect);
 	void update();
 	void render(sf::RenderTarget& target) const;

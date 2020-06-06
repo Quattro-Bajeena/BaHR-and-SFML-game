@@ -19,7 +19,7 @@ public:
 	std::map<std::string, sf::Music> music;
 
 	std::map<std::string, sf::SoundBuffer> soundBuffers;
-	std::map<std::string, sf::Sound> sounds;
+	//std::map<std::string, sf::Sound> sounds;
 
 	//Specific Sets
 	std::map<gunModels, const sf::Texture* > weaponTextures;

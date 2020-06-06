@@ -1,4 +1,4 @@
-#include "stdafx.h"
+﻿#include "stdafx.h"
 #include "HitboxComponent.h"
 
 HitboxComponent::HitboxComponent(sf::Sprite& sprite,
@@ -7,6 +7,8 @@ HitboxComponent::HitboxComponent(sf::Sprite& sprite,
     sprite(sprite), offsetX(offset_x), offsetY(offset_y), width(width), height(height),
     offsetXDefault(offset_x), offsetYDefault(offset_y)
 {
+    this->hitboxPresets["DEFAULT"] = sf::FloatRect(offset_x, offset_y, width, height);
+
     this->nextPosition.left = 0.f;
     this->nextPosition.top = 0.f;
     this->nextPosition.width = width;
@@ -101,16 +103,27 @@ void HitboxComponent::setPosition(const float& x, const float& y)
 
 void HitboxComponent::reset()
 {
-    this->offsetX = this->offsetXDefault;
-    this->offsetY = this->offsetYDefault;
-    this->hitbox.setSize(sf::Vector2f(this->width, this->height));
+    this->setHitbox("DEFAULT");
 }
 
 void HitboxComponent::changeHitbox(const float& offset_x, const float& offset_y, const float& width, const float& height)
 {
     this->offsetX = offset_x;
-    this->offsetY = offset_x;
+    this->offsetY = offset_y; //bruh tu był bład ze offsetY = offset_x
     this->hitbox.setSize(sf::Vector2f(width, height));
+}
+
+void HitboxComponent::addHitboxPreset(const std::string key, const float& offset_x, const float& offset_y, const float& width, const float& height)
+{
+    this->hitboxPresets[key] = sf::FloatRect(offset_x, offset_y, width, height);
+}
+
+void HitboxComponent::setHitbox(const std::string key)
+{
+    this->offsetX = this->hitboxPresets.at(key).left;
+    this->offsetY = this->hitboxPresets.at(key).top;
+
+    this->hitbox.setSize(sf::Vector2f(this->hitboxPresets.at(key).width, this->hitboxPresets.at(key).height));
 }
 
 bool HitboxComponent::intersects(const sf::FloatRect& frect)

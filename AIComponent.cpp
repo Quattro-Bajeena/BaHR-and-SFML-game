@@ -12,6 +12,9 @@ sf::Vector2f AIComponent::keepDistance(const float threshold)
 	if (this->distance > threshold) {
 		return this->targetDir;
 	}
+	else if (this->distance > threshold * 0.8) {
+		return sf::Vector2f(0, 0);
+	}
 	else {
 		return -this->targetDir;
 	}
@@ -45,7 +48,7 @@ AIComponent::AIComponent(sf::Sprite& sprite, enemyType type, enemyState& state)
 	this->roamTimer = 0.f;
 	this->roamTimerMax = 15.f; //changing roaming direction after that time
 
-	this->roamDir = util::normalize(sf::Vector2f(rand() % 2 - 1, rand() % 2 - 1));
+	this->roamDir = util::normalize(sf::Vector2f(RNG::get().randomF(-1,1), RNG::get().randomF(-1, 1)));
 	switch (this->type) {
 	case enemyType::REGULAR:
 		this->aggroDistance = 800.f;
@@ -72,8 +75,8 @@ AIComponent::AIComponent(sf::Sprite& sprite, enemyType type, enemyState& state)
 
 	sf::Vector2f roamDirTemp(
 		sf::Vector2f(
-			static_cast<float>(rand() % 200) / 100 - 1.f,
-			static_cast<float>(rand() % 200) / 100 - 1.f
+			RNG::get().randomF(-1, 1),
+			RNG::get().randomF(-1, 1)
 			));
 	this->roamDir = util::normalize(roamDirTemp);
 }
@@ -123,7 +126,7 @@ sf::Vector2f AIComponent::nextMove(const sf::Vector2f& target_dir, const float& 
 
 void AIComponent::update(const float& dt)
 {
-	this->roamTimer += dt;
+	this->roamTimer += (dt * RNG::get().randomF(0.5,1.5)); //timer will go up from 0.5 to 1.5 * dt, so enemies that spawn at the same time dont turn at the same time
 	if (this->distance < this->aggroDistance) { //enemies roam if far away from player
 		this->aggro = true;
 	}
@@ -133,8 +136,8 @@ void AIComponent::update(const float& dt)
 		this->roamTimer = 0.f;
 		sf::Vector2f roamDirTemp(
 			sf::Vector2f(
-				static_cast<float>(rand() % 200)/100 - 1.f,
-				static_cast<float>(rand() % 200)/100 - 1.f
+				RNG::get().randomF(-1, 1),
+				RNG::get().randomF(-1, 1)
 				));
 
 		this->roamDir = util::normalize(roamDirTemp);

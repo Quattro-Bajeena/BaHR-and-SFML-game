@@ -30,6 +30,9 @@
 #include<SFML/Audio.hpp>
 #include<SFML/Network.hpp>
 
+//MY headers
+#include "RNG.h"
+
 //My enums
 enum class powerUpType { DEFAULT = 0, FAST, THREE, ROUND, HEAVY, RANDOM };
 enum class ammoType {};

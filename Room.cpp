@@ -101,40 +101,31 @@ void Room::updatePowerUps(Player& player, const float& dt){
 
 void Room::createRandomEnemy(const sf::Vector2f& enemy_pos)
 {
-	enemyType type = enemyType::REGULAR;
-	int type_num = rand() % 100;
-	sf::Texture* enemyTexture;
-	enemyTexture = &Assets::Get().textures.at("REGULAR_ENEMY");
+
+	int type_num = RNG::get().randomI(0,100);
 
 	if (type_num > 35) {
-		type = enemyType::REGULAR;
-		enemyTexture = &Assets::Get().textures.at("REGULAR_ENEMY");
+		enemies.push_back(new RegularEnemy(enemy_pos));
 	}
 	else if (type_num > 10) {
-		type = enemyType::COMMANDO;
-		enemyTexture = &Assets::Get().textures.at("COMMANDO_ENEMY");
+		enemies.push_back(new CommandoEnemy(enemy_pos));
 	}
 
 	else if (type_num > 2) {
-		type = enemyType::STATIONARY;
-		enemyTexture = &Assets::Get().textures.at("STATIONARY_ENEMY");
+		enemies.push_back(new StationaryEnemy(enemy_pos));
 	}
 
 	else if (type_num >= 0) {
-		type = enemyType::BOSS;
-		enemyTexture = &Assets::Get().textures.at("BOSS_ENEMY");
+		enemies.push_back(new BossEnemy(enemy_pos));
 	}
 
-
-	enemies.push_back(new Enemy(enemy_pos,
-		1.f + static_cast<float>(rand() % 30) / 100, //size from 1 to 1.3
-		type, enemyTexture));
+	
 }
 
 void Room::createRandomPowerUp(const sf::Vector2f& position)
 {
 	powerUpType type = powerUpType::DEFAULT;
-	int type_num = rand() % 100;
+	int type_num = RNG::get().randomI(0,100);
 
 	if (type_num > 70)
 		type = powerUpType::FAST;

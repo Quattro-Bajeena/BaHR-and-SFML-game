@@ -90,6 +90,7 @@ private:
 public:
 	AnimationComponent(sf::Sprite& sprite, sf::Texture& texture_sheet);
 	virtual ~AnimationComponent();
+
 	//Accesor
 	const bool& isDone(const std::string key);
 

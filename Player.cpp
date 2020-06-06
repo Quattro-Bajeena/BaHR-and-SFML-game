@@ -16,8 +16,8 @@ Player::Player(const sf::Vector2f& pos, sf::Texture& texture_sheet)
 	this->createHitboxComponent(50.f, 18.f, 90.f, 180.f);
 
 	this->createShootingComponent(std::move(std::make_unique<NormalGun>()));
-
 	this->sprite.scale(6, 6);
+	
 	this->animationComponent->addAnimation("WALK_STRAIGHT", 12.f, 0, 1, 13, 32, 32);
 	this->animationComponent->addAnimation("WALK_LEFT", 12.f, 0, 3, 6, 32, 32);
 	this->animationComponent->addAnimation("WALK_RIGHT", 12.f, 0, 2, 6, 32, 32);
@@ -25,6 +25,7 @@ Player::Player(const sf::Vector2f& pos, sf::Texture& texture_sheet)
 	this->animationComponent->addAnimation("ROLL_BACK", 12.f, 0, 6, 8, 32, 32);
 	this->animationComponent->addAnimation("IDLE", 3.f, 0, 4, 4, 32, 32);
 
+	this->hitboxComponent->addHitboxPreset("ROLL",60.f, 60.f, 70.f, 110.f);
 
 	this->hitSound.setBuffer(Assets::Get().soundBuffers.at("HIT"));
 	this->hitSound.setVolume(30);
@@ -47,7 +48,7 @@ void Player::initVariables() {
 	this->rollingUp = false;
 	this->rollTimer = 1.f; //how much time bewteen rolls
 
-	this->invincibility = false;
+	this->invincibility = true;
 	this->invincibilityTimer = 0.f;
 	this->invincibilityTimerMax = 0.5f; //how long default invinvibility lasts
 	
@@ -62,22 +63,37 @@ void Player::initVariables() {
 //Functions
 
 
-void Player::roll()
+void Player::roll(const float& dt)
 {
+
 	if (this->rolling == false && this->rollTimer >= 1 && this->movementComponent->getState(movement_states::IDLE) == false) {
 
 		this->rolling = true;
 		this->rollTimer = 0;
 		this->movementComponent->startRoll();
-		this->hitboxComponent->changeHitbox(60.f, 100.f, 70.f, 110.f);
+		this->hitboxComponent->setHitbox("ROLL");
 		this->invincibility = true;
 
 		if (this->movementComponent->getState(movement_states::MOVING_UP) && rollingUp == false) {
 			rollingUp = true;
+			this->animationComponent->play("ROLL_BACK", dt, 1, 1, true);
+
 		}
-		else rollingUp = false;
+		else {
+			rollingUp = false;
+			this->animationComponent->play("ROLL", dt, 1, 1, true);
+		}
 	}
 
+}
+
+void Player::endRoll()
+{
+	this->rolling = false;
+	this->rollingUp = false;
+	this->movementComponent->endRoll();
+	this->hitboxComponent->reset();
+	this->invincibility = false;
 }
 
 
@@ -85,7 +101,7 @@ void Player::shoot(sf::Vector2f mousePos)
 {
 
 	this->shootingComponent->shoot();
-
+	{
 	/*
 
 	switch (this->currPowerUp) {
@@ -163,6 +179,7 @@ void Player::shoot(sf::Vector2f mousePos)
 
 		
 	*/
+	}
 }
 
 void Player::reload()
@@ -196,7 +213,8 @@ void Player::changeCurrGunPos(int pos)
 
 void Player::updateAnimations(const float& dt) //and movement/hitbox for rolling
 {
-	if (this->rolling) {
+	{
+	/*if (this->rolling) {
 
 		if (rollingUp == true) {
 			if (this->animationComponent->play("ROLL_BACK", dt, 1, 1, true)) {
@@ -222,8 +240,10 @@ void Player::updateAnimations(const float& dt) //and movement/hitbox for rolling
 			//this->animationComponent->play("IDLE", dt);
 		}
 	}
+	*/
+	}
 
-	else if (this->movementComponent->getState(movement_states::IDLE))
+	 if (this->movementComponent->getState(movement_states::IDLE))
 		this->animationComponent->play("IDLE", dt);
 	else if (this->movementComponent->getState(movement_states::MOVING_UP))
 		this->animationComponent->play("WALK_STRAIGHT", dt, this->movementComponent->getVelocity().y, this->movementComponent->getMaxVelocity());
@@ -233,6 +253,30 @@ void Player::updateAnimations(const float& dt) //and movement/hitbox for rolling
 		this->animationComponent->play("WALK_LEFT", dt, this->movementComponent->getVelocity().x, this->movementComponent->getMaxVelocity());
 	else if (this->movementComponent->getState(movement_states::MOVING_RIGHT))
 		this->animationComponent->play("WALK_RIGHT", dt, this->movementComponent->getVelocity().x, this->movementComponent->getMaxVelocity());
+
+
+	 if (this->rolling == true) {
+		 if (rollingUp == true && this->animationComponent->isDone("ROLL_BACK")) {
+
+			this->endRoll();	 
+
+		 }
+		 else if (rollingUp == false && this->animationComponent->isDone("ROLL")) {
+			 this->endRoll();
+		 }
+	}
+	
+		
+	if (this->movementComponent->getState(movement_states::IDLE)) {
+		if (this->animationComponent->isDone("ROLL") && this->animationComponent->isDone("ROLL_BACK")) {
+			this->rolling = false;
+			this->movementComponent->endRoll();
+			this->hitboxComponent->reset();
+			this->animationComponent->resetPriority();
+			//this->animationComponent->play("IDLE", dt);
+		}
+		
+	}
 }
 
 void Player::updateBullets(const std::vector<Enemy*>& enemies, const float dt)

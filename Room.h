@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "PowerUp.h"
 #include "State.h"
+#include "Enemies.h"
 
 
 class Player;

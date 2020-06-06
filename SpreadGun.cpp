@@ -25,7 +25,7 @@ std::vector<Bullet> SpreadGun::shootBullet()
         
         this->shootTimer = 0;
         this->readyToShoot = false;
-        sf::Vector2f central = util::rotateVector(this->direction, static_cast<float>(rand()%20) - 10.f);
+        sf::Vector2f central = util::rotateVector(this->direction, RNG::get().randomI(-10, 10));
         sf::Vector2f left = util::rotateVector(central, 30.f);
         sf::Vector2f right = util::rotateVector(central, -30.f);
 

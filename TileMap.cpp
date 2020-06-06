@@ -173,14 +173,14 @@ const int TileMap::getLayerSize(const int x, const int y, const int z) const
 
 const sf::Vector2f TileMap::randomFreeTile()
 {
-	sf::Vector2f rand_tile = sf::Vector2f(rand() % this->maxSizeWorldGrid.x, rand() % this->maxSizeWorldGrid.y);
+	//sf::Vector2f rand_tile = sf::Vector2f(rand() % this->maxSizeWorldGrid.x, rand() % this->maxSizeWorldGrid.y);
 	
 	bool ok = false;
 	int x, y;
 	while (ok == false) {
 		ok = true;
-		x = rand() % this->maxSizeWorldGrid.x;
-		y = rand() % this->maxSizeWorldGrid.y;
+		x = RNG::get().randomI(0,this->maxSizeWorldGrid.x-1);
+		y = RNG::get().randomI(0, this->maxSizeWorldGrid.y-1);
 
 		for (int k = 0; k < this->map[x][y][this->layer].size(); ++k) {
 			if (this->map[x][y][this->layer][k]->getCollision() == true) {

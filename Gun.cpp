@@ -221,7 +221,7 @@ void Gun::updateGunPosition()
 
 	double angle_rad = std::atan2(this->direction.x, this->direction.y);
 	double angle = angle_rad * 180. / M_PI;
-
+	
 	sf::Vector2f scale(1, 1);
 
 	this->gunTip.x = this->startPosition.x + this->direction.x * this->defaultBounds.width * 0.9f;

@@ -4,85 +4,10 @@
 
 
 
-Enemy::Enemy(sf::Vector2f position, float size, enemyType type, sf::Texture* texture)
-	:texture(texture),size(size), type(type)
-{
-	this->speed = 1;
-	this->shootTimerMax = 0;
+Enemy::Enemy(sf::Vector2f position){
+
 	
-	this->sprite.setTexture(*this->texture);
 	this->setPosition(position);
-	this->sprite.scale(this->size, this->size);
-
-	switch (type) {
-
-	default:
-	case enemyType::REGULAR:
-		this->createAnimationComponent(Assets::Get().textures.at("REGULAR_ENEMY"));
-		this->sprite.scale(6, 6);
-		this->animationComponent->addAnimation("WALK_LEFT", 1, 1, 0, 1, 64, 32);
-		this->animationComponent->addAnimation("WALK_RIGHT",  1, 2, 0, 1, 64, 32);
-		this->animationComponent->addAnimation("WALK_FORWARD",  1, 0, 0, 1, 64, 32);
-		this->canShoot = false;
-		this->damage = 0;
-		break;
-
-	case enemyType::COMMANDO:
-		this->sprite.scale(5, 5);
-		this->createAnimationComponent(Assets::Get().textures.at("COMMANDO_ENEMY"));
-		this->animationComponent->addAnimation("WALK_LEFT", 1, 0, 0, 1, 32, 32);
-		this->animationComponent->addAnimation("WALK_RIGHT", 1, 0, 0, 1, 32, 32);
-		this->animationComponent->addAnimation("WALK_FORWARD", 1, 0, 0, 1, 32, 32);
-		this->canShoot = true;
-		this->damage = 1;
-		this->shootTimerMax = 2;
-		this->points *= 2;
-		break;
-
-	case enemyType::STATIONARY:
-		this->sprite.scale(6, 6);
-		this->createAnimationComponent(Assets::Get().textures.at("STATIONARY_ENEMY"));
-		this->animationComponent->addAnimation("WALK_LEFT", 1, 0, 0, 1, 32, 32);
-		this->animationComponent->addAnimation("WALK_RIGHT", 1, 0, 0, 1, 32, 32);
-		this->animationComponent->addAnimation("WALK_FORWARD", 1, 0, 0, 1, 32, 32);
-		this->canShoot = true;
-		this->damage = 2;
-		this->shootTimerMax = 1;
-		this->speed = 0;
-		this->size *= 2;
-		this->health *= 4;
-		this->points *= 4;
-		break;
-
-	case enemyType::BOSS:
-		this->sprite.scale(9, 9);
-		this->createAnimationComponent(Assets::Get().textures.at("BOSS_ENEMY"));
-		this->animationComponent->addAnimation("WALK_LEFT", 1, 0, 0, 1, 32, 32);
-		this->animationComponent->addAnimation("WALK_RIGHT", 1, 0, 0, 1, 32, 32);
-		this->animationComponent->addAnimation("WALK_FORWARD", 1, 0, 0, 1, 32, 32);
-		this->canShoot = true;
-		this->damage = 4;
-		this->shootTimerMax = 5;
-		this->speed /= 1.5;
-		this->size *= 4;
-		this->health *= 10;
-		this->points *= 10;
-		break;
-	}
-
-
-	
-	
-	
-	this->speed = this->speed * (50 / this->size);
-	this->health = static_cast<int>(100 * this->size);
-	this->maxHealth = this->health;
-	this->points = static_cast<int>(this->size * 2);
-	
-	this->createHitboxComponent(0, 0, this->sprite.getGlobalBounds().width, this->sprite.getGlobalBounds().height);
-	this->createMovementComponent(this->speed, this->speed * 2, this->speed * 8, this->speed * 3);
-	this->createAIComponent(this->type, this->state);
-	
 	this->initVariables();
 }
 
@@ -95,6 +20,8 @@ void Enemy::initVariables()
 	this->text.setPosition(this->getPosition());
 	this->text.setFillColor(sf::Color::Red);
 
+	this->animationSwitchTimer = 0.f;
+	this->animationSwitchTimerMax = 1.f;
 	this->shootTimer = 0;	
 
 }
@@ -125,7 +52,7 @@ void Enemy::shoot(sf::Vector2f targetPos)
 		switch (this->type)
 		{
 		case enemyType::COMMANDO:{
-			int spray_angle = -5 + rand() % 10;
+			int spray_angle = RNG::get().randomF(-5,5);
 			sf::Vector2f spray = this->rotateVector(this->calculateDir(targetPos), spray_angle);
 			bullets.emplace_back(Bullet(this->getCenterPosition(), spray, sf::Color::Green,
 				this->damage, 15, 800, 1500));
@@ -153,24 +80,29 @@ void Enemy::updateBullets(const float dt)
 
 void Enemy::updateAnimations(const float& dt)
 {
-	
+	if (this->animationSwitchTimer >= this->animationSwitchTimerMax) {
+		//Bad idea if the animtions actually have more frames, only for single iamges swicthing directions, prevents stutering on edges when ~45 degress of player
 
-	if (this->movementComponent->getState(movement_states::IDLE) == true) {
-		this->animationComponent->play("WALK_FORWARD", dt);
-	}
-	else if (this->movementComponent->getState(movement_states::MOVING_UP) == true) {
-		this->animationComponent->play("WALK_FORWARD", dt);
-	}
-	else if (this->movementComponent->getState(movement_states::MOVING_DOWN) == true) {
-		this->animationComponent->play("WALK_FORWARD", dt);
-	}
-	else if (this->movementComponent->getState(movement_states::MOVING_LEFT) == true) {
-		this->animationComponent->play("WALK_LEFT", dt);
-	}
-	else if (this->movementComponent->getState(movement_states::MOVING_RIGHT) == true) {
-		this->animationComponent->play("WALK_RIGHT", dt);
-	}
+
+		if (this->movementComponent->getState(movement_states::IDLE) == true) {
+			this->animationComponent->play("WALK_FORWARD", dt);
+		}
+		else if (this->movementComponent->getState(movement_states::MOVING_UP) == true) {
+			this->animationComponent->play("WALK_FORWARD", dt);
+		}
+		else if (this->movementComponent->getState(movement_states::MOVING_DOWN) == true) {
+			this->animationComponent->play("WALK_FORWARD", dt);
+		}
+		else if (this->movementComponent->getState(movement_states::MOVING_LEFT) == true) {
+			this->animationComponent->play("WALK_LEFT", dt);
+		}
+		else if (this->movementComponent->getState(movement_states::MOVING_RIGHT) == true) {
+			this->animationComponent->play("WALK_RIGHT", dt);
+		}
 		
+		this->animationSwitchTimer = 0.f;
+	}
+
 	
 }
 
@@ -222,6 +154,8 @@ void Enemy::updateColor()
 void Enemy::update(const sf::Vector2f& target, const float& dt)
 {
 	this->shootTimer += dt;
+	this->animationSwitchTimer += dt;
+
 	Entity::update(dt);
 	this->movementComponent->update(dt);
 	this->hitboxComponent->update();
