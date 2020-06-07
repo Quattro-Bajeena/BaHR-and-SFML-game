@@ -16,11 +16,11 @@ void Room::updateEnemies(Player& player, const float& dt)
 			if (bullet->checkCollision(player.getGlobalBounds()) && player.isInvincible() == false) {
 
 				player.looseHealth(bullet->getDamage());
-				bullet = (*enemy)->getBullets().erase(bullet);
+				bullet = bullets.erase(bullet);
 			}
 			//Collision of enemy bullets with the map
 			else if (this->map->checkCollision(bullet->getShape().getGlobalBounds()) == true) {
-				bullet = (*enemy)->getBullets().erase(bullet);
+				bullet = bullets.erase(bullet);
 			}
 			else bullet++;
 
@@ -44,6 +44,7 @@ void Room::updateEnemies(Player& player, const float& dt)
 		}
 		if ((*enemy)->isDead() == true) { //Enemy death
 			this->statistics.logKill((*enemy)->getPoints(), (*enemy)->getType());
+			this->createAmmo((*enemy)->getType(), (*enemy)->getCenterPosition());
 			delete* enemy;
 			enemy = enemies.erase(enemy);//erase return iterator to the last element 
 		}
@@ -99,6 +100,24 @@ void Room::updatePowerUps(Player& player, const float& dt){
 
 }
 
+void Room::updateColletables(Player& player, const float& dt)
+{
+
+	for (auto ammo = this->ammoPickUps.begin(); ammo != this->ammoPickUps.end(); ) {
+		(*ammo)->update(player.getCenterPosition(), dt);
+
+		if ((*ammo)->checkCollision(player.getGlobalBounds())) {
+			player.recieveAmmo((*ammo)->getRefillPercent());
+			ammo = this->ammoPickUps.erase(ammo);
+
+		}
+		else if ((*ammo)->isActive() == false) {
+			ammo = this->ammoPickUps.erase(ammo);
+		}
+		else ++ammo;
+	}
+}
+
 void Room::createRandomEnemy(const sf::Vector2f& enemy_pos)
 {
 
@@ -140,6 +159,33 @@ void Room::createRandomPowerUp(const sf::Vector2f& position)
 
 
 	powerUps.emplace_back( std::make_unique<PowerUp>(position, 3, type, Assets::Get().textures.at("POWER_UP")));
+}
+
+void Room::createAmmo(enemyType type, const sf::Vector2f& position)
+{
+	int quantity = 0;
+	switch (type)
+	{
+	case enemyType::REGULAR:
+		quantity = RNG::get().discreteI({ 20,5,1 });
+		break;
+	case enemyType::COMMANDO:
+		quantity = RNG::get().discreteI({ 15,5,2,1 });
+		break;
+	case enemyType::STATIONARY:
+		quantity = RNG::get().discreteI({ 0,5,3,2,1 });
+		break;
+	case enemyType::BOSS:
+		quantity = RNG::get().discreteI({ 0,0,5,4,2,2,1 });
+		break;
+	default:
+		break;
+	}
+
+	for (int i = 0; i < quantity; i++) {
+		sf::Vector2f offset = sf::Vector2f(RNG::get().randomF(-50, 50), RNG::get().randomF(-50, 50));
+		this->ammoPickUps.emplace_back(std::make_unique<Ammo>(position, position + offset));
+	}
 }
 
 Room::Room( GameStatistics& statistics,
@@ -253,6 +299,9 @@ void Room::update(Player* player, const float& dt)
 	//Spawing new if it;s allowed
 	this->updatePowerUps(*player, dt);
 
+	//Collatebles (ammo) interacting with player, despawing after some time
+	this->updateColletables(*player, dt);
+
 	this->currEnemies = this->enemies.size();
 	this->currPowerUps = this->powerUps.size();
 }
@@ -263,6 +312,9 @@ void Room::render(sf::RenderTarget& target, const sf::Vector2i& gridPosition) co
 	this->map->render(target, gridPosition);
 	for (const auto &power_up : this->powerUps) {
 		power_up->render(target);
+	}
+	for (const auto& ammo : this->ammoPickUps) {
+		ammo->render(target);
 	}
 	for (const Enemy* enemy : enemies) {
 		enemy->render(target);

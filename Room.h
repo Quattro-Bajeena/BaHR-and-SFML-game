@@ -4,6 +4,7 @@
 #include "PowerUp.h"
 #include "State.h"
 #include "Enemies.h"
+#include "Ammo.h"
 
 
 class Player;
@@ -16,9 +17,10 @@ class Room
 private:
 	sf::Texture& tileSheet;
 	GameStatistics& statistics;
-
+	
 	std::vector<Enemy*> enemies;
 	std::vector<std::unique_ptr<PowerUp>> powerUps;
+	std::vector<std::unique_ptr<Ammo>> ammoPickUps;
 	std::unique_ptr<TileMap> map;
 
 	
@@ -39,9 +41,11 @@ private:
 	//Function
 	void updateEnemies(Player& player, const float& dt);
 	void updatePowerUps( Player& player, const float& dt);
+	void updateColletables(Player& player, const float& dt);
 
 	void createRandomEnemy(const sf::Vector2f& enemy_pos);
 	void createRandomPowerUp(const sf::Vector2f& position);
+	void createAmmo(enemyType type, const sf::Vector2f& position);
 
 public:
 	//Constuctor/Destrucor
