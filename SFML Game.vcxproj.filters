@@ -28,9 +28,6 @@
     <Filter Include="GUI">
       <UniqueIdentifier>{24de0e03-47fb-474e-8dca-112b18a5cd7d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Tile">
-      <UniqueIdentifier>{6f76d255-223b-48aa-8e74-15e06958a452}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Map">
       <UniqueIdentifier>{7ad3e3bb-2ec4-47b6-9c56-b3d87aa63b96}</UniqueIdentifier>
     </Filter>
@@ -60,319 +57,316 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GameState.cpp">
-      <Filter>States</Filter>
+    <ClCompile Include="Source_Code\Components\AIComponent.cpp">
+      <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="State.cpp">
-      <Filter>States</Filter>
+    <ClCompile Include="Source_Code\Components\AnimationComponent.cpp">
+      <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
+    <ClCompile Include="Source_Code\Components\HitboxComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Source_Code\Components\MovementComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Source_Code\Components\ShootingComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Source_Code\Entities\Enemy.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
+    <ClCompile Include="Source_Code\Entities\Entity.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
-    <ClCompile Include="PowerUp.cpp">
-      <Filter>Items</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity.cpp">
+    <ClCompile Include="Source_Code\Entities\Player.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
-    <ClCompile Include="AnimationComponent.cpp">
-      <Filter>Components</Filter>
+    <ClCompile Include="Source_Code\Entities\Enemies\BossEnemy.cpp">
+      <Filter>Entities\Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="HitboxComponent.cpp">
-      <Filter>Components</Filter>
+    <ClCompile Include="Source_Code\Entities\Enemies\CommandoEnemy.cpp">
+      <Filter>Entities\Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="MovementComponent.cpp">
-      <Filter>Components</Filter>
+    <ClCompile Include="Source_Code\Entities\Enemies\RegularEnemy.cpp">
+      <Filter>Entities\Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="MenuState.cpp">
-      <Filter>States</Filter>
+    <ClCompile Include="Source_Code\Entities\Enemies\StationaryEnemy.cpp">
+      <Filter>Entities\Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="EndScreenState.cpp">
-      <Filter>States</Filter>
+    <ClCompile Include="Source_Code\GUI\Gameplay\HealthBar.cpp">
+      <Filter>GUI\Gameplay</Filter>
     </ClCompile>
-    <ClCompile Include="GameStatistics.cpp">
-      <Filter>Utility</Filter>
+    <ClCompile Include="Source_Code\GUI\Gameplay\ReloadBar.cpp">
+      <Filter>GUI\Gameplay</Filter>
     </ClCompile>
-    <ClCompile Include="ShootingComponent.cpp">
-      <Filter>Components</Filter>
+    <ClCompile Include="Source_Code\GUI\Gameplay\TextureSelector.cpp">
+      <Filter>GUI\Gameplay</Filter>
     </ClCompile>
-    <ClCompile Include="AIComponent.cpp">
-      <Filter>Components</Filter>
+    <ClCompile Include="Source_Code\GUI\Gameplay\WeaponSlot.cpp">
+      <Filter>GUI\Gameplay</Filter>
     </ClCompile>
-    <ClCompile Include="Tile.cpp">
-      <Filter>Tile</Filter>
-    </ClCompile>
-    <ClCompile Include="TileMap.cpp">
-      <Filter>Map</Filter>
-    </ClCompile>
-    <ClCompile Include="EditorState.cpp">
-      <Filter>States</Filter>
-    </ClCompile>
-    <ClCompile Include="GraphicSettings.cpp">
-      <Filter>Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="SettingsState.cpp">
-      <Filter>States</Filter>
-    </ClCompile>
-    <ClCompile Include="World.cpp">
-      <Filter>Map</Filter>
-    </ClCompile>
-    <ClCompile Include="Room.cpp">
-      <Filter>Map</Filter>
-    </ClCompile>
-    <ClCompile Include="Gun.cpp">
-      <Filter>Weapons</Filter>
-    </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>Weapons</Filter>
-    </ClCompile>
-    <ClCompile Include="Assets.cpp">
-      <Filter>Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="NormalGun.cpp">
-      <Filter>Weapons\Guns</Filter>
-    </ClCompile>
-    <ClCompile Include="Revolver.cpp">
-      <Filter>Weapons\Guns</Filter>
-    </ClCompile>
-    <ClCompile Include="SpreadGun.cpp">
-      <Filter>Weapons\Guns</Filter>
-    </ClCompile>
-    <ClCompile Include="CanonGun.cpp">
-      <Filter>Weapons\Guns</Filter>
-    </ClCompile>
-    <ClCompile Include="ShotGun.cpp">
-      <Filter>Weapons\Guns</Filter>
-    </ClCompile>
-    <ClCompile Include="MagicGun.cpp">
-      <Filter>Weapons\Guns</Filter>
-    </ClCompile>
-    <ClCompile Include="FastGun.cpp">
-      <Filter>Weapons\Guns</Filter>
-    </ClCompile>
-    <ClCompile Include="Bar.cpp">
+    <ClCompile Include="Source_Code\GUI\General\Bar.cpp">
       <Filter>GUI\General</Filter>
     </ClCompile>
-    <ClCompile Include="Button.cpp">
+    <ClCompile Include="Source_Code\GUI\General\Button.cpp">
       <Filter>GUI\General</Filter>
     </ClCompile>
-    <ClCompile Include="DropDownList.cpp">
+    <ClCompile Include="Source_Code\GUI\General\DropDownList.cpp">
       <Filter>GUI\General</Filter>
     </ClCompile>
-    <ClCompile Include="PauseMenu.cpp">
+    <ClCompile Include="Source_Code\GUI\General\TextBox.cpp">
+      <Filter>GUI\General</Filter>
+    </ClCompile>
+    <ClCompile Include="Source_Code\GUI\StateRelated\PauseMenu.cpp">
       <Filter>GUI\StateRelated</Filter>
     </ClCompile>
-    <ClCompile Include="TextBox.cpp">
-      <Filter>GUI\General</Filter>
-    </ClCompile>
-    <ClCompile Include="HealthBar.cpp">
-      <Filter>GUI\Gameplay</Filter>
-    </ClCompile>
-    <ClCompile Include="WeaponSlot.cpp">
-      <Filter>GUI\Gameplay</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureSelector.cpp">
-      <Filter>GUI\Gameplay</Filter>
-    </ClCompile>
-    <ClCompile Include="ReloadBar.cpp">
-      <Filter>GUI\Gameplay</Filter>
-    </ClCompile>
-    <ClCompile Include="RegularEnemy.cpp">
-      <Filter>Entities\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="CommandoEnemy.cpp">
-      <Filter>Entities\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="StationaryEnemy.cpp">
-      <Filter>Entities\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="BossEnemy.cpp">
-      <Filter>Entities\Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="RNG.cpp">
-      <Filter>Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="stdafx.cpp">
-      <Filter>Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="Collectable.cpp">
+    <ClCompile Include="Source_Code\Items\Ammo.cpp">
       <Filter>Items</Filter>
     </ClCompile>
-    <ClCompile Include="Ammo.cpp">
+    <ClCompile Include="Source_Code\Items\Collectable.cpp">
       <Filter>Items</Filter>
     </ClCompile>
-    <ClCompile Include="Utility.cpp">
+    <ClCompile Include="Source_Code\Items\PowerUp.cpp">
+      <Filter>Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Source_Code\Main\Game.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Source_Code\Main\main.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Source_Code\Map\Room.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Source_Code\Map\Tile.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Source_Code\Map\TileMap.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Source_Code\Map\World.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Source_Code\States\EditorState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source_Code\States\EndScreenState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source_Code\States\GameState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source_Code\States\MenuState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source_Code\States\SettingsState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source_Code\States\State.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="Source_Code\Utility\Assets.cpp">
       <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source_Code\Utility\GameStatistics.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source_Code\Utility\GraphicSettings.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source_Code\Utility\RNG.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source_Code\Utility\stdafx.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source_Code\Utility\Utility.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Source_Code\Weapons\Guns\CanonGun.cpp">
+      <Filter>Weapons\Guns</Filter>
+    </ClCompile>
+    <ClCompile Include="Source_Code\Weapons\Guns\FastGun.cpp">
+      <Filter>Weapons\Guns</Filter>
+    </ClCompile>
+    <ClCompile Include="Source_Code\Weapons\Guns\MagicGun.cpp">
+      <Filter>Weapons\Guns</Filter>
+    </ClCompile>
+    <ClCompile Include="Source_Code\Weapons\Guns\NormalGun.cpp">
+      <Filter>Weapons\Guns</Filter>
+    </ClCompile>
+    <ClCompile Include="Source_Code\Weapons\Guns\Revolver.cpp">
+      <Filter>Weapons\Guns</Filter>
+    </ClCompile>
+    <ClCompile Include="Source_Code\Weapons\Guns\ShotGun.cpp">
+      <Filter>Weapons\Guns</Filter>
+    </ClCompile>
+    <ClCompile Include="Source_Code\Weapons\Guns\SpreadGun.cpp">
+      <Filter>Weapons\Guns</Filter>
+    </ClCompile>
+    <ClCompile Include="Source_Code\Weapons\Bullet.cpp">
+      <Filter>Weapons</Filter>
+    </ClCompile>
+    <ClCompile Include="Source_Code\Weapons\Gun.cpp">
+      <Filter>Weapons</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameState.h">
-      <Filter>States</Filter>
+    <ClInclude Include="Source_Code\Components\AIComponent.h">
+      <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="State.h">
-      <Filter>States</Filter>
+    <ClInclude Include="Source_Code\Components\AnimationComponent.h">
+      <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy.h">
+    <ClInclude Include="Source_Code\Components\HitboxComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Source_Code\Components\MovementComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Source_Code\Components\ShootingComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Source_Code\Entities\Enemies.h">
       <Filter>Entities</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
+    <ClInclude Include="Source_Code\Entities\Enemy.h">
       <Filter>Entities</Filter>
     </ClInclude>
-    <ClInclude Include="PowerUp.h">
-      <Filter>Items</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Main</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.h">
+    <ClInclude Include="Source_Code\Entities\Entity.h">
       <Filter>Entities</Filter>
     </ClInclude>
-    <ClInclude Include="AnimationComponent.h">
-      <Filter>Components</Filter>
+    <ClInclude Include="Source_Code\Entities\Player.h">
+      <Filter>Entities</Filter>
     </ClInclude>
-    <ClInclude Include="HitboxComponent.h">
-      <Filter>Components</Filter>
+    <ClInclude Include="Source_Code\Entities\Enemies\BossEnemy.h">
+      <Filter>Entities\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="MovementComponent.h">
-      <Filter>Components</Filter>
+    <ClInclude Include="Source_Code\Entities\Enemies\CommandoEnemy.h">
+      <Filter>Entities\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="MenuState.h">
-      <Filter>States</Filter>
+    <ClInclude Include="Source_Code\Entities\Enemies\RegularEnemy.h">
+      <Filter>Entities\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="EndScreenState.h">
-      <Filter>States</Filter>
+    <ClInclude Include="Source_Code\Entities\Enemies\StationaryEnemy.h">
+      <Filter>Entities\Enemies</Filter>
     </ClInclude>
-    <ClInclude Include="GameStatistics.h">
-      <Filter>Utility</Filter>
+    <ClInclude Include="Source_Code\GUI\Gameplay\HealthBar.h">
+      <Filter>GUI\Gameplay</Filter>
     </ClInclude>
-    <ClInclude Include="ShootingComponent.h">
-      <Filter>Components</Filter>
+    <ClInclude Include="Source_Code\GUI\Gameplay\ReloadBar.h">
+      <Filter>GUI\Gameplay</Filter>
     </ClInclude>
-    <ClInclude Include="AIComponent.h">
-      <Filter>Components</Filter>
+    <ClInclude Include="Source_Code\GUI\Gameplay\TextureSelector.h">
+      <Filter>GUI\Gameplay</Filter>
     </ClInclude>
-    <ClInclude Include="Tile.h">
-      <Filter>Tile</Filter>
+    <ClInclude Include="Source_Code\GUI\Gameplay\WeaponSlot.h">
+      <Filter>GUI\Gameplay</Filter>
     </ClInclude>
-    <ClInclude Include="TileMap.h">
-      <Filter>Map</Filter>
-    </ClInclude>
-    <ClInclude Include="EditorState.h">
-      <Filter>States</Filter>
-    </ClInclude>
-    <ClInclude Include="Gui.h">
-      <Filter>GUI</Filter>
-    </ClInclude>
-    <ClInclude Include="GraphicSettings.h">
-      <Filter>Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="SettingsState.h">
-      <Filter>States</Filter>
-    </ClInclude>
-    <ClInclude Include="World.h">
-      <Filter>Map</Filter>
-    </ClInclude>
-    <ClInclude Include="Room.h">
-      <Filter>Map</Filter>
-    </ClInclude>
-    <ClInclude Include="Gun.h">
-      <Filter>Weapons</Filter>
-    </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>Weapons</Filter>
-    </ClInclude>
-    <ClInclude Include="Assets.h">
-      <Filter>Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="NormalGun.h">
-      <Filter>Weapons\Guns</Filter>
-    </ClInclude>
-    <ClInclude Include="Revolver.h">
-      <Filter>Weapons\Guns</Filter>
-    </ClInclude>
-    <ClInclude Include="SpreadGun.h">
-      <Filter>Weapons\Guns</Filter>
-    </ClInclude>
-    <ClInclude Include="CanonGun.h">
-      <Filter>Weapons\Guns</Filter>
-    </ClInclude>
-    <ClInclude Include="ShotGun.h">
-      <Filter>Weapons\Guns</Filter>
-    </ClInclude>
-    <ClInclude Include="MagicGun.h">
-      <Filter>Weapons\Guns</Filter>
-    </ClInclude>
-    <ClInclude Include="Guns.h">
-      <Filter>Weapons</Filter>
-    </ClInclude>
-    <ClInclude Include="FastGun.h">
-      <Filter>Weapons\Guns</Filter>
-    </ClInclude>
-    <ClInclude Include="Bar.h">
+    <ClInclude Include="Source_Code\GUI\General\Bar.h">
       <Filter>GUI\General</Filter>
     </ClInclude>
-    <ClInclude Include="Button.h">
+    <ClInclude Include="Source_Code\GUI\General\Button.h">
       <Filter>GUI\General</Filter>
     </ClInclude>
-    <ClInclude Include="DropDownList.h">
+    <ClInclude Include="Source_Code\GUI\General\DropDownList.h">
       <Filter>GUI\General</Filter>
     </ClInclude>
-    <ClInclude Include="PauseMenu.h">
+    <ClInclude Include="Source_Code\GUI\General\TextBox.h">
+      <Filter>GUI\General</Filter>
+    </ClInclude>
+    <ClInclude Include="Source_Code\GUI\StateRelated\PauseMenu.h">
       <Filter>GUI\StateRelated</Filter>
     </ClInclude>
-    <ClInclude Include="TextBox.h">
-      <Filter>GUI\General</Filter>
-    </ClInclude>
-    <ClInclude Include="HealthBar.h">
-      <Filter>GUI\Gameplay</Filter>
-    </ClInclude>
-    <ClInclude Include="WeaponSlot.h">
-      <Filter>GUI\Gameplay</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureSelector.h">
-      <Filter>GUI\Gameplay</Filter>
-    </ClInclude>
-    <ClInclude Include="ReloadBar.h">
-      <Filter>GUI\Gameplay</Filter>
-    </ClInclude>
-    <ClInclude Include="RegularEnemy.h">
-      <Filter>Entities\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="CommandoEnemy.h">
-      <Filter>Entities\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="StationaryEnemy.h">
-      <Filter>Entities\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="BossEnemy.h">
-      <Filter>Entities\Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemies.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="stdafx.h">
-      <Filter>Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="Collectable.h">
+    <ClInclude Include="Source_Code\Items\Ammo.h">
       <Filter>Items</Filter>
     </ClInclude>
-    <ClInclude Include="RNG.h">
-      <Filter>Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="Ammo.h">
+    <ClInclude Include="Source_Code\Items\Collectable.h">
       <Filter>Items</Filter>
     </ClInclude>
-    <ClInclude Include="Utility.h">
+    <ClInclude Include="Source_Code\Items\PowerUp.h">
+      <Filter>Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Source_Code\Main\Game.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Source_Code\Map\Room.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Source_Code\Map\Tile.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Source_Code\Map\TileMap.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Source_Code\Map\World.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Source_Code\States\EditorState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source_Code\States\EndScreenState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source_Code\States\GameState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source_Code\States\MenuState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source_Code\States\SettingsState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source_Code\States\State.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source_Code\Utility\Assets.h">
       <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source_Code\Utility\GameStatistics.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source_Code\Utility\GraphicSettings.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source_Code\Utility\RNG.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source_Code\Utility\stdafx.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source_Code\Utility\Utility.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Source_Code\Weapons\Guns\CanonGun.h">
+      <Filter>Weapons\Guns</Filter>
+    </ClInclude>
+    <ClInclude Include="Source_Code\Weapons\Guns\FastGun.h">
+      <Filter>Weapons\Guns</Filter>
+    </ClInclude>
+    <ClInclude Include="Source_Code\Weapons\Guns\MagicGun.h">
+      <Filter>Weapons\Guns</Filter>
+    </ClInclude>
+    <ClInclude Include="Source_Code\Weapons\Guns\NormalGun.h">
+      <Filter>Weapons\Guns</Filter>
+    </ClInclude>
+    <ClInclude Include="Source_Code\Weapons\Guns\Revolver.h">
+      <Filter>Weapons\Guns</Filter>
+    </ClInclude>
+    <ClInclude Include="Source_Code\Weapons\Guns\ShotGun.h">
+      <Filter>Weapons\Guns</Filter>
+    </ClInclude>
+    <ClInclude Include="Source_Code\Weapons\Guns\SpreadGun.h">
+      <Filter>Weapons\Guns</Filter>
+    </ClInclude>
+    <ClInclude Include="Source_Code\Weapons\Bullet.h">
+      <Filter>Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="Source_Code\Weapons\Gun.h">
+      <Filter>Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="Source_Code\Weapons\Guns.h">
+      <Filter>Weapons</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

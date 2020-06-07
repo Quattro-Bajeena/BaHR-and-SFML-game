@@ -19,115 +19,116 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AIComponent.cpp" />
-    <ClCompile Include="Ammo.cpp" />
-    <ClCompile Include="AnimationComponent.cpp" />
-    <ClCompile Include="Bar.cpp" />
-    <ClCompile Include="BossEnemy.cpp" />
-    <ClCompile Include="Bullet.cpp" />
-    <ClCompile Include="Button.cpp" />
-    <ClCompile Include="CanonGun.cpp" />
-    <ClCompile Include="Collectable.cpp" />
-    <ClCompile Include="CommandoEnemy.cpp" />
-    <ClCompile Include="DropDownList.cpp" />
-    <ClCompile Include="EditorState.cpp" />
-    <ClCompile Include="EndScreenState.cpp" />
-    <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="FastGun.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameState.cpp" />
-    <ClCompile Include="GameStatistics.cpp" />
-    <ClCompile Include="GraphicSettings.cpp" />
-    <ClCompile Include="Gun.cpp" />
-    <ClCompile Include="HealthBar.cpp" />
-    <ClCompile Include="HitboxComponent.cpp" />
-    <ClCompile Include="MagicGun.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="MenuState.cpp" />
-    <ClCompile Include="MovementComponent.cpp" />
-    <ClCompile Include="NormalGun.cpp" />
-    <ClCompile Include="PauseMenu.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="PowerUp.cpp" />
-    <ClCompile Include="RegularEnemy.cpp" />
-    <ClCompile Include="ReloadBar.cpp" />
-    <ClCompile Include="Revolver.cpp" />
-    <ClCompile Include="RNG.cpp" />
-    <ClCompile Include="Room.cpp" />
-    <ClCompile Include="SettingsState.cpp" />
-    <ClCompile Include="ShootingComponent.cpp" />
-    <ClCompile Include="ShotGun.cpp" />
-    <ClCompile Include="SpreadGun.cpp" />
-    <ClCompile Include="State.cpp" />
-    <ClCompile Include="Assets.cpp" />
-    <ClCompile Include="StationaryEnemy.cpp" />
-    <ClCompile Include="stdafx.cpp">
+    <ClCompile Include="Source_Code\Components\AIComponent.cpp" />
+    <ClCompile Include="Source_Code\Components\AnimationComponent.cpp" />
+    <ClCompile Include="Source_Code\Components\HitboxComponent.cpp" />
+    <ClCompile Include="Source_Code\Components\MovementComponent.cpp" />
+    <ClCompile Include="Source_Code\Components\ShootingComponent.cpp" />
+    <ClCompile Include="Source_Code\Entities\Enemies\BossEnemy.cpp" />
+    <ClCompile Include="Source_Code\Entities\Enemies\CommandoEnemy.cpp" />
+    <ClCompile Include="Source_Code\Entities\Enemies\RegularEnemy.cpp" />
+    <ClCompile Include="Source_Code\Entities\Enemies\StationaryEnemy.cpp" />
+    <ClCompile Include="Source_Code\Entities\Enemy.cpp" />
+    <ClCompile Include="Source_Code\Entities\Entity.cpp" />
+    <ClCompile Include="Source_Code\Entities\Player.cpp" />
+    <ClCompile Include="Source_Code\GUI\Gameplay\HealthBar.cpp" />
+    <ClCompile Include="Source_Code\GUI\Gameplay\ReloadBar.cpp" />
+    <ClCompile Include="Source_Code\GUI\Gameplay\TextureSelector.cpp" />
+    <ClCompile Include="Source_Code\GUI\Gameplay\WeaponSlot.cpp" />
+    <ClCompile Include="Source_Code\GUI\General\Bar.cpp" />
+    <ClCompile Include="Source_Code\GUI\General\Button.cpp" />
+    <ClCompile Include="Source_Code\GUI\General\DropDownList.cpp" />
+    <ClCompile Include="Source_Code\GUI\General\TextBox.cpp" />
+    <ClCompile Include="Source_Code\GUI\StateRelated\PauseMenu.cpp" />
+    <ClCompile Include="Source_Code\Items\Ammo.cpp" />
+    <ClCompile Include="Source_Code\Items\Collectable.cpp" />
+    <ClCompile Include="Source_Code\Items\PowerUp.cpp" />
+    <ClCompile Include="Source_Code\Main\Game.cpp" />
+    <ClCompile Include="Source_Code\Main\main.cpp" />
+    <ClCompile Include="Source_Code\Map\Room.cpp" />
+    <ClCompile Include="Source_Code\Map\Tile.cpp" />
+    <ClCompile Include="Source_Code\Map\TileMap.cpp" />
+    <ClCompile Include="Source_Code\Map\World.cpp" />
+    <ClCompile Include="Source_Code\States\EditorState.cpp" />
+    <ClCompile Include="Source_Code\States\EndScreenState.cpp" />
+    <ClCompile Include="Source_Code\States\GameState.cpp" />
+    <ClCompile Include="Source_Code\States\MenuState.cpp" />
+    <ClCompile Include="Source_Code\States\SettingsState.cpp" />
+    <ClCompile Include="Source_Code\States\State.cpp" />
+    <ClCompile Include="Source_Code\Utility\Assets.cpp" />
+    <ClCompile Include="Source_Code\Utility\GameStatistics.cpp" />
+    <ClCompile Include="Source_Code\Utility\GraphicSettings.cpp" />
+    <ClCompile Include="Source_Code\Utility\RNG.cpp" />
+    <ClCompile Include="Source_Code\Utility\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="TextBox.cpp" />
-    <ClCompile Include="TextureSelector.cpp" />
-    <ClCompile Include="Tile.cpp" />
-    <ClCompile Include="TileMap.cpp" />
-    <ClCompile Include="Utility.cpp" />
-    <ClCompile Include="WeaponSlot.cpp" />
-    <ClCompile Include="World.cpp" />
+    <ClCompile Include="Source_Code\Utility\Utility.cpp" />
+    <ClCompile Include="Source_Code\Weapons\Bullet.cpp" />
+    <ClCompile Include="Source_Code\Weapons\Gun.cpp" />
+    <ClCompile Include="Source_Code\Weapons\Guns\CanonGun.cpp" />
+    <ClCompile Include="Source_Code\Weapons\Guns\FastGun.cpp" />
+    <ClCompile Include="Source_Code\Weapons\Guns\MagicGun.cpp" />
+    <ClCompile Include="Source_Code\Weapons\Guns\NormalGun.cpp" />
+    <ClCompile Include="Source_Code\Weapons\Guns\Revolver.cpp" />
+    <ClCompile Include="Source_Code\Weapons\Guns\ShotGun.cpp" />
+    <ClCompile Include="Source_Code\Weapons\Guns\SpreadGun.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AIComponent.h" />
-    <ClInclude Include="Ammo.h" />
-    <ClInclude Include="AnimationComponent.h" />
-    <ClInclude Include="Bar.h" />
-    <ClInclude Include="BossEnemy.h" />
-    <ClInclude Include="Bullet.h" />
-    <ClInclude Include="Button.h" />
-    <ClInclude Include="CanonGun.h" />
-    <ClInclude Include="Collectable.h" />
-    <ClInclude Include="CommandoEnemy.h" />
-    <ClInclude Include="DropDownList.h" />
-    <ClInclude Include="EditorState.h" />
-    <ClInclude Include="EndScreenState.h" />
-    <ClInclude Include="Enemies.h" />
-    <ClInclude Include="Enemy.h" />
-    <ClInclude Include="Entity.h" />
-    <ClInclude Include="FastGun.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="GameState.h" />
-    <ClInclude Include="GameStatistics.h" />
-    <ClInclude Include="GraphicSettings.h" />
-    <ClInclude Include="Gui.h" />
-    <ClInclude Include="Gun.h" />
-    <ClInclude Include="Guns.h" />
-    <ClInclude Include="HealthBar.h" />
-    <ClInclude Include="HitboxComponent.h" />
-    <ClInclude Include="MagicGun.h" />
-    <ClInclude Include="MenuState.h" />
-    <ClInclude Include="MovementComponent.h" />
-    <ClInclude Include="NormalGun.h" />
-    <ClInclude Include="PauseMenu.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="PowerUp.h" />
-    <ClInclude Include="RegularEnemy.h" />
-    <ClInclude Include="ReloadBar.h" />
-    <ClInclude Include="Revolver.h" />
-    <ClInclude Include="RNG.h" />
-    <ClInclude Include="Room.h" />
-    <ClInclude Include="SettingsState.h" />
-    <ClInclude Include="ShootingComponent.h" />
-    <ClInclude Include="ShotGun.h" />
-    <ClInclude Include="SpreadGun.h" />
-    <ClInclude Include="State.h" />
-    <ClInclude Include="Assets.h" />
-    <ClInclude Include="StationaryEnemy.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="TextBox.h" />
-    <ClInclude Include="TextureSelector.h" />
-    <ClInclude Include="Tile.h" />
-    <ClInclude Include="TileMap.h" />
-    <ClInclude Include="Utility.h" />
-    <ClInclude Include="WeaponSlot.h" />
-    <ClInclude Include="World.h" />
+    <ClInclude Include="Source_Code\Components\AIComponent.h" />
+    <ClInclude Include="Source_Code\Components\AnimationComponent.h" />
+    <ClInclude Include="Source_Code\Components\HitboxComponent.h" />
+    <ClInclude Include="Source_Code\Components\MovementComponent.h" />
+    <ClInclude Include="Source_Code\Components\ShootingComponent.h" />
+    <ClInclude Include="Source_Code\Entities\Enemies.h" />
+    <ClInclude Include="Source_Code\Entities\Enemies\BossEnemy.h" />
+    <ClInclude Include="Source_Code\Entities\Enemies\CommandoEnemy.h" />
+    <ClInclude Include="Source_Code\Entities\Enemies\RegularEnemy.h" />
+    <ClInclude Include="Source_Code\Entities\Enemies\StationaryEnemy.h" />
+    <ClInclude Include="Source_Code\Entities\Enemy.h" />
+    <ClInclude Include="Source_Code\Entities\Entity.h" />
+    <ClInclude Include="Source_Code\Entities\Player.h" />
+    <ClInclude Include="Source_Code\GUI\Gameplay\HealthBar.h" />
+    <ClInclude Include="Source_Code\GUI\Gameplay\ReloadBar.h" />
+    <ClInclude Include="Source_Code\GUI\Gameplay\TextureSelector.h" />
+    <ClInclude Include="Source_Code\GUI\Gameplay\WeaponSlot.h" />
+    <ClInclude Include="Source_Code\GUI\General\Bar.h" />
+    <ClInclude Include="Source_Code\GUI\General\Button.h" />
+    <ClInclude Include="Source_Code\GUI\General\DropDownList.h" />
+    <ClInclude Include="Source_Code\GUI\General\TextBox.h" />
+    <ClInclude Include="Source_Code\GUI\StateRelated\PauseMenu.h" />
+    <ClInclude Include="Source_Code\Items\Ammo.h" />
+    <ClInclude Include="Source_Code\Items\Collectable.h" />
+    <ClInclude Include="Source_Code\Items\PowerUp.h" />
+    <ClInclude Include="Source_Code\Main\Game.h" />
+    <ClInclude Include="Source_Code\Map\Room.h" />
+    <ClInclude Include="Source_Code\Map\Tile.h" />
+    <ClInclude Include="Source_Code\Map\TileMap.h" />
+    <ClInclude Include="Source_Code\Map\World.h" />
+    <ClInclude Include="Source_Code\States\EditorState.h" />
+    <ClInclude Include="Source_Code\States\EndScreenState.h" />
+    <ClInclude Include="Source_Code\States\GameState.h" />
+    <ClInclude Include="Source_Code\States\MenuState.h" />
+    <ClInclude Include="Source_Code\States\SettingsState.h" />
+    <ClInclude Include="Source_Code\States\State.h" />
+    <ClInclude Include="Source_Code\Utility\Assets.h" />
+    <ClInclude Include="Source_Code\Utility\GameStatistics.h" />
+    <ClInclude Include="Source_Code\Utility\GraphicSettings.h" />
+    <ClInclude Include="Source_Code\Utility\RNG.h" />
+    <ClInclude Include="Source_Code\Utility\stdafx.h" />
+    <ClInclude Include="Source_Code\Utility\Utility.h" />
+    <ClInclude Include="Source_Code\Weapons\Bullet.h" />
+    <ClInclude Include="Source_Code\Weapons\Gun.h" />
+    <ClInclude Include="Source_Code\Weapons\Guns.h" />
+    <ClInclude Include="Source_Code\Weapons\Guns\CanonGun.h" />
+    <ClInclude Include="Source_Code\Weapons\Guns\FastGun.h" />
+    <ClInclude Include="Source_Code\Weapons\Guns\MagicGun.h" />
+    <ClInclude Include="Source_Code\Weapons\Guns\NormalGun.h" />
+    <ClInclude Include="Source_Code\Weapons\Guns\Revolver.h" />
+    <ClInclude Include="Source_Code\Weapons\Guns\ShotGun.h" />
+    <ClInclude Include="Source_Code\Weapons\Guns\SpreadGun.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -198,10 +199,11 @@
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>F:\Game_Dev\SFML game\sfml\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ConformanceMode>false</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)\Source_Code\Weapons\Guns;$(ProjectDir)\Source_Code\Weapons;$(ProjectDir)\Source_Code\Utility;$(ProjectDir)\Source_Code\Tile;$(ProjectDir)\Source_Code\States;$(ProjectDir)\Source_Code\Map;$(ProjectDir)\Source_Code\Main;$(ProjectDir)\Source_Code\Items;$(ProjectDir)\Source_Code\StateRelated;$(ProjectDir)\Source_Code\GUI\General;$(ProjectDir)\Source_Code\GUI\Gameplay;$(ProjectDir)\Source_Code\GUI;$(ProjectDir)\Source_Code\Entities\Enemies;$(ProjectDir)\Source_Code\Entities;$(ProjectDir)\Source_Code\Components;$(SolutionDir)\sfml\include</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <EnableModules>true</EnableModules>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -215,9 +217,11 @@
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>F:\Game_Dev\SFML game\sfml\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <ConformanceMode>false</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)\Source_Code\Weapons\Guns;$(ProjectDir)\Source_Code\Weapons;$(ProjectDir)\Source_Code\Utility;$(ProjectDir)\Source_Code\Tile;$(ProjectDir)\Source_Code\States;$(ProjectDir)\Source_Code\Map;$(ProjectDir)\Source_Code\Main;$(ProjectDir)\Source_Code\Items;$(ProjectDir)\Source_Code\StateRelated;$(ProjectDir)\Source_Code\GUI\General;$(ProjectDir)\Source_Code\GUI\Gameplay;$(ProjectDir)\Source_Code\GUI;$(ProjectDir)\Source_Code\Entities\Enemies;$(ProjectDir)\Source_Code\Entities;$(ProjectDir)\Source_Code\Components;$(SolutionDir)\sfml\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <EnableModules>true</EnableModules>
+      <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -233,10 +237,12 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>F:\Game_Dev\SFML game\sfml\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ConformanceMode>false</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)\Source_Code\Weapons\Guns;$(ProjectDir)\Source_Code\Weapons;$(ProjectDir)\Source_Code\Utility;$(ProjectDir)\Source_Code\Tile;$(ProjectDir)\Source_Code\States;$(ProjectDir)\Source_Code\Map;$(ProjectDir)\Source_Code\Main;$(ProjectDir)\Source_Code\Items;$(ProjectDir)\Source_Code\StateRelated;$(ProjectDir)\Source_Code\GUI\General;$(ProjectDir)\Source_Code\GUI\Gameplay;$(ProjectDir)\Source_Code\GUI;$(ProjectDir)\Source_Code\Entities\Enemies;$(ProjectDir)\Source_Code\Entities;$(ProjectDir)\Source_Code\Components;$(SolutionDir)\sfml\include</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <EnableModules>true</EnableModules>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -254,9 +260,12 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>F:\Game_Dev\SFML game\sfml\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <ConformanceMode>false</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)\Source_Code\Weapons\Guns;$(ProjectDir)\Source_Code\Weapons;$(ProjectDir)\Source_Code\Utility;$(ProjectDir)\Source_Code\Tile;$(ProjectDir)\Source_Code\States;$(ProjectDir)\Source_Code\Map;$(ProjectDir)\Source_Code\Main;$(ProjectDir)\Source_Code\Items;$(ProjectDir)\Source_Code\StateRelated;$(ProjectDir)\Source_Code\GUI\General;$(ProjectDir)\Source_Code\GUI\Gameplay;$(ProjectDir)\Source_Code\GUI;$(ProjectDir)\Source_Code\Entities\Enemies;$(ProjectDir)\Source_Code\Entities;$(ProjectDir)\Source_Code\Components;$(SolutionDir)\sfml\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <EnableModules>true</EnableModules>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
