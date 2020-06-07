@@ -40,8 +40,12 @@ protected:
 	bool quit;
 	bool paused;
 	bool cursorVisibility;
+
 	float keytime;
 	float keytimeMax;
+
+	float clickTime;
+	float clickTimeMax;
 
 	int gridSize;
 
@@ -64,6 +68,7 @@ public:
 	//Accesors
 	const bool& getQuit() const;
 	const bool getKeytime();
+	const bool getClickTime();
 
 	//Functions
 	void endState();

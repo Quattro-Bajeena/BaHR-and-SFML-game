@@ -96,21 +96,10 @@ void GameState::initGui()
 
 void GameState::initWorld()
 {
-	this->world = std::make_unique< World>(Assets::Get().textures.at("TILE_MAP"),this->statistics);
+	this->world = std::make_unique< World>("World/test_world.txt",Assets::Get().textures.at("TILE_MAP"),this->statistics);
 	
-	
-	this->world->addRoom("TEST", 0, 0,
-		false, 0.5f,0,
-		true,1,3);
 
-
-	this->world->addRoom("TEST", 15, 0,
-		true, 0.5f, 20,
-		false, 2.f, 5);
-
-	this->world->addRoom("TEST", 0, 15,
-		false, 0, 3,
-		true, 1.f, 10);
+	this->world->saveToFile("World/test_world.txt");
 }
 
 //Constuctors / destructors

@@ -7,7 +7,7 @@ State::State(StateData& state_data)
 	: stateData(state_data),
 	window(*state_data.window),
 	quit(false), paused(false), states(*state_data.states), gridSize(state_data.gridSize),
-	keytime(0.f), keytimeMax(0.3f)
+	keytime(0.f), keytimeMax(0.3f), clickTime(0.f), clickTimeMax(0.1f)
 {
 	this->refreshGui();
 	this->window.setMouseCursorVisible(true);
@@ -24,6 +24,15 @@ State::~State()
 const bool& State::getQuit() const
 {
 	return this->quit;
+}
+
+const bool State::getClickTime()
+{
+	if (this->clickTime >= this->clickTimeMax) {
+		this->clickTime = 0.f;
+		return true;
+	}
+	else return false;
 }
 
 const bool State::getKeytime()
@@ -102,6 +111,9 @@ void State::updateKeytime(const float& dt)
 {
 	if (this->keytime < this->keytimeMax) {
 		this->keytime += dt;
+	}
+	if (this->clickTime < this->clickTimeMax) {
+		this->clickTime += dt;
 	}
 }
 

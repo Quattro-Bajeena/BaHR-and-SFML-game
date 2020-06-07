@@ -43,7 +43,7 @@ void Room::updateEnemies(Player& player, const float& dt)
 			player.Die();
 		}
 		if ((*enemy)->isDead() == true) { //Enemy death
-			this->statistics.logKill((*enemy)->getPoints(), (*enemy)->getType());
+			this->statistics->logKill((*enemy)->getPoints(), (*enemy)->getType());
 			this->createAmmo((*enemy)->getType(), (*enemy)->getCenterPosition());
 			delete* enemy;
 			enemy = enemies.erase(enemy);//erase return iterator to the last element 
@@ -188,12 +188,31 @@ void Room::createAmmo(enemyType type, const sf::Vector2f& position)
 	}
 }
 
-Room::Room( GameStatistics& statistics,
+Room::Room( GameStatistics& statistics, const std::string& type,
 	const std::string& room_file, sf::Texture& tile_sheet,
 	int offsetX, int offsetY)
-	:tileSheet(tile_sheet), statistics(statistics)
+	:tileSheet(tile_sheet), statistics(&statistics), tileMapType(type), offset(offsetX,offsetY)
 {
 	this->map = std::make_unique<TileMap>(room_file, tileSheet, offsetX, offsetY);
+	this->spawnTime = 0.f;
+	this->powerUpTime = 0.f;
+
+	this->allowSpawnEnemies = false;
+	this->spawnTimeMax = 0;
+	this->enemyLimit = 0;
+
+	this->allowSpawnPowerUps = false;
+	this->powerUpTimeMax = 0;
+	this->powerUpLimit = 0;
+
+	this->currEnemies = 0;
+	this->currPowerUps = 0;
+}
+
+Room::Room(const std::string& type, const std::string& room_file, sf::Texture& tile_sheet)
+	:tileSheet(tile_sheet), tileMapType(type), offset(0, 0), statistics(nullptr)
+{
+	this->map = std::make_unique<TileMap>(room_file, tileSheet, offset.x, offset.y);
 	this->spawnTime = 0.f;
 	this->powerUpTime = 0.f;
 
@@ -213,7 +232,6 @@ Room::~Room()
 {
 	util::purge(this->enemies);
 
-	
 }
 
 //Accesors
@@ -232,7 +250,7 @@ const sf::Vector2f Room::randomFreeTile() const
 	return this->map->randomFreeTile();
 }
 
-const bool Room::checkCollision(sf::FloatRect bounds)
+const bool Room::checkCollision(sf::FloatRect bounds) const
 {
 	return this->map->checkCollision(bounds);
 }
@@ -244,6 +262,13 @@ const std::vector<Enemy*>& Room::getEnemies()
 
 	//YAY SOLVED by passing sf::vector2f<Entity*>(enemis.begin, enemies.end) in player to shooting compenent function
 	return this->enemies;
+}
+
+const std::string Room::getAsString() const
+{
+	std::stringstream ss;
+	ss << this->tileMapType << " " << this->offset.x << " " << this->offset.y << " " << this->allowSpawnEnemies << " " << this->spawnTimeMax << " " << this->enemyLimit;
+	return ss.str();
 }
 
 void Room::setEnemies(bool enemy_spawn, float spawn_time, int enemy_limit)
@@ -270,10 +295,10 @@ void Room::spawnEnemies()
 void Room::spawnPowerUps()
 {
 
-	while (this->powerUps.size() < this->powerUpLimit) {
+	/*while (this->powerUps.size() < this->powerUpLimit) {
 		this->createRandomPowerUp(this->map->randomFreeTile());
 
-	}
+	}*/
 }
 
 void Room::updateCollision(Entity* entity, const float& dt)
@@ -297,22 +322,22 @@ void Room::update(Player* player, const float& dt)
 
 	//Timer of power ups, collision with player, destroying old power ups
 	//Spawing new if it;s allowed
-	this->updatePowerUps(*player, dt);
+	//this->updatePowerUps(*player, dt);
 
 	//Collatebles (ammo) interacting with player, despawing after some time
 	this->updateColletables(*player, dt);
 
 	this->currEnemies = this->enemies.size();
-	this->currPowerUps = this->powerUps.size();
+	//this->currPowerUps = this->powerUps.size();
 }
 
 
 void Room::render(sf::RenderTarget& target, const sf::Vector2i& gridPosition) const
 {
 	this->map->render(target, gridPosition);
-	for (const auto &power_up : this->powerUps) {
+	/*for (const auto &power_up : this->powerUps) {
 		power_up->render(target);
-	}
+	}*/
 	for (const auto& ammo : this->ammoPickUps) {
 		ammo->render(target);
 	}
@@ -324,4 +349,9 @@ void Room::render(sf::RenderTarget& target, const sf::Vector2i& gridPosition) co
 void Room::renderDeffered(sf::RenderTarget& target) const
 {
 	this->map->renderDeffered(target);
+}
+
+void Room::fullRender(sf::RenderTarget& target) const
+{
+	this->map->fullRender(target);
 }

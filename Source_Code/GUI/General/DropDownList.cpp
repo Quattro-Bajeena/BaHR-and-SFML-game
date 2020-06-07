@@ -3,11 +3,11 @@
 
 gui::DropDownList::DropDownList(float x, float y,
 	float width, float height, sf::Vector2f scale,
-	sf::Font& font, std::string list[],
-	int nrOfElements, const int default_index)
-	:font(font), showList(false), keytimeMax(1.f), keytime(0.f)
+	const sf::Font& font, std::vector<std::string> list,
+	const int default_index)
+	:font(font), showList(false), keytimeMax(1.f), keytime(0.f), released(false), initialSize(x,y,width,height), orgScale(scale)
 {
-
+	int nrOfElements = list.size();
 	this->activeElement = new Button(
 		x, y, width, height, scale,
 		&this->font, list[default_index], 36 ,
@@ -45,6 +45,25 @@ gui::DropDownList::~DropDownList()
 
 
 
+void gui::DropDownList::reload(const std::vector<std::string>& list)
+{
+	/*
+	int nrOfElements = list.size();
+	this->list.push_back(
+		new Button(
+			this->initialSize.left, this->initialSize.top + 3 + (this->initialSize.height * (nrOfElements -1 + 1)), this->initialSize.width, this->initialSize.height,
+			this->orgScale,
+			&this->font, list[nrOfElements-1], 32,
+			sf::Color(15, 15, 15, 250), sf::Color(250, 250, 250, 200), sf::Color(10, 10, 10, 255),
+			sf::Color(150, 150, 130, 240), sf::Color(100, 100, 80, 255), sf::Color(10, 10, 10, 50),
+			sf::Color(255, 255, 255, 0), sf::Color(255, 255, 255, 0), sf::Color(255, 255, 255, 0),
+			nrOfElements-1
+		)
+	);
+	this->bounds.height += this->initialSize.height * this->orgScale.y;
+	*/
+}
+
 //Accesors
 const bool gui::DropDownList::getKeytime()
 {
@@ -61,9 +80,19 @@ const unsigned short gui::DropDownList::getActiveElementId() const
 	return this->activeElement->getId();
 }
 
+const std::string gui::DropDownList::getActiveText() const
+{
+	return this->activeElement->getText();
+}
+
 const bool gui::DropDownList::isActive() const
 {
 	return this->showList;
+}
+
+const bool gui::DropDownList::isReleased() const
+{
+	return this->released;
 }
 
 void gui::DropDownList::scale(sf::Vector2f scale)
@@ -84,7 +113,9 @@ void gui::DropDownList::updateKeytime(const float& dt)
 
 void gui::DropDownList::update(const sf::Vector2i& mousePosWindow)
 {
+
 	this->activeElement->update(mousePosWindow);
+	this->released = false;
 
 	//Show and hide the list
 	if (this->activeElement->isReleased()) {
@@ -104,6 +135,7 @@ void gui::DropDownList::update(const sf::Vector2i& mousePosWindow)
 				this->showList = false;
 				this->activeElement->setText(button->getText());
 				this->activeElement->setId(button->getId());
+				this->released = true;
 
 			}
 		}

@@ -4,6 +4,7 @@
 #include "GameState.h"
 #include "EditorState.h"
 #include "SettingsState.h"
+#include "WorldEditorState.h"
 
 class MenuState :
 	public State

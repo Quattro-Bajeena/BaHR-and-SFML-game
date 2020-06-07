@@ -36,10 +36,16 @@ void MenuState::initButtons()
 		sf::Color(100, 100, 100, 150), sf::Color(180, 180, 130, 200), sf::Color(20, 20, 20, 50));
 
 	this->buttons["EDITOR_STATE"] = std::make_unique< gui::Button>(
-		1610.f, 140.f, 200.f, 150.f, this->stateData.scale,
-		&Assets::Get().font, "Editor", 50,
-		sf::Color(15, 15, 15, 200), sf::Color(250, 250, 250, 255), sf::Color(10, 10, 10, 200),
-		sf::Color(100, 100, 100, 150), sf::Color(150, 150, 150, 200), sf::Color(20, 20, 20, 50));
+		1610.f, 140.f, 200.f, 70.f, this->stateData.scale,
+		&Assets::Get().font, "Map Editor", 35,
+		sf::Color(35, 20, 50, 210), sf::Color(250, 250, 250, 255), sf::Color(10, 10, 10, 200),
+		sf::Color(100, 100, 100, 150), sf::Color(140, 110, 160, 200), sf::Color(20, 20, 20, 50));
+
+	this->buttons["WORLD_EDITOR_STATE"] = std::make_unique< gui::Button>(
+		1610.f, 215.f, 200.f, 70.f, this->stateData.scale,
+		&Assets::Get().font, "Level Editor", 35,
+		sf::Color(35, 20, 50, 210), sf::Color(250, 250, 250, 255), sf::Color(10, 10, 10, 200),
+		sf::Color(100, 100, 100, 150), sf::Color(140, 110, 160, 200), sf::Color(20, 20, 20, 50));
 
 	this->buttons["EXIT_STATE"] = std::make_unique< gui::Button>(
 		1610.f, 300.f, 200.f, 150.f, this->stateData.scale,
@@ -153,6 +159,10 @@ void MenuState::updateButtons()
 	//Level Editor
 	if (this->buttons["EDITOR_STATE"]->isReleased()) {
 		this->states.push(new EditorState(this->stateData));
+	}
+
+	if (this->buttons["WORLD_EDITOR_STATE"]->isReleased()) {
+		this->states.push(new WorldEditorState(this->stateData));
 	}
 
 	//Settings

@@ -50,6 +50,12 @@ void gui::TextBox::scale(const sf::Vector2f& scale)
 		);
 }
 
+void gui::TextBox::setString(const std::string string)
+{
+	this->string = string;
+	this->text.setString(this->string);
+}
+
 const sf::String gui::TextBox::getText() const
 {
 	return  sf::String(this->string);
@@ -160,7 +166,7 @@ void gui::TextBox::update(const sf::Vector2i& mousePosWindow)
 		);
 }
 
-void gui::TextBox::render(sf::RenderTarget& target)
+void gui::TextBox::render(sf::RenderTarget& target) const
 {
 	target.draw(this->shape);
 	target.draw(this->text);

@@ -51,7 +51,7 @@ void EditorState::initPauseMenu()
 	this->pmenu->addButton("SAVE", 300.f, "Save");
 	this->pmenu->addButton("LOAD", 500.f, "Load");
 	this->pmenu->addButton("QUIT", 800.f, "Quit");
-	this->pmenu->addTextBox("FILE_PATH", 650, "default_map");
+	this->pmenu->addTextBox("FILE_PATH", 650, "DEFAULT");
 
 
 }
@@ -161,7 +161,7 @@ void EditorState::updateEditorInput(const float& dt)
 
 
 	//Add a tile to a tilemap
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && this->getKeytime()) {
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && this->getClickTime()) {
 		if (this->sidebar.getGlobalBounds().contains(sf::Vector2f(this->mousePosWindow)) == false) {
 
 			if (this->textureSelector->getActive() == false) {
@@ -174,13 +174,13 @@ void EditorState::updateEditorInput(const float& dt)
 	}
 
 	//Remove tile from the tilemap
-	else if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && this->getKeytime()) {
+	else if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && this->getClickTime()) {
 		if (this->sidebar.getGlobalBounds().contains(sf::Vector2f(this->mousePosWindow)) == false) {
 			if (this->textureSelector->getActive() == false) {
 				this->tileMap->removeTile(this->mousePosGrid.x, this->mousePosGrid.y, this->layer);
 			}
 			else {
-				this->textureRect = this->textureSelector->getTextureRect();
+				//this->textureRect = this->textureSelector->getTextureRect();
 			}
 		}
 
@@ -189,10 +189,16 @@ void EditorState::updateEditorInput(const float& dt)
 
 	//Toggle collsiosn
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::C) && this->getKeytime()) {
-		if (this->collision)
+		if (this->collision) {
 			this->collision = false;
-		else
+			this->selectorRect.setOutlineColor(sf::Color::Black);
+		}
+			
+		else {
 			this->collision = true;
+			this->selectorRect.setOutlineColor(sf::Color::Red);
+		}
+			
 	}
 
 	//Increse and decrease type
@@ -245,7 +251,7 @@ void EditorState::updateGui(const float& dt)
 		<< this->mousePosView.y << "\n"
 		<< this->mousePosGrid.x << " | " << this->mousePosGrid.y << "\n"
 		<< this->textureRect.left << " | " << this->textureRect.top << "\n"
-		<< "Collision: " << this->collision << "\n"
+		/*<< "Collision: " << this->collision << "\n"*/
 		<< "Type: " << this->type << "\n"
 		<< "Layer: " << this->layer << "\n"
 		<< "Tiles: " << this->tileMap->getLayerSize(this->mousePosGrid.x, this->mousePosGrid.y, this->layer);
@@ -263,10 +269,10 @@ void EditorState::updatePauseMenuButtons()
 		this->endState();
 	}
 	if (this->pmenu->isButtonReleased("SAVE")) {
-		this->tileMap->saveToFile("maps/" + this->pmenu->getTextBoxString("FILE_PATH")+".txt");
+		this->tileMap->saveToFile("World/TileMaps/" + this->pmenu->getTextBoxString("FILE_PATH")+".txt");
 	}
 	if (this->pmenu->isButtonReleased("LOAD")) {
-		this->tileMap->loadFromFile("maps/" + this->pmenu->getTextBoxString("FILE_PATH") + ".txt", Assets::Get().textures.at("TILE_MAP"));
+		this->tileMap->loadFromFile("World/TileMaps/" + this->pmenu->getTextBoxString("FILE_PATH") + ".txt", Assets::Get().textures.at("TILE_MAP"));
 	}
 }
 
@@ -325,8 +331,8 @@ void EditorState::render(sf::RenderTarget* target) const
 	}
 	//Setting new view for tiles
 	target->setView(this->view);
-	this->tileMap->render(*target, this->mousePosGrid);
-	this->tileMap->renderDeffered(*target);
+	this->tileMap->fullRender(*target);
+
 
 	//reseting the view soUi wont be affected by it
 	target->setView(this->window.getDefaultView());

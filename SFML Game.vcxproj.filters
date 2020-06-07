@@ -210,6 +210,9 @@
     <ClCompile Include="Source_Code\Weapons\Gun.cpp">
       <Filter>Weapons</Filter>
     </ClCompile>
+    <ClCompile Include="Source_Code\States\WorldEditorState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source_Code\Components\AIComponent.h">
@@ -367,6 +370,9 @@
     </ClInclude>
     <ClInclude Include="Source_Code\Weapons\Guns.h">
       <Filter>Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="Source_Code\States\WorldEditorState.h">
+      <Filter>States</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

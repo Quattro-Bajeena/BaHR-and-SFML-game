@@ -40,6 +40,7 @@ namespace gui {
 
 		//Modifiers
 		void scale(const sf::Vector2f& scale);
+		void setString(const std::string string);
 
 		//Accesors
 		const sf::String getText() const;
@@ -48,7 +49,7 @@ namespace gui {
 
 		void typeText(sf::Uint32 unicode_text);
 		void update(const sf::Vector2i& mousePosWindow);
-		void render(sf::RenderTarget& target);
+		void render(sf::RenderTarget& target) const;
 
 	};
 }

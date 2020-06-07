@@ -55,6 +55,7 @@
     <ClCompile Include="Source_Code\States\MenuState.cpp" />
     <ClCompile Include="Source_Code\States\SettingsState.cpp" />
     <ClCompile Include="Source_Code\States\State.cpp" />
+    <ClCompile Include="Source_Code\States\WorldEditorState.cpp" />
     <ClCompile Include="Source_Code\Utility\Assets.cpp" />
     <ClCompile Include="Source_Code\Utility\GameStatistics.cpp" />
     <ClCompile Include="Source_Code\Utility\GraphicSettings.cpp" />
@@ -113,6 +114,7 @@
     <ClInclude Include="Source_Code\States\MenuState.h" />
     <ClInclude Include="Source_Code\States\SettingsState.h" />
     <ClInclude Include="Source_Code\States\State.h" />
+    <ClInclude Include="Source_Code\States\WorldEditorState.h" />
     <ClInclude Include="Source_Code\Utility\Assets.h" />
     <ClInclude Include="Source_Code\Utility\GameStatistics.h" />
     <ClInclude Include="Source_Code\Utility\GraphicSettings.h" />
@@ -200,7 +202,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\Source_Code\Weapons\Guns;$(ProjectDir)\Source_Code\Weapons;$(ProjectDir)\Source_Code\Utility;$(ProjectDir)\Source_Code\Tile;$(ProjectDir)\Source_Code\States;$(ProjectDir)\Source_Code\Map;$(ProjectDir)\Source_Code\Main;$(ProjectDir)\Source_Code\Items;$(ProjectDir)\Source_Code\StateRelated;$(ProjectDir)\Source_Code\GUI\General;$(ProjectDir)\Source_Code\GUI\Gameplay;$(ProjectDir)\Source_Code\GUI;$(ProjectDir)\Source_Code\Entities\Enemies;$(ProjectDir)\Source_Code\Entities;$(ProjectDir)\Source_Code\Components;$(SolutionDir)\sfml\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\Source_Code\Weapons\Guns;$(ProjectDir)\Source_Code\Weapons;$(ProjectDir)\Source_Code\Utility;$(ProjectDir)\Source_Code\Tile;$(ProjectDir)\Source_Code\States;$(ProjectDir)\Source_Code\Map;$(ProjectDir)\Source_Code\Main;$(ProjectDir)\Source_Code\Items;$(ProjectDir)\Source_Code\GUI\StateRelated;$(ProjectDir)\Source_Code\GUI\General;$(ProjectDir)\Source_Code\GUI\Gameplay;$(ProjectDir)\Source_Code\GUI;$(ProjectDir)\Source_Code\Entities\Enemies;$(ProjectDir)\Source_Code\Entities;$(ProjectDir)\Source_Code\Components;$(SolutionDir)\sfml\include</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <EnableModules>true</EnableModules>
@@ -218,7 +220,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\Source_Code\Weapons\Guns;$(ProjectDir)\Source_Code\Weapons;$(ProjectDir)\Source_Code\Utility;$(ProjectDir)\Source_Code\Tile;$(ProjectDir)\Source_Code\States;$(ProjectDir)\Source_Code\Map;$(ProjectDir)\Source_Code\Main;$(ProjectDir)\Source_Code\Items;$(ProjectDir)\Source_Code\StateRelated;$(ProjectDir)\Source_Code\GUI\General;$(ProjectDir)\Source_Code\GUI\Gameplay;$(ProjectDir)\Source_Code\GUI;$(ProjectDir)\Source_Code\Entities\Enemies;$(ProjectDir)\Source_Code\Entities;$(ProjectDir)\Source_Code\Components;$(SolutionDir)\sfml\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\Source_Code\Weapons\Guns;$(ProjectDir)\Source_Code\Weapons;$(ProjectDir)\Source_Code\Utility;$(ProjectDir)\Source_Code\Tile;$(ProjectDir)\Source_Code\States;$(ProjectDir)\Source_Code\Map;$(ProjectDir)\Source_Code\Main;$(ProjectDir)\Source_Code\Items;$(ProjectDir)\Source_Code\GUI\StateRelated;$(ProjectDir)\Source_Code\GUI\General;$(ProjectDir)\Source_Code\GUI\Gameplay;$(ProjectDir)\Source_Code\GUI;$(ProjectDir)\Source_Code\Entities\Enemies;$(ProjectDir)\Source_Code\Entities;$(ProjectDir)\Source_Code\Components;$(SolutionDir)\sfml\include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <EnableModules>true</EnableModules>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -238,7 +240,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\Source_Code\Weapons\Guns;$(ProjectDir)\Source_Code\Weapons;$(ProjectDir)\Source_Code\Utility;$(ProjectDir)\Source_Code\Tile;$(ProjectDir)\Source_Code\States;$(ProjectDir)\Source_Code\Map;$(ProjectDir)\Source_Code\Main;$(ProjectDir)\Source_Code\Items;$(ProjectDir)\Source_Code\StateRelated;$(ProjectDir)\Source_Code\GUI\General;$(ProjectDir)\Source_Code\GUI\Gameplay;$(ProjectDir)\Source_Code\GUI;$(ProjectDir)\Source_Code\Entities\Enemies;$(ProjectDir)\Source_Code\Entities;$(ProjectDir)\Source_Code\Components;$(SolutionDir)\sfml\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\Source_Code\Weapons\Guns;$(ProjectDir)\Source_Code\Weapons;$(ProjectDir)\Source_Code\Utility;$(ProjectDir)\Source_Code\Tile;$(ProjectDir)\Source_Code\States;$(ProjectDir)\Source_Code\Map;$(ProjectDir)\Source_Code\Main;$(ProjectDir)\Source_Code\Items;$(ProjectDir)\Source_Code\GUI\StateRelated;$(ProjectDir)\Source_Code\GUI\General;$(ProjectDir)\Source_Code\GUI\Gameplay;$(ProjectDir)\Source_Code\GUI;$(ProjectDir)\Source_Code\Entities\Enemies;$(ProjectDir)\Source_Code\Entities;$(ProjectDir)\Source_Code\Components;$(SolutionDir)\sfml\include</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <EnableModules>true</EnableModules>
@@ -261,7 +263,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)\Source_Code\Weapons\Guns;$(ProjectDir)\Source_Code\Weapons;$(ProjectDir)\Source_Code\Utility;$(ProjectDir)\Source_Code\Tile;$(ProjectDir)\Source_Code\States;$(ProjectDir)\Source_Code\Map;$(ProjectDir)\Source_Code\Main;$(ProjectDir)\Source_Code\Items;$(ProjectDir)\Source_Code\StateRelated;$(ProjectDir)\Source_Code\GUI\General;$(ProjectDir)\Source_Code\GUI\Gameplay;$(ProjectDir)\Source_Code\GUI;$(ProjectDir)\Source_Code\Entities\Enemies;$(ProjectDir)\Source_Code\Entities;$(ProjectDir)\Source_Code\Components;$(SolutionDir)\sfml\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)\Source_Code\Weapons\Guns;$(ProjectDir)\Source_Code\Weapons;$(ProjectDir)\Source_Code\Utility;$(ProjectDir)\Source_Code\Tile;$(ProjectDir)\Source_Code\States;$(ProjectDir)\Source_Code\Map;$(ProjectDir)\Source_Code\Main;$(ProjectDir)\Source_Code\Items;$(ProjectDir)\Source_Code\GUI\StateRelated;$(ProjectDir)\Source_Code\GUI\General;$(ProjectDir)\Source_Code\GUI\Gameplay;$(ProjectDir)\Source_Code\GUI;$(ProjectDir)\Source_Code\Entities\Enemies;$(ProjectDir)\Source_Code\Entities;$(ProjectDir)\Source_Code\Components;$(SolutionDir)\sfml\include</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <EnableModules>true</EnableModules>
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>

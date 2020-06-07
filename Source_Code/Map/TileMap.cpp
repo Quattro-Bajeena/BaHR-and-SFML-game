@@ -34,10 +34,10 @@ TileMap::TileMap(float grid_size, int width, int height, int offsetX, int offset
 	this->maxSizeWorldF.x = static_cast<float>(width) * grid_size;
 	this->maxSizeWorldF.y = static_cast<float>(height) * grid_size;
 
-	this->fromX = 0;
+	/*this->fromX = 0;
 	this->fromY = 0;
 	this->toX = 0;
-	this->toY = 0;
+	this->toY = 0;*/
 	this->layer = 0;
 
 	this->map.resize(this->maxSizeWorldGrid.x, std::vector<std::vector<std::vector<Tile*>>>());
@@ -62,10 +62,10 @@ TileMap::TileMap(float grid_size, int width, int height, int offsetX, int offset
 TileMap::TileMap(const std::string file_name, sf::Texture& tile_sheet, int offsetX, int offsetY)
 	:offsetX(offsetX), offsetY(offsetY), tileSheet(tile_sheet)
 {
-	this->fromX = 0;
+	/*this->fromX = 0;
 	this->fromY = 0;
 	this->toX = 0;
-	this->toY = 0;
+	this->toY = 0;*/
 
 	std::ifstream in_file(file_name);
 	if (in_file.is_open()) {
@@ -326,10 +326,10 @@ void TileMap::addTile(const int x, const int y, const int z,
 	//and add a tile to that postion if the interal tilemap array allows it
 
 	//if the mouse is outside it wont do
-	if (x < this->maxSizeWorldGrid.x && y < this->maxSizeWorldGrid.y && z < layers && x>=0&& y>=0) { //they are int so cant be less than 0 NONONO TO DO
+	if (x < this->maxSizeWorldGrid.x && y < this->maxSizeWorldGrid.y && z < layers && x>=0 && y>=0 && this->map[x][y][z].size() < 3) {
 		//ok to add tile
 		this->map[x][y][z].push_back(new Tile(x + offsetX, y + offsetY, this->gridSizeF, this->tileSheet, texture_rect, collision, type));
-		std::cout << "ADDED TILE" << "\n";
+		//std::cout << "ADDED TILE" << "\n";
 
 	}
 
@@ -343,7 +343,7 @@ void TileMap::removeTile(const int x, const int y, const int z)
 			//ok to remove tile
 			delete this->map[x][y][z][this->map[x][y][z].size() - 1];
 			this->map[x][y][z].pop_back();
-			std::cout << "REMOVED TILE" << "\n";
+			//std::cout << "REMOVED TILE" << "\n";
 		}
 	}
 
@@ -380,17 +380,17 @@ void TileMap::updateCollision(Entity* entity, const float& dt) //change to bool?
 
 	//Tiles
 	//Only tiles next to the entity are checkhed for collision
-	this->fromX = util::clamp(entity->getGridPosition(this->gridSizeI).x - this->offsetX - 1, 0, this->maxSizeWorldGrid.x);
-	this->toX = util::clamp(static_cast<int>(entity->getGridPosition(this->gridSizeI).x) - this->offsetX + 2, 0, static_cast<int>(this->maxSizeWorldGrid.x));
+	int fromX = util::clamp(entity->getGridPosition(this->gridSizeI).x - this->offsetX - 1, 0, this->maxSizeWorldGrid.x);
+	int toX = util::clamp(static_cast<int>(entity->getGridPosition(this->gridSizeI).x) - this->offsetX + 2, 0, static_cast<int>(this->maxSizeWorldGrid.x));
 
-	this->fromY = util::clamp(static_cast<int>(entity->getGridPosition(this->gridSizeI).y) - this->offsetY - 1, 0, static_cast<int>(this->maxSizeWorldGrid.y));
-	this->toY = util::clamp(static_cast<int>(entity->getGridPosition(this->gridSizeI).y) -this->offsetY + 2, 0, static_cast<int>(this->maxSizeWorldGrid.y));
+	int fromY = util::clamp(static_cast<int>(entity->getGridPosition(this->gridSizeI).y) - this->offsetY - 1, 0, static_cast<int>(this->maxSizeWorldGrid.y));
+	int toY = util::clamp(static_cast<int>(entity->getGridPosition(this->gridSizeI).y) -this->offsetY + 2, 0, static_cast<int>(this->maxSizeWorldGrid.y));
 
 	
 
-	for (int x = this->fromX; x < this->toX; ++x) {
+	for (int x = fromX; x < toX; ++x) {
 
-		for (int y = this->fromY; y < this->toY; ++y) {
+		for (int y = fromY; y < toY; ++y) {
 
 			for (size_t k = 0; k < this->map[x][y][this->layer].size(); k++)
 			{
@@ -455,7 +455,7 @@ void TileMap::updateCollision(Entity* entity, const float& dt) //change to bool?
 
 }
 
-bool TileMap::checkCollision(sf::FloatRect bounds)
+const bool TileMap::checkCollision(sf::FloatRect bounds) const
 {
 	sf::Vector2i grid_position =  sf::Vector2i(
 		static_cast<int>(bounds.left) / this->gridSizeI,
@@ -464,17 +464,17 @@ bool TileMap::checkCollision(sf::FloatRect bounds)
 
 	//Tiles
 	//Only tiles next to the entity are checkhed for collision
-	this->fromX = util::clamp(grid_position.x - this->offsetX - 1, 0, this->maxSizeWorldGrid.x);
-	this->toX = util::clamp(grid_position.x - this->offsetX + 2, 0, this->maxSizeWorldGrid.x);
+	int fromX = util::clamp(grid_position.x - this->offsetX - 1, 0, this->maxSizeWorldGrid.x);
+	int toX = util::clamp(grid_position.x - this->offsetX + 2, 0, this->maxSizeWorldGrid.x);
 
-	this->fromY = util::clamp(grid_position.y - this->offsetY - 1, 0, this->maxSizeWorldGrid.y);
-	this->toY = util::clamp(grid_position.y - this->offsetY + 2, 0, this->maxSizeWorldGrid.y);
+	int fromY = util::clamp(grid_position.y - this->offsetY - 1, 0, this->maxSizeWorldGrid.y);
+	int toY = util::clamp(grid_position.y - this->offsetY + 2, 0, this->maxSizeWorldGrid.y);
 
 
 
-	for (int x = this->fromX; x < this->toX; ++x) {
+	for (int x = fromX; x < toX; ++x) {
 
-		for (int y = this->fromY; y < this->toY; ++y) {
+		for (int y = fromY; y < toY; ++y) {
 
 			for (size_t k = 0; k < this->map[x][y][this->layer].size(); k++)
 			{
@@ -500,19 +500,19 @@ void TileMap::update()
 
 }
 
-void TileMap::render(sf::RenderTarget& target, const sf::Vector2i& gridPosition) 
+void TileMap::render(sf::RenderTarget& target, const sf::Vector2i& gridPosition) const
 {
 
-	this->layer = 0;
-	this->fromX = util::clamp(gridPosition.x -this->offsetX - 20, 0, static_cast<int>(this->maxSizeWorldGrid.x));
-	this->toX = util::clamp(gridPosition.x - this->offsetX + 20, 0, static_cast<int>(this->maxSizeWorldGrid.x));
+	
+	int fromX = util::clamp(gridPosition.x -this->offsetX - 30, 0, static_cast<int>(this->maxSizeWorldGrid.x));
+	int toX = util::clamp(gridPosition.x - this->offsetX + 30, 0, static_cast<int>(this->maxSizeWorldGrid.x));
 
-	this->fromY = util::clamp(gridPosition.y - this->offsetY - 20, 0, static_cast<int>(this->maxSizeWorldGrid.y));
-	this->toY = util::clamp(gridPosition.y - this->offsetY + 20, 0, static_cast<int>(this->maxSizeWorldGrid.y));
+	int fromY = util::clamp(gridPosition.y - this->offsetY - 30, 0, static_cast<int>(this->maxSizeWorldGrid.y));
+	int toY = util::clamp(gridPosition.y - this->offsetY + 30, 0, static_cast<int>(this->maxSizeWorldGrid.y));
 
-	for (int x = this->fromX; x < this->toX; ++x) {
+	for (int x = fromX; x < toX; ++x) {
 
-		for (int y = this->fromY; y < this->toY; ++y) {
+		for (int y = fromY; y < toY; ++y) {
 			for (int k = 0; k < this->map[x][y][this->layer].size(); k++)
 			{
 				if (this->map[x][y][this->layer][k]->getType() == TileTypes::ABOVE) {
@@ -520,9 +520,7 @@ void TileMap::render(sf::RenderTarget& target, const sf::Vector2i& gridPosition)
 				}
 				else {
 					this->map[x][y][this->layer][k]->render(target);
-				}
-
-				
+				}	
 
 			}
 		}
@@ -540,13 +538,29 @@ void TileMap::render(sf::RenderTarget& target, const sf::Vector2i& gridPosition)
 	}*/
 }
 
-void TileMap::renderDeffered(sf::RenderTarget& target) 
+void TileMap::renderDeffered(sf::RenderTarget& target) const
 {
 	while (this->defferedRenderStack.empty() == false) {
 		defferedRenderStack.top()->render(target);
 		defferedRenderStack.pop();
 	}
 }
+
+void TileMap::fullRender(sf::RenderTarget& target) const
+{
+	for (auto& x : this->map) {
+		for (auto& y : x) {
+			for (auto& z : y) {
+				for (auto* k : z) {
+					k->render(target);
+				}
+			}
+		}
+	}
+	target.draw(this->boundary);
+}
+
+
 
 
 

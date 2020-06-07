@@ -80,10 +80,20 @@ void SettingsState::initGui()
 	}
 	int current_aa = std::distance(this->antiAliasing.begin(), std::find(this->antiAliasing.begin(), this->antiAliasing.end(), this->stateData.gfxSettings->contexSettings.antialiasingLevel));
 
-	this->dropDownLists["RESOLUTION"] = std::make_unique< gui::DropDownList>(470, 100, 200.f, 80.f, this->stateData.scale, Assets::Get().font, modes_str.data(), modes_str.size(), current_mode);
+	this->dropDownLists["RESOLUTION"] = std::make_unique< gui::DropDownList>(
+		470, 100, 200.f, 80.f,
+		this->stateData.scale, Assets::Get().font,
+		modes_str, current_mode);
 	
-	this->dropDownLists["FPS"] = std::make_unique< gui::DropDownList>(470, 435, 200.f, 80.f, this->stateData.scale, Assets::Get().font, fps_str.data(), fps_str.size(), current_fps);
-	this->dropDownLists["GANTI_ALIASING"] = std::make_unique< gui::DropDownList>(470, 280, 200.f, 80.f, this->stateData.scale, Assets::Get().font, aa_str.data(), aa_str.size(), current_aa);
+	this->dropDownLists["FPS"] = std::make_unique< gui::DropDownList>(
+		470, 435, 200.f, 80.f,
+		this->stateData.scale, Assets::Get().font,
+		fps_str, current_fps);
+
+	this->dropDownLists["GANTI_ALIASING"] = std::make_unique< gui::DropDownList>(
+		470, 280, 200.f, 80.f,
+		this->stateData.scale, Assets::Get().font,
+		aa_str, current_aa);
 	
 }
 
@@ -155,8 +165,8 @@ void SettingsState::updateGui()
 	if (std::any_of(this->dropDownLists.begin(), this->dropDownLists.end(),
 		[](std::pair<const std::string, std::unique_ptr<gui::DropDownList>>& list) {return list.second->isActive() == true; }) == false) {
 		//Buttons 
-		for (auto& it : this->buttons) {
-			it.second->update(this->mousePosWindow);
+		for (auto& [key, button] : this->buttons) {
+			button->update(this->mousePosWindow);
 		}
 
 		//Dropdown lists

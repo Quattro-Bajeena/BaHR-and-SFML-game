@@ -19,7 +19,7 @@ private:
 
 	int layers;
 	std::vector<std::vector<std::vector< std::vector<Tile*> > > > map;
-	std::stack<Tile*> defferedRenderStack;
+	mutable std::stack<Tile*> defferedRenderStack;
 
 	sf::Texture& tileSheet;
 	//std::string textureFile;
@@ -31,10 +31,11 @@ private:
 	int offsetY;
 
 	//Culling
-	int fromX;
+	/*int fromX;
 	int toX;
 	int fromY;
 	int toY;
+	*/
 	int layer;
 
 public:
@@ -60,13 +61,13 @@ public:
 	void loadFromFile(const std::string file_name, sf::Texture tile_sheet);
 
 	void updateCollision(Entity* entity, const float& dt);
-	bool checkCollision(sf::FloatRect bounds);
+	const bool checkCollision(sf::FloatRect bounds) const;
 
 	void update();
-	void render(sf::RenderTarget& target, const sf::Vector2i& gridPosition) ;
-	void renderDeffered(sf::RenderTarget& target);
+	void render(sf::RenderTarget& target, const sf::Vector2i& gridPosition) const;
+	void renderDeffered(sf::RenderTarget& target) const;
 
-
+	void fullRender(sf::RenderTarget& target) const;
 
 
 };

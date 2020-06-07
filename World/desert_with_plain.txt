@@ -1,0 +1,4 @@
+desert1 24 3 0 0 0
+desert1 24 -12 0 0 0
+desert1 9 -12 0 0 0
+plains 9 3 0 0 0
