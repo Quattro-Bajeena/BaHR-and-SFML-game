@@ -50,7 +50,7 @@ private:
 			this->timer += mod_percent * dt;
 			//std::cout<< mod_percent<<"\n";
 			
-			if (this->timer >= 1 / this->framerate) { //Next frame
+			if (this->timer >= 1.f / this->framerate) { //Next frame
 
 				//reset timer
 				this->timer = 0.f;
@@ -73,8 +73,9 @@ private:
 		}
 
 		void reset() {
-			this->timer = this->framerate;
+			this->timer = 0.f;
 			this->currentRect = this->startRect;
+			this->done = true;
 
 		}
 
@@ -86,6 +87,7 @@ private:
 	std::map<std::string, Animation*> animations;
 	Animation* lastAnimation;
 	Animation* priorityAnimation;
+	Animation* currentAnimation;
 
 public:
 	AnimationComponent(sf::Sprite& sprite, sf::Texture& texture_sheet);
@@ -100,6 +102,8 @@ public:
 		float framerate,
 		int start_frame_x, int start_frame_y, int frames,
 		int width, int height);
+	void setAnimation(std::string key, bool priority = false);
+	const bool playCurrentAnimation(const float& dt);
 
 	const bool& play(std::string key, const float& dt,
 		const float& modifier = 1.f, const float modifier_max = 1.f, const bool priority = false);

@@ -30,7 +30,7 @@ private:
 	void initVariables();
 
 	//internal Functions	
-	
+	void updateAnimations(const float& dt);
 	
 public:
 	Player(const sf::Vector2f& pos, sf::Texture& texture_sheet);
@@ -42,6 +42,7 @@ public:
 	void shoot(sf::Vector2f mousePos);
 	void reload();
 	void recievePowerUp(powerUpType type);
+	void recieveAmmo(float percent);
 	void recieveGun(gunModels model);
 	void changeCurrGunAdjacent(int direction);
 	void changeCurrGunPos(int pos);
@@ -51,8 +52,6 @@ public:
 	
 
 	//Main functions
-	
-	void updateAnimations(const float& dt);
 	void update(const float& dt);
 	void updateBullets(const std::vector<Enemy*>& enemies, const float dt);
 	void updateWeapon(const sf::Vector2f& mousePos, const float& dt);

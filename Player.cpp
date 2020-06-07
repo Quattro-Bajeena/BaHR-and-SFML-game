@@ -76,12 +76,14 @@ void Player::roll(const float& dt)
 
 		if (this->movementComponent->getState(movement_states::MOVING_UP) && rollingUp == false) {
 			rollingUp = true;
-			this->animationComponent->play("ROLL_BACK", dt, 1, 1, true);
+			//this->animationComponent->play("ROLL_BACK", dt, 1, 1, true);
+			this->animationComponent->setAnimation("ROLL_BACK", true);
 
 		}
 		else {
 			rollingUp = false;
-			this->animationComponent->play("ROLL", dt, 1, 1, true);
+			//this->animationComponent->play("ROLL", dt, 1, 1, true);
+			this->animationComponent->setAnimation("ROLL", true);
 		}
 	}
 
@@ -94,6 +96,7 @@ void Player::endRoll()
 	this->movementComponent->endRoll();
 	this->hitboxComponent->reset();
 	this->invincibility = false;
+	this->animationComponent->resetPriority();
 }
 
 
@@ -189,8 +192,13 @@ void Player::reload()
 
 void Player::recievePowerUp(powerUpType type)
 {
-	this->shootingComponent->refillAmmo(0.25);
+	//this->shootingComponent->refillAmmo(0.25);
 	
+}
+
+void Player::recieveAmmo(float percent)
+{
+	this->shootingComponent->refillAmmo(percent);
 }
 
 void Player::recieveGun(gunModels model)
@@ -243,17 +251,30 @@ void Player::updateAnimations(const float& dt) //and movement/hitbox for rolling
 	*/
 	}
 
-	 if (this->movementComponent->getState(movement_states::IDLE))
-		this->animationComponent->play("IDLE", dt);
-	else if (this->movementComponent->getState(movement_states::MOVING_UP))
-		this->animationComponent->play("WALK_STRAIGHT", dt, this->movementComponent->getVelocity().y, this->movementComponent->getMaxVelocity());
-	else if (this->movementComponent->getState(movement_states::MOVING_DOWN))
-		this->animationComponent->play("WALK_STRAIGHT", dt, this->movementComponent->getVelocity().y, this->movementComponent->getMaxVelocity());
-	else if (this->movementComponent->getState(movement_states::MOVING_LEFT))
-		this->animationComponent->play("WALK_LEFT", dt, this->movementComponent->getVelocity().x, this->movementComponent->getMaxVelocity());
-	else if (this->movementComponent->getState(movement_states::MOVING_RIGHT))
-		this->animationComponent->play("WALK_RIGHT", dt, this->movementComponent->getVelocity().x, this->movementComponent->getMaxVelocity());
+	if (this->movementComponent->getState(movement_states::IDLE) == true) {
+		this->animationComponent->setAnimation("IDLE");
+	 }
+		
+	else if (this->movementComponent->getState(movement_states::MOVING_UP) == true) {
+		this->animationComponent->setAnimation("WALK_STRAIGHT");
+	}
+		
+	else if (this->movementComponent->getState(movement_states::MOVING_DOWN) == true) {
+		this->animationComponent->setAnimation("WALK_STRAIGHT");
+	}
+		
+	else if (this->movementComponent->getState(movement_states::MOVING_LEFT) == true) {
+		this->animationComponent->setAnimation("WALK_LEFT");
+	}
+		
+	else if (this->movementComponent->getState(movement_states::MOVING_RIGHT) == true) {
+		this->animationComponent->setAnimation("WALK_RIGHT");
+	}
 
+	//For memories
+	//this->animationComponent->play("WALK_RIGHT", dt, this->movementComponent->getVelocity().x, this->movementComponent->getMaxVelocity());
+
+	this->animationComponent->playCurrentAnimation(dt);
 
 	 if (this->rolling == true) {
 		 if (rollingUp == true && this->animationComponent->isDone("ROLL_BACK")) {
@@ -266,14 +287,11 @@ void Player::updateAnimations(const float& dt) //and movement/hitbox for rolling
 		 }
 	}
 	
-		
+	//99% not needed	
 	if (this->movementComponent->getState(movement_states::IDLE)) {
-		if (this->animationComponent->isDone("ROLL") && this->animationComponent->isDone("ROLL_BACK")) {
-			this->rolling = false;
-			this->movementComponent->endRoll();
-			this->hitboxComponent->reset();
-			this->animationComponent->resetPriority();
-			//this->animationComponent->play("IDLE", dt);
+		if (this->rolling == true && this->animationComponent->isDone("ROLL") && this->animationComponent->isDone("ROLL_BACK")) {
+			this->endRoll();
+			std::cout << "this second end roll, am I needed?\n";
 		}
 		
 	}
