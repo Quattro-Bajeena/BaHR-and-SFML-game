@@ -8,6 +8,8 @@
 #include "ShootingComponent.h"
 #include "AIComponent.h"
 #include "Assets.h"
+#include "RNG.h"
+#include "Utility.h"
 
 class HitboxComponent;
 class MovementComponent;

@@ -1,7 +1,7 @@
 #pragma once
 #include "Bullet.h"
 #include "Assets.h"
-
+#include "Utility.h"
 
 
 class Magazine

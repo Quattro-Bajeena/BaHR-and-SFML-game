@@ -19,9 +19,6 @@
     <Filter Include="Entities">
       <UniqueIdentifier>{42f75ed5-eca8-4961-b12b-bbcfabdf9e6f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Objects">
-      <UniqueIdentifier>{66eb7371-e64b-4db7-b17e-5a191c675d19}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Main">
       <UniqueIdentifier>{4660b3f0-c11a-4385-8b67-a8731f471e6c}</UniqueIdentifier>
     </Filter>
@@ -58,6 +55,9 @@
     <Filter Include="Entities\Enemies">
       <UniqueIdentifier>{164cda76-aa61-4c76-8344-713801015d98}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Items">
+      <UniqueIdentifier>{66eb7371-e64b-4db7-b17e-5a191c675d19}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameState.cpp">
@@ -73,7 +73,7 @@
       <Filter>Entities</Filter>
     </ClCompile>
     <ClCompile Include="PowerUp.cpp">
-      <Filter>Objects</Filter>
+      <Filter>Items</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Main</Filter>
@@ -204,6 +204,15 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Utility</Filter>
     </ClCompile>
+    <ClCompile Include="Collectable.cpp">
+      <Filter>Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Ammo.cpp">
+      <Filter>Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameState.h">
@@ -219,7 +228,7 @@
       <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="PowerUp.h">
-      <Filter>Objects</Filter>
+      <Filter>Items</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Main</Filter>
@@ -350,10 +359,19 @@
     <ClInclude Include="Enemies.h">
       <Filter>Entities</Filter>
     </ClInclude>
-    <ClInclude Include="RNG.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="stdafx.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Collectable.h">
+      <Filter>Items</Filter>
+    </ClInclude>
+    <ClInclude Include="RNG.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Ammo.h">
+      <Filter>Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility.h">
       <Filter>Utility</Filter>
     </ClInclude>
   </ItemGroup>

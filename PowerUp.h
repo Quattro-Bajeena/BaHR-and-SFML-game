@@ -12,6 +12,7 @@ private:
 	powerUpType type;
 
 	bool active;
+	
 
 	float timer;
 	float timerMax;

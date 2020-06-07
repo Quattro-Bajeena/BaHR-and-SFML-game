@@ -72,6 +72,7 @@ void Game::initAssets()
     Assets::Get().textures["POWER_UP"].loadFromFile("Assets/Images/Sprites/PowerUpIcons.png");
     Assets::Get().textures["HEARTS"].loadFromFile("Assets/Images/Sprites/hearts_sheet.png");
     Assets::Get().textures["CROSSHAIR"].loadFromFile("Assets/Images/Sprites/crosshair.png");
+    Assets::Get().textures["BULLET"].loadFromFile("Assets/Images/Sprites/bullet.png");
 
     //Backgrouds
     Assets::Get().textures["MENU_BACKGROUND"].loadFromFile("Assets/Images/Backgrounds/background.png");

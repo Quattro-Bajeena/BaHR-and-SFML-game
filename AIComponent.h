@@ -1,4 +1,6 @@
 #pragma once
+#include "RNG.h"
+#include "Utility.h"
 class AIComponent
 {
 

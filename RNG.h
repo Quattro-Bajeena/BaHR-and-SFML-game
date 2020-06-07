@@ -1,4 +1,5 @@
 #pragma once
+//Singleton Random number generator
 class RNG
 {
 private:
@@ -17,18 +18,25 @@ public:
 	RNG(const RNG&) = delete;
 
 	
-	int randomI(int min, int max) {
+	 inline const int randomI(const int min, const int max) {
 		
 		static std::mt19937 mt(this->rd());
-		std::uniform_int_distribution<> distribution(min, max);
-		return distribution(mt);
+		std::uniform_int_distribution<> dist(min, max);
+		return dist(mt);
+	}
+
+	 inline const int discreteI(const std::vector<int> weights) {
+		static std::mt19937 mt(this->rd());
+		std::discrete_distribution<> dist(weights.begin(), weights.end());
+		return dist(mt);
+
 	}
 	
-	float randomF(float min, float max) {
+	 inline const float randomF(const float min, float max) {
 
 		static std::mt19937 mt(this->rd());
-		std::uniform_real_distribution<float> distribution(min, max);
-		return distribution(mt);
+		std::uniform_real_distribution<float> dist(min, max);
+		return dist(mt);
 	}
 	
 };

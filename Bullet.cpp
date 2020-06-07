@@ -32,7 +32,7 @@ const bool Bullet::DistanceLimit(const sf::Vector2f& position) const
 {
 	sf::Vector2f vector = position - this->shape.getPosition();
 	float distance = sqrt(pow(vector.x, 2) + pow(vector.y, 2));
-	if (distance > maxDistance) return true;
+	if (distance > this->maxDistance) return true;
 	else return false;
 }
 

@@ -1,6 +1,7 @@
 #ifndef MOVEMENT_COMPONENT
 #define MOVEMENT_COMPONENT
-
+#pragma once
+#include "Utility.h"
 
 enum class movement_states { IDLE = 0, MOVING, MOVING_LEFT, MOVING_RIGHT, MOVING_UP, MOVING_DOWN };
 

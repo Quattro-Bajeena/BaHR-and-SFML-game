@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "MagicGun.h"
+#include "RNG.h"
 
 MagicGun::MagicGun()
 {

@@ -20,12 +20,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AIComponent.cpp" />
+    <ClCompile Include="Ammo.cpp" />
     <ClCompile Include="AnimationComponent.cpp" />
     <ClCompile Include="Bar.cpp" />
     <ClCompile Include="BossEnemy.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="CanonGun.cpp" />
+    <ClCompile Include="Collectable.cpp" />
     <ClCompile Include="CommandoEnemy.cpp" />
     <ClCompile Include="DropDownList.cpp" />
     <ClCompile Include="EditorState.cpp" />
@@ -68,17 +70,20 @@
     <ClCompile Include="TextureSelector.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TileMap.cpp" />
+    <ClCompile Include="Utility.cpp" />
     <ClCompile Include="WeaponSlot.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AIComponent.h" />
+    <ClInclude Include="Ammo.h" />
     <ClInclude Include="AnimationComponent.h" />
     <ClInclude Include="Bar.h" />
     <ClInclude Include="BossEnemy.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="CanonGun.h" />
+    <ClInclude Include="Collectable.h" />
     <ClInclude Include="CommandoEnemy.h" />
     <ClInclude Include="DropDownList.h" />
     <ClInclude Include="EditorState.h" />
@@ -120,6 +125,7 @@
     <ClInclude Include="TextureSelector.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="TileMap.h" />
+    <ClInclude Include="Utility.h" />
     <ClInclude Include="WeaponSlot.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>

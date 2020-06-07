@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "SpreadGun.h"
+#include "RNG.h"
 
 SpreadGun::SpreadGun()
 {

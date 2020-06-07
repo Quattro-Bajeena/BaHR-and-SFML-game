@@ -1,5 +1,6 @@
 #pragma once
 #include "Gun.h"
+#include "RNG.h"
 class ShotGun :
 	public Gun
 {

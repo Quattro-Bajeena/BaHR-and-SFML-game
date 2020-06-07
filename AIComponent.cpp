@@ -75,8 +75,8 @@ AIComponent::AIComponent(sf::Sprite& sprite, enemyType type, enemyState& state)
 
 	sf::Vector2f roamDirTemp(
 		sf::Vector2f(
-			RNG::get().randomF(-1, 1),
-			RNG::get().randomF(-1, 1)
+			RNG::get().randomF(-1.f, 1.f),
+			RNG::get().randomF(-1.f, 1.f)
 			));
 	this->roamDir = util::normalize(roamDirTemp);
 }
