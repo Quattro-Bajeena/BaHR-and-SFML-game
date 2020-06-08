@@ -224,7 +224,7 @@ void SettingsState::updateGui()
 		
 		this->window.setFramerateLimit(this->stateData.gfxSettings->frameRateLimit);
 		this->window.setVerticalSyncEnabled(this->stateData.gfxSettings->vsync);
-		this->stateData.gfxSettings->saveToFile("Config/graphics.ini");
+		this->stateData.gfxSettings->saveToFile(this->stateData.folderPaths.at("CONFIG")+"graphics.ini");
 		this->refreshGui();
 	}
 

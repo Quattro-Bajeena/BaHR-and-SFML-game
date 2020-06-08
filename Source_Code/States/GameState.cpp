@@ -96,10 +96,8 @@ void GameState::initGui()
 
 void GameState::initWorld()
 {
-	this->world = std::make_unique< World>("World/test_world.txt",Assets::Get().textures.at("TILE_MAP"),this->statistics);
+	this->world = std::make_unique< World>(this->stateData.folderPaths.at("WORLD")+"test_world.txt",Assets::Get().textures.at("TILE_MAP"),this->statistics);
 	
-
-	this->world->saveToFile("World/test_world.txt");
 }
 
 //Constuctors / destructors

@@ -63,7 +63,7 @@ void WorldEditorState::initPauseMenu()
 	this->pmenu->addButton("RESUME", 160.f, "Resume");
 	this->pmenu->addButton("SAVE", 250.f, "Save");
 	this->pmenu->addButton("LOAD", 350.f, "Load");
-	this->pmenu->addTextBox("FILE_PATH", 450, "TEST_WORLD");
+	this->pmenu->addTextBox("FILE_NAME", 450, "TEST_WORLD");
 	this->pmenu->addList("ROOMS", 550, this->worldsStr);
 	this->pmenu->addButton("QUIT", 900.f, "Quit");
 	
@@ -80,7 +80,7 @@ void WorldEditorState::loadFiles()
 	namespace fs = std::filesystem;
 
 	std::cout << "-------------\n";
-	std::string level_path = "World";
+	std::string level_path = "Assets/World/";
 	std::cout << "Levels: " << "\n";
 	for (const auto& entry : fs::directory_iterator(level_path)) {
 		if (entry.path().filename().has_extension()) {
@@ -92,7 +92,7 @@ void WorldEditorState::loadFiles()
 	}
 
 	std::cout << "-------------\n";
-	std::string room_path = "World/TileMaps/";
+	std::string room_path = "Assets/World/TileMaps/";
 	std::cout << "Tile Maps: " << "\n";
 	for (const auto& entry : fs::directory_iterator(room_path)) {
 
@@ -329,15 +329,15 @@ void WorldEditorState::updatePauseMenuButtons()
 		this->endState();
 	}
 	else if (this->pmenu->isButtonReleased("SAVE")) {
-		this->world->saveToFile("World/" + this->pmenu->getTextBoxString("FILE_PATH") + ".txt");
+		this->world->saveToFile(this->stateData.folderPaths.at("WORLD") + this->pmenu->getTextBoxString("FILE_NAME") + ".txt");
 		this->loadFiles();
 		this->pmenu->reloadList("ROOMS", this->worldsStr);
 	}
 	else if (this->pmenu->isButtonReleased("LOAD")) {
-		this->world->loadFromFile("World/" + this->pmenu->getListString("ROOMS") + ".txt");
+		this->world->loadFromFile(this->stateData.folderPaths.at("WORLD") + this->pmenu->getListString("ROOMS") + ".txt");
 	}
 	else if (this->pmenu->isListReleased("ROOMS")) {
-		this->pmenu->setTextBoxString("FILE_PATH", this->pmenu->getListString("ROOMS"));
+		this->pmenu->setTextBoxString("FILE_NAME", this->pmenu->getListString("ROOMS"));
 	}
 
 

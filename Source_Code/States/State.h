@@ -19,8 +19,10 @@ public:
 	sf::Vector2f scale;
 	sf::RenderWindow* window;
 	GraphicSettings* gfxSettings;
+	std::map<std::string, std::string> folderPaths;
 	std::map<std::string, int>* supportedKeys;
 	std::stack<State*>* states;
+	
 };
 
 class State

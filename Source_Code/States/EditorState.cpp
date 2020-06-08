@@ -51,7 +51,7 @@ void EditorState::initPauseMenu()
 	this->pmenu->addButton("SAVE", 300.f, "Save");
 	this->pmenu->addButton("LOAD", 500.f, "Load");
 	this->pmenu->addButton("QUIT", 800.f, "Quit");
-	this->pmenu->addTextBox("FILE_PATH", 650, "DEFAULT");
+	this->pmenu->addTextBox("FILE_NAME", 650, "DEFAULT");
 
 
 }
@@ -269,10 +269,10 @@ void EditorState::updatePauseMenuButtons()
 		this->endState();
 	}
 	if (this->pmenu->isButtonReleased("SAVE")) {
-		this->tileMap->saveToFile("World/TileMaps/" + this->pmenu->getTextBoxString("FILE_PATH")+".txt");
+		this->tileMap->saveToFile(this->stateData.folderPaths.at("TILEMAPS") + this->pmenu->getTextBoxString("FILE_NAME")+".txt");
 	}
 	if (this->pmenu->isButtonReleased("LOAD")) {
-		this->tileMap->loadFromFile("World/TileMaps/" + this->pmenu->getTextBoxString("FILE_PATH") + ".txt", Assets::Get().textures.at("TILE_MAP"));
+		this->tileMap->loadFromFile(this->stateData.folderPaths.at("TILEMAPS") + this->pmenu->getTextBoxString("FILE_NAME") + ".txt", Assets::Get().textures.at("TILE_MAP"));
 	}
 }
 

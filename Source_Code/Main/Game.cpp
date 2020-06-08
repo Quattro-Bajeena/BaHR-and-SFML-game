@@ -31,7 +31,7 @@ void Game::initWindow()
 
 void Game::initGraphicSettings()
 {
-    this->gfxSettings.loadFromFile("Config/graphics.ini");
+    this->gfxSettings.loadFromFile("Assets/Config/graphics.ini");
 }
 
 void Game::initStateData()
@@ -42,6 +42,11 @@ void Game::initStateData()
     this->stateData.states = &this->states;
     this->stateData.gridSize = this->gridSize;
     this->stateData.scale = sf::Vector2f(this->gfxSettings.resolution.width / 1920.f, this->gfxSettings.resolution.height / 1080.f);
+
+    this->stateData.folderPaths["CONFIG"] = "Assets/Config/";
+    this->stateData.folderPaths["WORLD"] = "Assets/World/";
+    this->stateData.folderPaths["TILEMAPS"] = "Assets/World/Tilemaps/";
+    this->stateData.folderPaths["STATISTICS"] = "Assets/Statistics/";
 }
 
 
@@ -52,13 +57,14 @@ void Game::initStates()
 
 void Game::initStatistics()
 {
-    std::map<std::string, std::string> file_paths = { { "SCORE_BOARD" , "Statistics/score_board.txt" } , {"ENEMY_KILLS", "Statistics/enemy_kills.txt"} };
+    std::map<std::string, std::string> file_paths = { { "SCORE_BOARD" , "Assets/Statistics/score_board.txt" } , {"ENEMY_KILLS", "Assets/Statistics/enemy_kills.txt"} };
     this->statistics = std::make_unique<GameStatistics>(file_paths);
     this->statistics->load();
 }
 
 void Game::initAssets()
 {
+    
     Assets::Get().font.loadFromFile("Assets/Fonts/impact.ttf");
 
     //Entites
@@ -99,20 +105,37 @@ void Game::initAssets()
    //Sounds
    Assets::Get().soundBuffers["HIT"].loadFromFile("Assets/Sounds/uguu.wav");
    //Assets::Get().sounds["HIT"].setBuffer(Assets::Get().soundBuffers.at("HIT"));
+
+   
 }
 
 
 
 //Constructors/Destructors
 Game::Game() {
+    auto t1 = std::chrono::high_resolution_clock::now();
     this->initVariables();
+    auto t2 = std::chrono::high_resolution_clock::now();
     this->initGraphicSettings();
+    auto t3 = std::chrono::high_resolution_clock::now();
     this->initWindow();
+    auto t4 = std::chrono::high_resolution_clock::now();
     this->initStateData();
+    auto t5 = std::chrono::high_resolution_clock::now();
     this->initAssets();
+    auto t6 = std::chrono::high_resolution_clock::now();
     this->initStatistics();
+    auto t7 = std::chrono::high_resolution_clock::now();
     this->initStates(); //last
+    auto t8 = std::chrono::high_resolution_clock::now();
     
+    std::cout << "Init Variables: " << std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count() << " ms\n";
+    std::cout << "Init Grpahic Settings: " << std::chrono::duration_cast<std::chrono::milliseconds>(t3 - t2).count() << " ms\n";
+    std::cout << "Init Window: " << std::chrono::duration_cast<std::chrono::milliseconds>(t4 - t3).count() << " ms\n";
+    std::cout << "Init State Data: " << std::chrono::duration_cast<std::chrono::milliseconds>(t5 - t4).count() << " ms\n";
+    std::cout << "Init Assets: " << std::chrono::duration_cast<std::chrono::milliseconds>(t6 - t5).count() << " ms\n";
+    std::cout << "Init Statistcs: " << std::chrono::duration_cast<std::chrono::milliseconds>(t7 - t6).count() << " ms\n";
+    std::cout << "Init States: " << std::chrono::duration_cast<std::chrono::milliseconds>(t8 - t7).count() << " ms\n";
 }
 
 Game::~Game()

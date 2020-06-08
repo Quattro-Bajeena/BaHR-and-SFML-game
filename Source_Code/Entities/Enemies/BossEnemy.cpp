@@ -33,7 +33,7 @@ BossEnemy::BossEnemy(sf::Vector2f position)
 void BossEnemy::shoot(sf::Vector2f targetPos)
 {
 	if (this->aiComponent->isAggro() && this->shootTimer >= this->shootTimerMax && this->canShoot == true) {
-		bullets.emplace_back(Bullet(this->getCenterPosition(), this->calculateDir(targetPos), sf::Color::Black,
+		this->bullets.emplace_back(Bullet(this->getCenterPosition(), this->calculateDir(targetPos), sf::Color::Black,
 			this->damage, 50, 500, 1000));
 		this->shootTimer = 0.f;
 	}

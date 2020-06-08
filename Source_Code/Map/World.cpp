@@ -5,7 +5,7 @@
 void World::initRooms()
 {
 	namespace fs = std::filesystem;
-	std::string path = "World/TileMaps/";
+	std::string path = "Assets/World/TileMaps/";
 	for (const auto& entry : fs::directory_iterator(path)) {
 		
 		std::string filename = entry.path().filename().stem().string();
@@ -13,7 +13,7 @@ void World::initRooms()
 	}
 		
 
-	roomFiles["TEST"] = "World/TileMaps/default_map.txt";
+	//roomFiles["TEST"] = "Assets/World/TileMaps/default_map.txt";
 }
 
 void World::clear()

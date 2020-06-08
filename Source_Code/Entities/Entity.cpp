@@ -74,8 +74,8 @@ const sf::Vector2f Entity::getCenterPosition() const
 	}
 	else
 		return sf::Vector2f(
-			this->sprite.getPosition().x + this->sprite.getGlobalBounds().width,
-			this->sprite.getPosition().y + this->sprite.getGlobalBounds().height
+			this->sprite.getPosition().x + this->sprite.getGlobalBounds().width / 2,
+			this->sprite.getPosition().y + this->sprite.getGlobalBounds().height / 2
 			);
 }
 
