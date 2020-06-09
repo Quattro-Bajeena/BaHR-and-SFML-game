@@ -18,15 +18,20 @@ private:
 	std::map<std::string, std::unique_ptr<gui::DropDownList>> lists;
 	std::map<std::string, std::unique_ptr<gui::Button>> buttons;
 	sf::RectangleShape sidebar;
+	std::unique_ptr<gui::CheckBox> checkBox;
+	std::map<std::string, sf::Text> texts;
 
-	//sf::IntRect textureRect;
+	
 	sf::RectangleShape selectorRect;
-
-	mutable sf::RenderTexture renderTexture;
 	mutable sf::RectangleShape placeRect;
 
+	mutable sf::RenderTexture renderTexture;
+	
+	std::pair<sf::Color, sf::Color> roomSelectedCol;
+	std::pair<sf::Color, sf::Color> roomNotSelectedCol;
 	Room* tempRoom;
 	Room* selectedRoom;
+	bool selected;
 	
 	//Objects
 	std::map<std::string, std::string> roomFiles;

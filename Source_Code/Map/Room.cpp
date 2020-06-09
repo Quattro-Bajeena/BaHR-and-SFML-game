@@ -271,6 +271,11 @@ const std::string Room::getAsString() const
 	return ss.str();
 }
 
+const EnemyInfo Room::getEnemyInfo() const
+{
+	return EnemyInfo(this->allowSpawnEnemies, this->spawnTimeMax, this->enemyLimit);
+}
+
 void Room::setEnemies(bool enemy_spawn, float spawn_time, int enemy_limit)
 {
 	this->allowSpawnEnemies = enemy_spawn;

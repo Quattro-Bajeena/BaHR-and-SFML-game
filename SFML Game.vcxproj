@@ -45,6 +45,7 @@
     <ClCompile Include="Source_Code\GUI\Gameplay\WeaponSlot.cpp" />
     <ClCompile Include="Source_Code\GUI\General\Bar.cpp" />
     <ClCompile Include="Source_Code\GUI\General\Button.cpp" />
+    <ClCompile Include="Source_Code\GUI\General\CheckBox.cpp" />
     <ClCompile Include="Source_Code\GUI\General\DropDownList.cpp" />
     <ClCompile Include="Source_Code\GUI\General\TextBox.cpp" />
     <ClCompile Include="Source_Code\GUI\StateRelated\PauseMenu.cpp" />
@@ -107,8 +108,10 @@
     <ClInclude Include="Source_Code\GUI\Gameplay\WeaponSlot.h" />
     <ClInclude Include="Source_Code\GUI\General\Bar.h" />
     <ClInclude Include="Source_Code\GUI\General\Button.h" />
+    <ClInclude Include="Source_Code\GUI\General\CheckBox.h" />
     <ClInclude Include="Source_Code\GUI\General\DropDownList.h" />
     <ClInclude Include="Source_Code\GUI\General\TextBox.h" />
+    <ClInclude Include="Source_Code\GUI\Gui.h" />
     <ClInclude Include="Source_Code\GUI\StateRelated\PauseMenu.h" />
     <ClInclude Include="Source_Code\Items\Ammo.h" />
     <ClInclude Include="Source_Code\Items\Collectable.h" />

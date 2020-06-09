@@ -41,6 +41,7 @@ void WorldEditorState::initVariables()
 	this->offset = { 0,0 };
 
 	this->tempRoom = nullptr;
+	this->selected = false;
 }
 
 
@@ -110,6 +111,7 @@ void WorldEditorState::initWorld()
 
 void WorldEditorState::initGui()
 {
+	//SIDABR
 	this->sidebar.setSize(
 		sf::Vector2f(
 			static_cast<float>(this->stateData.gfxSettings->resolution.width) / 8.f,
@@ -119,9 +121,38 @@ void WorldEditorState::initGui()
 	this->sidebar.setOutlineColor(sf::Color(230, 230, 230, 200));
 	this->sidebar.setOutlineThickness(static_cast<int>(2.f * this->stateData.scale.x));
 
+	std::vector<std::string> room_str;
+	for (const auto& [room_type, filepath] : this->roomFiles) {
+		room_str.emplace_back(room_type);
+		this->roomFilesVec.emplace_back(room_type, filepath);
+	}
+
+	this->lists["ROOMS"] = std::make_unique< gui::DropDownList>(
+		20, 100, 200.f, 80.f,
+		this->stateData.scale, Assets::Get().font,
+		room_str, 0);
+
+	this->texts["SPAWN"].setString("Enemy Spawn:");
+	this->texts["SPAWN"].setFont(Assets::Get().font);
+	this->texts["SPAWN"].setPosition(10 * this->stateData.scale.x , 200 * this->stateData.scale.y);
+	this->texts["SPAWN"].setFillColor(sf::Color(200, 160, 50));
+	this->texts["SPAWN"].setCharacterSize(40 * this->stateData.scale.x);
+
+	this->checkBox = std::make_unique<gui::CheckBox>(
+		80, 270, 60, 60, this->stateData.scale,
+		sf::Color(15, 10, 5, 255), sf::Color(40, 30, 20, 200), sf::Color(0, 0, 0, 100),
+		sf::Color(5, 2, 0, 255), sf::Color(15, 15, 15, 200), sf::Color(20, 20, 20, 200));
+	
+
+	//MOUSE SELECTORS
+	this->roomSelectedCol.first = sf::Color::Blue;
+	this->roomNotSelectedCol.first = sf::Color::Red;
+
+	this->roomSelectedCol.second = sf::Color(200, 200, 255, 40);
+	this->roomNotSelectedCol.second = sf::Color(255, 200, 200, 40);
 
 	this->selectorRect.setSize(sf::Vector2f(0,0));
-	this->selectorRect.setFillColor(sf::Color(255, 200, 200, 40));
+	this->selectorRect.setFillColor(this->roomNotSelectedCol.second);
 	this->selectorRect.setOutlineThickness(static_cast<int>(10.f * this->stateData.scale.x));
 	this->selectorRect.setOutlineColor(sf::Color::Red);
 
@@ -130,16 +161,7 @@ void WorldEditorState::initGui()
 	this->placeRect.setOutlineThickness(static_cast<int>(20.f * this->stateData.scale.x));
 	this->placeRect.setOutlineColor(sf::Color::Green);
 
-	std::vector<std::string> room_str;
-	for (const auto& [room_type, filepath] : this->roomFiles) {
-		room_str.emplace_back(room_type);
-		this->roomFilesVec.emplace_back(room_type, filepath);
-	}
-
-	this->lists["ROOMS"] = std::make_unique< gui::DropDownList>(
-		10, 100, 200.f, 80.f,
-		this->stateData.scale, Assets::Get().font,
-		room_str, 0);
+	
 
 }
 
@@ -217,6 +239,9 @@ void WorldEditorState::updateEditorInput(const float& dt)
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E) && this->getKeytime()) {
 		this->startPlacingRoom();
 	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::F) && this->getKeytime() && this->selected == true) {
+		this->checkBox->check();
+	}
 
 	//Add a new Room
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && this->getKeytime()) {
@@ -228,6 +253,17 @@ void WorldEditorState::updateEditorInput(const float& dt)
 				this->placingNewRoom = false;
 				delete this->tempRoom;
 				this->tempRoom = nullptr;
+			}
+			else if (this->selected == false) {
+				this->selected = true;
+				this->selectorRect.setOutlineColor(this->roomSelectedCol.first);
+				this->selectorRect.setFillColor(this->roomSelectedCol.second);
+
+			}
+			else if (this->selected == true) {
+				this->selected = false;
+				this->selectorRect.setOutlineColor(this->roomNotSelectedCol.first);
+				this->selectorRect.setFillColor(this->roomNotSelectedCol.second);
 			}
 			
 		}
@@ -250,6 +286,16 @@ void WorldEditorState::updateEditorInput(const float& dt)
 
 	}
 
+	//UPDATE ROOM VARIABLES
+	if (this->selected == false) {
+		if (this->selectedRoom != nullptr) {
+			this->enemySpawn = this->selectedRoom->getEnemyInfo().spawn;
+		}
+	}
+	else if (this->selected == true) {
+		this->enemySpawn = this->checkBox->isChecked();
+		this->selectedRoom->setEnemies(this->enemySpawn, this->enemySpawnTime, this->enemyLimit);
+	}
 	
 
 }
@@ -263,6 +309,7 @@ void WorldEditorState::updateButtons()
 			for (auto& [key, button] : this->buttons) {
 				button->update(this->mousePosWindow);
 			}
+			this->checkBox->update(this->mousePosWindow);
 		}
 
 		
@@ -288,7 +335,7 @@ void WorldEditorState::updateGui(const float& dt)
 		this->placeRect.setPosition(sf::Vector2f(this->offset * this->stateData.gridSize));
 		
 	}
-	else {
+	else if(this->selected == false){
 
 		for (const auto& room : this->world->getRooms()) {
 			if (room->getBounds().contains(this->mousePosView)) {
@@ -300,21 +347,20 @@ void WorldEditorState::updateGui(const float& dt)
 
 			}
 		}
+
+		this->checkBox->setCheck(this->enemySpawn);
 		
 	}
-
-	if (this->selectedRoom) {
-		this->selectedRoom->setEnemies(this->enemySpawn, this->enemySpawnTime, this->enemyLimit);
-	}
-
 
 
 	this->cursorText.setPosition(this->mousePosWindow.x + 100.f * this->stateData.scale.x, this->mousePosWindow.y - 50.f * this->stateData.scale.y);
 	std::stringstream ss;
-	ss << this->mousePosView.x << " | "<< this->mousePosView.y << "\n"
-		<< this->mousePosGrid.x << " | " << this->mousePosGrid.y << "\n"
-		<<this->roomOffset.x <<" | "<<this->roomOffset.y <<"\n"
-		<< this->roomType << "\n";
+	ss << this->mousePosView.x << " | " << this->mousePosView.y << "\n"
+		<<"mouse pos grid "<<this->mousePosGrid.x << " | " << this->mousePosGrid.y << "\n"
+		<<"room offset "<<this->roomOffset.x << " | " << this->roomOffset.y << "\n"
+		<<"selected: " <<this->selected<<"\n"
+		<<"spawn: "<<this->enemySpawn << "\n"
+		<<"room type"<< this->roomType << "\n";
 
 	this->cursorText.setString(ss.str());
 
@@ -397,8 +443,11 @@ void WorldEditorState::renderGui(sf::RenderTarget& target) const
 
 	target.setView(this->window.getDefaultView()); //rest rendering with default view
 	target.draw(this->sidebar);
-	this->lists.at("ROOMS")->render(target);
+	
+	target.draw(this->texts.at("SPAWN"));
+	this->checkBox->render(target);
 
+	this->lists.at("ROOMS")->render(target);
 	target.draw(this->cursorText);
 
 

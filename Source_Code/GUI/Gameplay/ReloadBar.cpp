@@ -5,9 +5,9 @@ gui::ReloadBar::ReloadBar(int offset_x, int offset_y, int width, int height,
 	sf::Vector2f scale)
 	:scale(scale)
 {
-	this->offset = sf::Vector2f(offset_x * scale.x, offset_y * scale.y);
-	this->background.setSize(sf::Vector2f(width, height));
-	this->background.scale(scale);
+	this->offset = sf::Vector2f(offset_x, offset_y);
+	this->background.setSize(sf::Vector2f(width, height ));
+	//this->background.setScale(scale);
 	this->background.setFillColor(sf::Color::Transparent);
 
 	this->line.setSize(sf::Vector2f(this->background.getGlobalBounds().width, this->background.getGlobalBounds().height / 5));

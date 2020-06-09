@@ -8,3 +8,4 @@
 #include "Bar.h"
 #include "WeaponSlot.h"
 #include "ReloadBar.h"
+#include "CheckBox.h"

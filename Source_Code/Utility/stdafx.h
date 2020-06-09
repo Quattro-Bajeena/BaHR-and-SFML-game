@@ -42,7 +42,7 @@ enum class gunModels {null = 0, NORMAL, REVOLVER, CANNON, SPREAD, SHOTGUN, MAGIC
 enum class enemyState { FULL = 0, SCRATCHED, DAMAGED, GRAVE, DEAD };
 enum class enemyType { REGULAR = 0, COMMANDO, STATIONARY, BOSS };
 enum class guiStates { IDLE = 0, HOVER, ACTIVE, RELEASED };
-enum TileTypes { DEFAULT = 0, ABOVE, DAMAGING };
+enum TileTypes { DEFAULT = 0, ABOVE, DAMAGING, SPAWN };
 
 
 

@@ -11,6 +11,17 @@ class Player;
 class Enemy;
 class Entity;
 class GameStatistics;
+class Ammo;
+class TileMap;
+
+struct EnemyInfo {
+	EnemyInfo(bool spawn, float time, int limit)
+	:spawn(spawn),time(time),limit(limit)
+	{}
+	const bool spawn;
+	const float time;
+	const int limit;
+};
 
 class Room
 {
@@ -64,6 +75,8 @@ public:
 	const bool checkCollision(sf::FloatRect bounds) const;
 	const std::vector<Enemy*>& getEnemies();
 	const std::string getAsString() const;
+	const EnemyInfo getEnemyInfo() const;
+
 
 	//Setters
 	void setEnemies(bool enemy_spawn, float spawn_time, int enemy_limit);
