@@ -217,7 +217,7 @@ void Game::render() const
     this->window->clear(sf::Color(40, 40, 40));
 
     //Render items
-    if (!this->states.empty()) {
+    if (this->states.empty() == false) {
         this->states.top()->render(this->window);
     }
 
