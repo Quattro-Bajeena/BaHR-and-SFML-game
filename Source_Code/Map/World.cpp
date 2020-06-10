@@ -51,9 +51,14 @@ World::World(std::string file_name, sf::Texture& tileSheet, GameStatistics& stat
 
 World::~World()
 {
-	for (Room* room : this->rooms) {
-		delete room;
-	}
+	util::purge(this->rooms);
+	util::purge(this->players);
+}
+
+void World::addPlayer(std::string name, const sf::Vector2f& pos)
+{
+	this->players.emplace_back(new Player(name, pos));
+	this->player = this->players.back();
 }
 
 //Functions

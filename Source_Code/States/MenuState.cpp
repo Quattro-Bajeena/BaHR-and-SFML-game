@@ -16,7 +16,8 @@ void MenuState::initBackground()
 
 void MenuState::initGui()
 {
-
+	mouseText.setFont(Assets::Get().font);
+	mouseText.setCharacterSize(24);
 }
 
 
@@ -32,6 +33,18 @@ void MenuState::initButtons()
 	this->buttons["SETTINGS_STATE"] = std::make_unique< gui::Button>(
 		1400.f, 300.f, 200.f, 150.f, this->stateData.scale,
 		&Assets::Get().font, "Settings", 50,
+		sf::Color(240, 240, 15, 200), sf::Color(255, 255, 230, 255), sf::Color(10, 10, 10, 200),
+		sf::Color(100, 100, 100, 150), sf::Color(180, 180, 130, 200), sf::Color(20, 20, 20, 50));
+
+	this->buttons["SERVER_STATE"] = std::make_unique< gui::Button>(
+		1400.f, 460.f, 200.f, 150.f, this->stateData.scale,
+		&Assets::Get().font, "Create\nServer", 45,
+		sf::Color(240, 240, 15, 200), sf::Color(255, 255, 230, 255), sf::Color(10, 10, 10, 200),
+		sf::Color(100, 100, 100, 150), sf::Color(180, 180, 130, 200), sf::Color(20, 20, 20, 50));
+
+	this->buttons["MULTIPLAYER_STATE"] = std::make_unique< gui::Button>(
+		1610.f, 460.f, 200.f, 150.f, this->stateData.scale,
+		&Assets::Get().font, "Multiplayer", 40,
 		sf::Color(240, 240, 15, 200), sf::Color(255, 255, 230, 255), sf::Color(10, 10, 10, 200),
 		sf::Color(100, 100, 100, 150), sf::Color(180, 180, 130, 200), sf::Color(20, 20, 20, 50));
 
@@ -53,7 +66,7 @@ void MenuState::initButtons()
 		sf::Color(255, 65, 65, 200), sf::Color(255, 220, 220, 255), sf::Color(10, 10, 10, 200),
 		sf::Color(90, 90, 90, 150), sf::Color(200, 150, 150, 200), sf::Color(20, 20, 20, 50));
 
-	this->textBox = std::make_unique< gui::TextBox>(1400.f, 480.f, 410.f, 80.f, this->stateData.scale,
+	this->textBox = std::make_unique< gui::TextBox>(1400.f, 680.f, 410.f, 80.f, this->stateData.scale,
 		Assets::Get().font, "insert_name", 50, 15, 
 		sf::Color(40, 40, 40, 255), sf::Color(20, 20, 20, 255), sf::Color(5, 5, 5, 255),
 		sf::Color(200, 200, 200, 200), sf::Color(230, 230, 230, 230), sf::Color(240, 240, 240, 255));
@@ -170,6 +183,14 @@ void MenuState::updateButtons()
 		this->states.push(new SettingsState(this->stateData));
 	}
 
+	if (this->buttons["SERVER_STATE"]->isReleased()) {
+		this->states.push(new MultiplayerServerState(this->stateData, this->statistics));
+	}
+
+	if (this->buttons["MULTIPLAYER_STATE"]->isReleased()) {
+		this->states.push(new MultiplayerClientState(this->stateData));
+	}
+
 	//Quit the state
 	if (this->buttons["EXIT_STATE"]->isReleased()) {
 		this->endState();
@@ -186,12 +207,7 @@ void MenuState::updateGui()
 
 	this->textBox->update(this->mousePosWindow);
 
-	mouseText.setPosition(this->mousePosView.x, this->mousePosView.y - 50);
-	mouseText.setFont(Assets::Get().font);
-	mouseText.setCharacterSize(24);
-	std::stringstream ss;
-	ss << this->mousePosView.x << "\n" << this->mousePosView.y;
-	mouseText.setString(ss.str());
+	
 }
 
 void MenuState::update(const float& dt)

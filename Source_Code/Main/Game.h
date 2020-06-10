@@ -1,11 +1,6 @@
 #pragma once
 
-#include "Player.h"
-#include "PowerUp.h"
-#include "State.h"
-#include "GameState.h"
 #include "MenuState.h"
-
 
 class Game
 {

@@ -24,6 +24,11 @@ Entity::~Entity()
 	
 }
 
+void Entity::setHealth(int health)
+{
+	this->health = health;
+}
+
 //Comonent functions
 void Entity::setTexture(sf::Texture& texture)
 {

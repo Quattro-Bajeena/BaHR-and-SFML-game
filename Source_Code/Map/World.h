@@ -19,6 +19,8 @@ private:
 	bool editing;
 
 	//Gameplay
+	std::vector<Player*> players;
+	Player* player;
 
 	//Initliazers
 	void initRooms();
@@ -31,6 +33,7 @@ public:
 	~World();
 
 	//Functions
+	void addPlayer(std::string name, const sf::Vector2f& pos);
 	void addRoom(std::string room_type, int offsetX, int offsetY,
 		bool enemy_spawn, float spawn_time, int enemy_limit);
 	void removeRoom(sf::Vector2i room_offset);

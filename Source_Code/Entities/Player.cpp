@@ -5,14 +5,14 @@
 
 //Constructor===================================================================
 
-Player::Player(const sf::Vector2f& pos, sf::Texture& texture_sheet)
-	:startingPos(pos)
+Player::Player(std::string name, const sf::Vector2f& pos)
+	:name(name), startingPos(pos)
 {
 	this->initVariables();
 	this->setPosition(pos);
 	
 	this->createMovementComponent(500.f, 1200.f, 4800.f, 1500.f);
-	this->createAnimationComponent(texture_sheet);
+	this->createAnimationComponent(Assets::Get().textures.at("PLAYER_SHEET"));
 	this->createHitboxComponent(50.f, 18.f, 90.f, 180.f);
 
 	this->createShootingComponent(std::move(std::make_unique<NormalGun>()));
@@ -214,6 +214,11 @@ void Player::changeCurrGunAdjacent(int direction)
 void Player::changeCurrGunPos(int pos)
 {
 	this->shootingComponent->changeCurrGunPos(pos);
+}
+
+const std::string Player::getName() const
+{
+	return this->name;
 }
 
 

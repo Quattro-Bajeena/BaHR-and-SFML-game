@@ -62,6 +62,8 @@
     <ClCompile Include="Source_Code\States\EndScreenState.cpp" />
     <ClCompile Include="Source_Code\States\GameState.cpp" />
     <ClCompile Include="Source_Code\States\MenuState.cpp" />
+    <ClCompile Include="Source_Code\States\MultiplayerClientState.cpp" />
+    <ClCompile Include="Source_Code\States\MultiplayerServerState.cpp" />
     <ClCompile Include="Source_Code\States\SettingsState.cpp" />
     <ClCompile Include="Source_Code\States\State.cpp" />
     <ClCompile Include="Source_Code\States\WorldEditorState.cpp" />
@@ -125,6 +127,8 @@
     <ClInclude Include="Source_Code\States\EndScreenState.h" />
     <ClInclude Include="Source_Code\States\GameState.h" />
     <ClInclude Include="Source_Code\States\MenuState.h" />
+    <ClInclude Include="Source_Code\States\MultiplayerClientState.h" />
+    <ClInclude Include="Source_Code\States\MultiplayerServerState.h" />
     <ClInclude Include="Source_Code\States\SettingsState.h" />
     <ClInclude Include="Source_Code\States\State.h" />
     <ClInclude Include="Source_Code\States\WorldEditorState.h" />

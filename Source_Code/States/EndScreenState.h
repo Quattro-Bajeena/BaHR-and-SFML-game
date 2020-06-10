@@ -1,8 +1,12 @@
 #pragma once
-#include "State.h"
-#include "GameState.h"
-#include "MenuState.h"
+
 #include "Player.h"
+#include "GameState.h"
+
+class MenuState;
+class GameState;
+class Player;
+class State;
 
 class EndScreenState :
 	public State

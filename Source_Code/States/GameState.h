@@ -11,7 +11,7 @@ class TileMap;
 class GameState :
 	public State
 {
-private:
+protected:
 	sf::View view;
 	mutable sf::RenderTexture renderTexture;
 	mutable sf::Sprite renderSprite;
@@ -46,7 +46,7 @@ private:
 	void initView();
 	void initText();
 	void initWorld();
-	void initPlayer();
+	virtual void initPlayer();
 	void initSound();
 	void initGui();
 	void initDeferredRender();
@@ -61,7 +61,7 @@ private:
 	void updateGui(const float& dt);
 	void updatePauseMenuButtons(const float& dt);
 
-	void updatePlayerInput(const float& dt);
+	virtual void updatePlayerInput(const float& dt);
 	void updateTileMap(const float& dt);
 
 	void renderGui(sf::RenderTarget* target = nullptr) const;
@@ -71,8 +71,8 @@ public:
 	virtual ~GameState();
 
 	//Function
-	void update(const float& dt);
-	void render(sf::RenderTarget* target = nullptr) const;
+	virtual void update(const float& dt);
+	virtual void render(sf::RenderTarget* target = nullptr) const;
 	
 
 };

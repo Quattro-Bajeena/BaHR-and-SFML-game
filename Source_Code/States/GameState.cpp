@@ -42,8 +42,7 @@ void GameState::initText()
 
 void GameState::initPlayer()
 {
-	player = new Player(this->world->randomFreeTile(),
-		Assets::Get().textures.at("PLAYER_SHEET"));
+	player = new Player(this->statistics.getName(),this->world->randomFreeTile());
 
 }
 
@@ -207,16 +206,16 @@ void GameState::updatePlayerInput(const float& dt)
 {
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-		player->move(-1.f, 0.f, dt);
+		this->player->move(-1.f, 0.f, dt);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-		player->move(1.f, 0.f, dt);
+		this->player->move(1.f, 0.f, dt);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-		player->move(0.f, -1.f, dt);
+		this->player->move(0.f, -1.f, dt);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-		player->move(0.f, 1.f, dt);
+		this->player->move(0.f, 1.f, dt);
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {

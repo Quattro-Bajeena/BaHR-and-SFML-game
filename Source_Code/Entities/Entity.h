@@ -63,6 +63,9 @@ public:
 	Entity();
 	virtual ~Entity();
 
+	//Setters
+	void setHealth(int health);
+
 	//Accesors
 	virtual const sf::Vector2f getPosition() const;
 	virtual const sf::Vector2f getCenterPosition() const;

@@ -13,7 +13,7 @@ private:
 	//Assets
 	sf::Text debugText;
 	//Variables
-
+	std::string name;
 
 	//Power ups
 	//Movement
@@ -33,7 +33,7 @@ private:
 	void updateAnimations(const float& dt);
 	
 public:
-	Player(const sf::Vector2f& pos, sf::Texture& texture_sheet);
+	Player(std::string name, const sf::Vector2f& pos);
 	~Player();
 
 	//Functions
@@ -48,7 +48,7 @@ public:
 	void changeCurrGunPos(int pos);
 
 	//Accesors
-	
+	const std::string getName() const;
 	
 
 	//Main functions

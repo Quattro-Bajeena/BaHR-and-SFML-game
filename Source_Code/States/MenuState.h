@@ -1,10 +1,16 @@
 #pragma once
-
-#include "State.h"
 #include "GameState.h"
+#include "MultiplayerServerState.h"
 #include "EditorState.h"
 #include "SettingsState.h"
 #include "WorldEditorState.h"
+
+class GameState;
+class MultiplayerServerState;
+class SettingsState;
+class WorldEditorState;
+class EditorState;
+class EndScreenState;
 
 class MenuState :
 	public State
