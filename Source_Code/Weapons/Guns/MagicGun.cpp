@@ -15,13 +15,18 @@ MagicGun::MagicGun(AudioManager& audio)
 
 }
 
+void MagicGun::reloadSound()
+{
+}
+
 std::vector<Bullet> MagicGun::shootBullet()
 {
+    
     if (this->shootTimer >= this->shootTimerMax && this->reloading == false) {
         this->magazine->shoot(0);
-        this->shootTimer = 0;
+       
         this->readyToShoot = false;
-
+        this->shootTimer = 0;
         std::vector<Bullet> bullets;
         sf::Vector2f central = util::rotateVector(this->direction, RNG::get().randomI(-10, 10));
 

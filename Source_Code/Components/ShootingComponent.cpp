@@ -82,6 +82,12 @@ const float ShootingComponent::getReloadTime() const
 	return this->currentGun->getReloadTime();
 }
 
+void ShootingComponent::changeGunSound()
+{
+	this->audio.playRandom("change_weapon");
+
+}
+
 void ShootingComponent::shoot()
 {
 	std::vector<Bullet> bullets_shot = this->currentGun->shootBullet();
@@ -114,6 +120,7 @@ void ShootingComponent::changeCurrGunAdjacent(int direction)
 				this->currentGunPos--;
 			}
 		}
+		this->changeGunSound();
 		this->currentGun = this->guns[this->currentGunPos].get();
 		this->swapTime = 0.f;
 	}
@@ -123,6 +130,7 @@ void ShootingComponent::changeCurrGunAdjacent(int direction)
 void ShootingComponent::changeCurrGunPos(int pos)
 {
 	if (pos >= 0 && pos < this->guns.size()) {
+		this->changeGunSound();
 		this->currentGunPos = pos;
 		this->currentGun = this->guns[this->currentGunPos].get();
 	}

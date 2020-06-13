@@ -148,7 +148,7 @@ void HitboxComponent::update()
 
 void HitboxComponent::render(sf::RenderTarget& target) const
 {
-    target.draw(this->hitbox);
-    target.draw(this->center);
+    //target.draw(this->hitbox);
+    //target.draw(this->center);
 }
 

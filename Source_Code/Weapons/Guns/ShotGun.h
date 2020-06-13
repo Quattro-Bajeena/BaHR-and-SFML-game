@@ -10,6 +10,7 @@ public:
 	ShotGun(AudioManager& audio);
 	~ShotGun() = default;
 
+	void reloadSound();
 	std::vector<Bullet> shootBullet();
 };
 

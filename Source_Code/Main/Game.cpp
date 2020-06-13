@@ -113,11 +113,13 @@ void Game::initAssets()
 void Game::initAudioManager()
 {
     this->audio = std::make_unique<AudioManager>(this->stateData.folderPaths.at("AUDIO"));
+
+    this->audio->addMusic("track_1", "Music/my_first_track.wav");
+
     this->audio->addSound("player_hit", "Player/uguu.wav");
 
     this->audio->addSound("normal_shoot", "Gun sounds/Normal/normal shot.wav");
     this->audio->addSound("normal_reload", "Gun sounds/Normal/normal reload.wav");
-
 
     this->audio->addSound("shotgun_shoot", "Gun sounds/Shotgun/shotgun shot 1.wav");
     this->audio->addSound("shotgun_shoot", "Gun sounds/Shotgun/shotgun shot 2.wav");
@@ -140,11 +142,11 @@ void Game::initAudioManager()
     this->audio->addSound("change_weapon", "Gun sounds/Common/change weapon 2.wav");
     this->audio->addSound("change_weapon", "Gun sounds/Common/change weapon 3.wav");
 
-    this->audio->addSound("empty_weapon", "Gun sounds/Common/empty 1");
-    this->audio->addSound("empty_weapon", "Gun sounds/Common/empty 2");
-    this->audio->addSound("empty_weapon", "Gun sounds/Common/empty 3");
+    this->audio->addSound("empty_weapon", "Gun sounds/Common/empty 1.wav");
+    this->audio->addSound("empty_weapon", "Gun sounds/Common/empty 2.wav");
+    this->audio->addSound("empty_weapon", "Gun sounds/Common/empty 3.wav");
 
-    this->audio->addSound("reload_weapon", "Gun sounds/Common/reload 1.wav");
+    this->audio->addSound("reload", "Gun sounds/Common/reload 1.wav");
 
 
 }

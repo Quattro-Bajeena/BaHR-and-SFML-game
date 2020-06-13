@@ -72,8 +72,6 @@ protected:
 
 	gunModels model;
 	sf::Sprite sprite;
-	sf::Sound shootSound;
-	sf::Sound reloadSound;
 
 	std::string name;
 	sf::Color bulletColor;
@@ -104,6 +102,8 @@ protected:
 	bool requestingShoot;
 	bool readyToShoot;
 
+	float emptySoundTimer;
+	float emptySoundTimerMax;
 
 public:
 	//Constructor destructor
@@ -122,9 +122,13 @@ public:
 	const std::unique_ptr<Magazine>& getMagazine() const;
 	const gunModels getModel() const;
 
+	//Sounds
+	virtual void reloadSound();
+	virtual void emptyMagazineSound();
+
 	//Functions
 	virtual std::vector<Bullet> shootBullet() = 0;
-	void reload();
+	virtual void reload();
 	void refillAmmo();
 	void refillAmmo(float percent);
 	void update(sf::Vector2f start_pos, sf::Vector2f dir, const float& dt);

@@ -20,13 +20,22 @@ SpreadGun::SpreadGun(AudioManager& audio)
     this->gunDistance = 30.f;
 }
 
+void SpreadGun::reloadSound()
+{
+    this->audio.play("spread_reload");
+}
+
 std::vector<Bullet> SpreadGun::shootBullet()
 {
+    
+    if (this->magazine->isEmpty() == true) {
+        this->emptyMagazineSound();
+    }
     if ( this->shootTimer >= this->shootTimerMax && this->reloading == false && this->magazine->isEmpty() == false) {
         this->audio.playRandom("spread_shoot");
         this->magazine->shoot(1);
-        
         this->shootTimer = 0;
+       
         this->readyToShoot = false;
         sf::Vector2f central = util::rotateVector(this->direction, RNG::get().randomI(-10, 10));
         sf::Vector2f left = util::rotateVector(central, 30.f);

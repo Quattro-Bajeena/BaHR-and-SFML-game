@@ -8,6 +8,31 @@ AudioManager::AudioManager(std::string path)
 	this->sweepTime = 0.f;
 	this->sweepTimeMax = 5.f;
 	this->maxSounds = 50;
+	this->currentMusic = nullptr;
+}
+
+void AudioManager::addMusic(std::string key, std::string file_name, bool loop)
+{
+	this->music[key].openFromFile(this->path + file_name);
+	if (loop == true) {
+		this->music[key].setLoop(true);
+	}
+
+}
+
+void AudioManager::playMusic(std::string key, float volume)
+{
+	if (currentMusic != nullptr) {
+		this->currentMusic->stop();
+	}
+	this->music.at(key).setVolume(volume);
+	this->music.at(key).play();
+	this->currentMusic = &this->music.at(key);
+}
+
+void AudioManager::stopMusic()
+{
+	this->currentMusic->stop();
 }
 
 void AudioManager::addSound(std::string key, std::string file_name)

@@ -9,6 +9,7 @@ public:
 	MagicGun(AudioManager& audio);
 	~MagicGun() = default;
 
+	void reloadSound();
 	std::vector<Bullet> shootBullet();
 };
 

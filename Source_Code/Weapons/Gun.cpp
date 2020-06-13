@@ -122,6 +122,8 @@ Gun::Gun(AudioManager& audio)
 	this->shootTimer = 0.f;
 	this->requestingShoot = false;
 	this->readyToShoot = true;
+	this->emptySoundTimer = 0.f;
+	this->emptySoundTimerMax = 1.f;
 	
 }
 
@@ -164,14 +166,30 @@ const gunModels Gun::getModel() const
 	return this->model;
 }
 
+void Gun::reloadSound()
+{
+	this->audio.play("reload");
+}
+
+void Gun::emptyMagazineSound()
+{
+	if (this->emptySoundTimer >= this->emptySoundTimerMax) {
+		this->audio.playRandom("empty_weapon");
+		this->emptySoundTimer = 0.f;
+	}
+	
+}
+
 
 
 void Gun::reload()
 {
 	if (this->reloading == false && this->magazine->isFull() == false 
 		&& this->magazine->noBullets() == false) {
+		this->reloadSound();
 		this->reloading = true;
 	}
+	
 }
 
 void Gun::refillAmmo()
@@ -187,6 +205,7 @@ void Gun::refillAmmo(float percent)
 
 void Gun::update(sf::Vector2f start_pos, sf::Vector2f dir, const float& dt)
 {
+	this->emptySoundTimer += dt;
 	if (this->reloading == true) {
 		//std::cout << "reloading\n";
 		this->reloadTimer += dt;

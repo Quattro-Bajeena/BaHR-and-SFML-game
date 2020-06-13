@@ -20,15 +20,24 @@ ShotGun::ShotGun(AudioManager& audio)
     this->gunDistance = 30.f;
 }
 
+void ShotGun::reloadSound()
+{
+    this->audio.play("shotgun_reload",10,0.7);
+}
+
 std::vector<Bullet> ShotGun::shootBullet()
 {
+   
+    if (this->magazine->isEmpty() == true) {
+        this->emptyMagazineSound();
+    }
     if (this->readyToShoot == true && this->shootTimer >= this->shootTimerMax && this->reloading == false && this->magazine->isEmpty() == false) {
         this->audio.playRandom("shotgun_shoot");
         this->magazine->shoot(1);
 
-        this->shootTimer = 0;
+        
         this->readyToShoot = false;
-
+        this->shootTimer = 0;
         std::vector<Bullet> bullets;
         sf::Vector2f central = util::rotateVector(this->direction, RNG::get().randomI(-10, 10));
 

@@ -19,11 +19,19 @@ CanonGun::CanonGun(AudioManager& audio)
     this->gunDistance = 30.f;
 }
 
+void CanonGun::reloadSound()
+{
+    this->audio.play("reload",10,0.5);
+}
+
 std::vector<Bullet> CanonGun::shootBullet()
 {
     this->requestingShoot = true;
+    if (this->magazine->isEmpty() == true) {
+        this->emptyMagazineSound();
+    }
     if (this->shootTimer >= this->shootTimerMax && this->reloading == false && this->magazine->isEmpty() == false) {
-        this->audio.playRandom("canon_shoot", 30, 0.7);
+        this->audio.playRandom("canon_shoot", 20, 0.7);
         this->magazine->shoot(1);
         this->shootTimer = 0.f;
         this->readyToShoot = false;

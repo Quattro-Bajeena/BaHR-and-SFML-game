@@ -21,9 +21,18 @@ Revolver::Revolver(AudioManager& audio)
     this->gunDistance = 30.f;
 }
 
+void Revolver::reloadSound()
+{
+    this->audio.play("revolver_reload");
+}
+
 std::vector<Bullet> Revolver::shootBullet()
 {
+   
     this->requestingShoot = true;
+    if (this->magazine->isEmpty() == true) {
+        this->emptyMagazineSound();
+    }
     if (this->readyToShoot == true && this->shootTimer >= this->shootTimerMax && this->reloading == false && this->magazine->isEmpty() == false) {
         this->audio.playRandom("revolver_shoot");
         this->magazine->shoot(1);

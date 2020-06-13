@@ -9,6 +9,7 @@ public:
 	SpreadGun(AudioManager& audio);
 	~SpreadGun() = default;
 
+	void reloadSound() override;
 	std::vector<Bullet> shootBullet();
 };
 

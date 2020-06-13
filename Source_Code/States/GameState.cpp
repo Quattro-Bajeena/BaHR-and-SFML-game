@@ -48,8 +48,7 @@ void GameState::initPlayer()
 
 void GameState::initSound()
 {
-	//this->music.openFromFile("Assets/Sounds/gwyn.wav");
-	//this->endScreenMusic.openFromFile("Assets/Sounds/guts.wav");
+	this->audio.playMusic("track_1");
 }
 
 void GameState::initGui()
@@ -118,8 +117,9 @@ GameState::GameState(StateData& state_data, GameStatistics& stats, AudioManager&
 
 GameState::~GameState()
 {
+	
 	delete this->player;
-	std::cout << "Ending GameState" << "\n";
+	//std::cout << "Ending GameState" << "\n";
 
 }
 
@@ -127,6 +127,8 @@ GameState::~GameState()
 
 void GameState::loose()
 {
+	
+
 	this->statistics.update();
 	this->statistics.save();
 	

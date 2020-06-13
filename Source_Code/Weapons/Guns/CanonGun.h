@@ -10,6 +10,7 @@ public:
 	CanonGun(AudioManager& audio);
 	~CanonGun() = default;
 
+	void reloadSound();
 	std::vector<Bullet> shootBullet();
 };
 

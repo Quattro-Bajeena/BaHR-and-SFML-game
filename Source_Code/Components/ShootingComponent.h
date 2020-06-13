@@ -37,6 +37,9 @@ public:
 	const bool canReload() const;
 	const float getReloadTime() const;
 
+	//Sound
+	void changeGunSound();
+
 	//Functions
 	void shoot();
 	void reload();

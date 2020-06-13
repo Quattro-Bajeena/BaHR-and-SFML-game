@@ -47,7 +47,8 @@ const bool State::getKeytime()
 
 void State::endState()
 {
-	std::cout << "Ending this State" << "\n";
+	this->audio.stopMusic();
+	//std::cout << "Ending this State" << "\n";
 	this->quit = true;
 
 }
