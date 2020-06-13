@@ -47,11 +47,12 @@ void EditorState::initText()
 void EditorState::initPauseMenu()
 {
 	this->pmenu = std::make_unique< PauseMenu>(this->window, Assets::Get().font, this->stateData.scale);
-	this->pmenu->addButton("RESUME", 150.f, "Resume");
-	this->pmenu->addButton("SAVE", 300.f, "Save");
-	this->pmenu->addButton("LOAD", 500.f, "Load");
-	this->pmenu->addButton("QUIT", 800.f, "Quit");
-	this->pmenu->addTextBox("FILE_NAME", 650, "DEFAULT");
+	this->pmenu->addButton("RESUME", 180, "Resume");
+	this->pmenu->addTextBox("FILE_NAME", 300, "DEFAULT");
+	this->pmenu->addList("MAP_NAMES", 390, this->mapNames);
+	this->pmenu->addButton("SAVE", 700, "Save");
+	this->pmenu->addButton("LOAD", 800, "Load");
+	this->pmenu->addButton("QUIT", 900, "Quit");
 
 
 }
@@ -96,11 +97,27 @@ void EditorState::initGui()
 
 }
 
+void EditorState::initMapFiles()
+{
+	namespace fs = std::filesystem;
+
+	std::cout << "-------------\n";
+	std::string room_path = this->stateData.folderPaths.at("TILEMAPS");
+	std::cout << "Tile Maps: " << "\n";
+	for (const auto& entry : fs::directory_iterator(room_path)) {
+
+		std::string filename = entry.path().filename().stem().string();
+		std::cout << "-" << filename << "\n";
+		this->mapNames.push_back(filename);
+	}
+}
+
 //Constuctor
 EditorState::EditorState(StateData& state_data, AudioManager& audio)
 	:State(state_data, audio)
 {
 	this->initVariables();
+	this->initMapFiles();
 	this->initView();
 	this->initText();
 	this->initPauseMenu();
@@ -169,6 +186,7 @@ void EditorState::updateEditorInput(const float& dt)
 			}
 			else {
 				this->textureRect = this->textureSelector->getTextureRect();
+				
 			}
 		}
 	}
@@ -265,14 +283,17 @@ void EditorState::updatePauseMenuButtons()
 	if (this->pmenu->isButtonReleased("RESUME")) {
 		this->unpauseState();
 	}
-	if (this->pmenu->isButtonReleased("QUIT")) {
+	else if (this->pmenu->isButtonReleased("QUIT")) {
 		this->endState();
 	}
-	if (this->pmenu->isButtonReleased("SAVE")) {
+	else if (this->pmenu->isButtonReleased("SAVE")) {
 		this->tileMap->saveToFile(this->stateData.folderPaths.at("TILEMAPS") + this->pmenu->getTextBoxString("FILE_NAME")+".txt");
 	}
-	if (this->pmenu->isButtonReleased("LOAD")) {
+	else if (this->pmenu->isButtonReleased("LOAD")) {
 		this->tileMap->loadFromFile(this->stateData.folderPaths.at("TILEMAPS") + this->pmenu->getTextBoxString("FILE_NAME") + ".txt", Assets::Get().textures.at("TILE_MAP"));
+	}
+	else if (this->pmenu->isListReleased("MAP_NAMES")) {
+		this->pmenu->setTextBoxString("FILE_NAME", this->pmenu->getListString("MAP_NAMES"));
 	}
 }
 

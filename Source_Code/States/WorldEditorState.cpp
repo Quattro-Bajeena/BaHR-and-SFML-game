@@ -81,7 +81,7 @@ void WorldEditorState::loadFiles()
 	namespace fs = std::filesystem;
 
 	std::cout << "-------------\n";
-	std::string level_path = "Assets/World/";
+	std::string level_path = this->stateData.folderPaths.at("WORLD");
 	std::cout << "Levels: " << "\n";
 	for (const auto& entry : fs::directory_iterator(level_path)) {
 		if (entry.path().filename().has_extension()) {
@@ -93,7 +93,7 @@ void WorldEditorState::loadFiles()
 	}
 
 	std::cout << "-------------\n";
-	std::string room_path = "Assets/World/TileMaps/";
+	std::string room_path = this->stateData.folderPaths.at("TILEMAPS");
 	std::cout << "Tile Maps: " << "\n";
 	for (const auto& entry : fs::directory_iterator(room_path)) {
 
@@ -132,6 +132,30 @@ void WorldEditorState::initGui()
 		this->stateData.scale, Assets::Get().font,
 		room_str, 0);
 
+	std::vector<std::string> enemy_limits_str;
+	for (int limit : this->enemyLimits)
+		enemy_limits_str.emplace_back(std::to_string(limit));
+
+
+	this->lists["ENEMY_LIMIT"] = std::make_unique< gui::DropDownList>(
+		20, 400, 200.f, 80.f,
+		this->stateData.scale, Assets::Get().font,
+		enemy_limits_str, 0);
+
+	std::vector<std::string> enemy_spawn_times_str;
+	for (float time : this->enemySpawnTimes) {
+		std::string time_str = std::to_string(time);
+		time_str = time_str.erase(2, time_str.length() - (2+1));
+		time_str += " [s]";
+		enemy_spawn_times_str.emplace_back(time_str);
+	}
+		
+
+	this->lists["ENEMY_TIMES"] = std::make_unique< gui::DropDownList>(
+		20, 500, 200.f, 80.f,
+		this->stateData.scale, Assets::Get().font,
+		enemy_spawn_times_str, 0);
+
 	this->texts["SPAWN"].setString("Enemy Spawn:");
 	this->texts["SPAWN"].setFont(Assets::Get().font);
 	this->texts["SPAWN"].setPosition(10 * this->stateData.scale.x , 200 * this->stateData.scale.y);
@@ -165,6 +189,12 @@ void WorldEditorState::initGui()
 
 }
 
+void WorldEditorState::initEnemyOptions()
+{
+	this->enemyLimits = { 0, 5, 10, 15, 20, 25 };
+	this->enemySpawnTimes = {0, 0.3f, 0.5f, 1, 2, 5 };
+}
+
 
 
 void WorldEditorState::startPlacingRoom()
@@ -184,6 +214,7 @@ WorldEditorState::WorldEditorState(StateData& state_data, AudioManager& audio)
 {
 	this->loadFiles();
 	this->initVariables();
+	this->initEnemyOptions();
 	this->initView();
 	this->initText();
 	
@@ -290,10 +321,15 @@ void WorldEditorState::updateEditorInput(const float& dt)
 	if (this->selected == false) {
 		if (this->selectedRoom != nullptr) {
 			this->enemySpawn = this->selectedRoom->getEnemyInfo().spawn;
+			this->enemyLimit = this->selectedRoom->getEnemyInfo().limit;
+			this->enemySpawnTime = this->selectedRoom->getEnemyInfo().time;
 		}
 	}
 	else if (this->selected == true) {
 		this->enemySpawn = this->checkBox->isChecked();
+		this->enemyLimit = this->enemyLimits[this->lists.at("ENEMY_LIMIT")->getActiveElementId()];
+		this->enemySpawnTime = this->enemySpawnTimes[this->lists.at("ENEMY_TIMES")->getActiveElementId()];
+		
 		this->selectedRoom->setEnemies(this->enemySpawn, this->enemySpawnTime, this->enemyLimit);
 	}
 	
@@ -309,16 +345,32 @@ void WorldEditorState::updateButtons()
 			for (auto& [key, button] : this->buttons) {
 				button->update(this->mousePosWindow);
 			}
-			this->checkBox->update(this->mousePosWindow);
 		}
 
+
+		if (this->selected == true) {
+			if (this->lists.at("ENEMY_LIMIT")->isActive() == false && this->lists.at("ENEMY_TIMES")->isActive() == false) {
+				this->lists.at("ENEMY_LIMIT")->update(this->mousePosWindow);
+				this->lists.at("ENEMY_TIMES")->update(this->mousePosWindow);
+				this->checkBox->update(this->mousePosWindow);
+			}
+			else if (this->lists.at("ENEMY_LIMIT")->isActive() == true) {
+				this->lists.at("ENEMY_LIMIT")->update(this->mousePosWindow);
+			}
+			else if (this->lists.at("ENEMY_TIMES")->isActive() == true) {
+				this->lists.at("ENEMY_TIMES")->update(this->mousePosWindow);
+			}
+			
+		}
+		else {
+			this->lists.at("ROOMS")->update(this->mousePosWindow);
+		}
 		
-		this->lists.at("ROOMS")->update(this->mousePosWindow);
 		if (this->lists.at("ROOMS")->isReleased() == true) {
 			this->startPlacingRoom();
-
 		}
 	}
+	
 	
 }
 
@@ -349,6 +401,14 @@ void WorldEditorState::updateGui(const float& dt)
 		}
 
 		this->checkBox->setCheck(this->enemySpawn);
+
+		int index = std::distance(this->enemyLimits.begin(), std::find(this->enemyLimits.begin(), this->enemyLimits.end(), this->enemyLimit));
+		this->lists.at("ENEMY_LIMIT")->setActiveElement(index);
+	
+		int index_2 = std::distance(this->enemySpawnTimes.begin(), std::find(this->enemySpawnTimes.begin(), this->enemySpawnTimes.end(), this->enemySpawnTime));
+		this->lists.at("ENEMY_TIMES")->setActiveElement(index_2);
+
+		//std::cout << "enemy limit: " << index <<" | "<<"enemy timez: " << index_2 << "\n";
 		
 	}
 
@@ -360,6 +420,8 @@ void WorldEditorState::updateGui(const float& dt)
 		<<"room offset "<<this->roomOffset.x << " | " << this->roomOffset.y << "\n"
 		<<"selected: " <<this->selected<<"\n"
 		<<"spawn: "<<this->enemySpawn << "\n"
+		<<"enemy limit: "<<this->enemyLimit<<"\n"
+		<<"enemy time: " << this->enemySpawnTime << "\n"
 		<<"room type"<< this->roomType << "\n";
 
 	this->cursorText.setString(ss.str());
@@ -380,7 +442,7 @@ void WorldEditorState::updatePauseMenuButtons()
 		this->pmenu->reloadList("ROOMS", this->worldsStr);
 	}
 	else if (this->pmenu->isButtonReleased("LOAD")) {
-		this->world->loadFromFile(this->stateData.folderPaths.at("WORLD") + this->pmenu->getListString("ROOMS") + ".txt");
+		this->world->loadFromFile(this->stateData.folderPaths.at("WORLD") + this->pmenu->getTextBoxString("FILE_NAME") + ".txt");
 	}
 	else if (this->pmenu->isListReleased("ROOMS")) {
 		this->pmenu->setTextBoxString("FILE_NAME", this->pmenu->getListString("ROOMS"));
@@ -447,7 +509,10 @@ void WorldEditorState::renderGui(sf::RenderTarget& target) const
 	target.draw(this->texts.at("SPAWN"));
 	this->checkBox->render(target);
 
+	this->lists.at("ENEMY_TIMES")->render(target);
+	this->lists.at("ENEMY_LIMIT")->render(target);
 	this->lists.at("ROOMS")->render(target);
+	
 	target.draw(this->cursorText);
 
 

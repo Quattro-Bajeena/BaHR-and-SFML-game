@@ -104,8 +104,13 @@ void gui::TextureSelector::scale(const sf::Vector2f& scale)
 void gui::TextureSelector::switchHidden()
 {
 	if (this->hidden == true)
-		hidden = false;
-	else hidden = true;
+	{
+		this->hidden = false;
+	}
+	else {
+		this->hidden = true;
+		this->active = false;
+	}
 }
 
 void gui::TextureSelector::updateKeytime(const float& dt)

@@ -45,6 +45,14 @@ gui::DropDownList::~DropDownList()
 
 
 
+void gui::DropDownList::setActiveElement(int id)
+{
+	
+	this->activeElement->setId(id);
+	this->activeElement->setText(this->list[id]->getText());
+	
+}
+
 void gui::DropDownList::reload(const std::vector<std::string>& list)
 {
 	/*

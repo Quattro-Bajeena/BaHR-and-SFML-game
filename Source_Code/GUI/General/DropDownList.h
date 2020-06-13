@@ -31,6 +31,7 @@ namespace gui {
 		void scale(sf::Vector2f scale);
 
 		//Functions
+		void setActiveElement(int id);
 		void reload(const std::vector<std::string>& list);
 		const bool getKeytime();
 		void updateKeytime(const float& dt);

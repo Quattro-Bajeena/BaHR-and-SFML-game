@@ -21,6 +21,7 @@ private:
 
 	//GUI
 	std::unique_ptr<PauseMenu> pmenu;
+	std::vector<std::string> mapNames;
 
 	std::map<std::string, gui::Button*> buttons;
 	sf::RectangleShape sidebar;
@@ -45,6 +46,7 @@ private:
 	void initButtons();
 	void initTileMap();
 	void initGui();
+	void initMapFiles();
 
 public:
 	EditorState(StateData& state_data, AudioManager& audio);

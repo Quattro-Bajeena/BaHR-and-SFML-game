@@ -174,7 +174,7 @@ void Gun::reloadSound()
 void Gun::emptyMagazineSound()
 {
 	if (this->emptySoundTimer >= this->emptySoundTimerMax) {
-		this->audio.playRandom("empty_weapon");
+		this->audio.playRandom("empty_weapon",30);
 		this->emptySoundTimer = 0.f;
 	}
 	

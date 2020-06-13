@@ -15,9 +15,9 @@ private:
 
 	//GUI
 	std::unique_ptr<PauseMenu> pmenu;
+	sf::RectangleShape sidebar;
 	std::map<std::string, std::unique_ptr<gui::DropDownList>> lists;
 	std::map<std::string, std::unique_ptr<gui::Button>> buttons;
-	sf::RectangleShape sidebar;
 	std::unique_ptr<gui::CheckBox> checkBox;
 	std::map<std::string, sf::Text> texts;
 
@@ -49,11 +49,13 @@ private:
 	sf::Vector2i roomOffset;
 	sf::Vector2i offset;
 
+	//current Room settings
 	bool enemySpawn;
 	float enemySpawnTime;
 	int enemyLimit;
 	
-	
+	std::vector<int> enemyLimits;
+	std::vector<float> enemySpawnTimes;
 
 	//Functions
 	
@@ -66,6 +68,7 @@ private:
 	void loadFiles();
 	void initWorld();
 	void initGui();
+	void initEnemyOptions();
 
 
 	void startPlacingRoom();

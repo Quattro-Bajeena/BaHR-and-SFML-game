@@ -32,7 +32,8 @@ void AudioManager::playMusic(std::string key, float volume)
 
 void AudioManager::stopMusic()
 {
-	this->currentMusic->stop();
+	if(this->currentMusic != nullptr)
+		this->currentMusic->stop();
 }
 
 void AudioManager::addSound(std::string key, std::string file_name)
