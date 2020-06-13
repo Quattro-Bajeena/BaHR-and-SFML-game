@@ -5,8 +5,8 @@
 
 //Constructor===================================================================
 
-Player::Player(std::string name, const sf::Vector2f& pos)
-	:name(name), startingPos(pos)
+Player::Player(std::string name, const sf::Vector2f& pos, AudioManager& audio)
+	:name(name), startingPos(pos), Entity(audio)
 {
 	this->initVariables();
 	this->setPosition(pos);
@@ -15,7 +15,7 @@ Player::Player(std::string name, const sf::Vector2f& pos)
 	this->createAnimationComponent(Assets::Get().textures.at("PLAYER_SHEET"));
 	this->createHitboxComponent(50.f, 18.f, 90.f, 180.f);
 
-	this->createShootingComponent(std::move(std::make_unique<NormalGun>()));
+	this->createShootingComponent(std::move(std::make_unique<NormalGun>(this->audio)), this->audio);
 	this->sprite.scale(6, 6);
 	
 	this->animationComponent->addAnimation("WALK_STRAIGHT", 12.f, 0, 1, 13, 32, 32);
@@ -27,8 +27,7 @@ Player::Player(std::string name, const sf::Vector2f& pos)
 
 	this->hitboxComponent->addHitboxPreset("ROLL",60.f, 60.f, 70.f, 110.f);
 
-	this->hitSound.setBuffer(Assets::Get().soundBuffers.at("HIT"));
-	this->hitSound.setVolume(30);
+
 
 }
 
@@ -216,6 +215,14 @@ void Player::changeCurrGunPos(int pos)
 	this->shootingComponent->changeCurrGunPos(pos);
 }
 
+void Player::looseHealth(int damage)
+{
+	if (this->invincibility == false) {
+		this->health -= damage;
+		this->audio.play("player_hit", 20);
+	}
+}
+
 const std::string Player::getName() const
 {
 	return this->name;
@@ -329,8 +336,8 @@ void Player::update(const float& dt) {
 		this->dead = true;
 	}
 	if (this->dead == true) {
-		this->hitSound.setPitch(0.6f);
-		this->hitSound.play();
+		
+		this->audio.play("player_hit", 30, 0.6);
 	}
 }
 

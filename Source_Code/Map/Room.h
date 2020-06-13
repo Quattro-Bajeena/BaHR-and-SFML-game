@@ -28,6 +28,7 @@ class Room
 private:
 	sf::Texture& tileSheet;
 	GameStatistics* const statistics;
+	AudioManager* const audio;
 	const std::string tileMapType;
 	
 	std::vector<Enemy*> enemies;
@@ -62,7 +63,7 @@ private:
 
 public:
 	//Constuctor/Destrucor
-	Room( GameStatistics& statistics, const std::string& type,
+	Room( GameStatistics& statistics, AudioManager& audio, const std::string& type,
 		const std::string& room_file, sf::Texture& tile_sheet,
 		int offsetX, int offsetY);
 	Room(const std::string& type, const std::string& room_file, sf::Texture& tile_sheet);

@@ -96,8 +96,8 @@ void MenuState::initText()
 	this->textsOrgPos["ENEMY_KILLS"] = this->texts.at("ENEMY_KILLS").getPosition();
 }
 
-MenuState::MenuState(StateData& state_data,GameStatistics& statistics)
-	:State(state_data), statistics(statistics)
+MenuState::MenuState(StateData& state_data,GameStatistics& statistics, AudioManager& audio)
+	:State(state_data, audio), statistics(statistics)
 {
 	this->initVariables();
 	this->initBackground();
@@ -166,29 +166,29 @@ void MenuState::updateButtons()
 	//New game
 	if (this->buttons["GAME_STATE"]->isReleased()) {
 		this->statistics.setName(this->textBox->isStringDefault() ? "-unknown-" : this->textBox->getText());
-		this->states.push(new GameState(this->stateData, this->statistics));
+		this->states.push(new GameState(this->stateData, this->statistics, this->audio));
 	}
 
 	//Level Editor
 	if (this->buttons["EDITOR_STATE"]->isReleased()) {
-		this->states.push(new EditorState(this->stateData));
+		this->states.push(new EditorState(this->stateData, this->audio));
 	}
 
 	if (this->buttons["WORLD_EDITOR_STATE"]->isReleased()) {
-		this->states.push(new WorldEditorState(this->stateData));
+		this->states.push(new WorldEditorState(this->stateData, this->audio));
 	}
 
 	//Settings
 	if (this->buttons["SETTINGS_STATE"]->isReleased()) {
-		this->states.push(new SettingsState(this->stateData));
+		this->states.push(new SettingsState(this->stateData, this->audio));
 	}
 
 	if (this->buttons["SERVER_STATE"]->isReleased()) {
-		this->states.push(new MultiplayerServerState(this->stateData, this->statistics));
+		this->states.push(new MultiplayerServerState(this->stateData, this->statistics, this->audio));
 	}
 
 	if (this->buttons["MULTIPLAYER_STATE"]->isReleased()) {
-		this->states.push(new MultiplayerClientState(this->stateData));
+		this->states.push(new MultiplayerClientState(this->stateData, this->audio));
 	}
 
 	//Quit the state

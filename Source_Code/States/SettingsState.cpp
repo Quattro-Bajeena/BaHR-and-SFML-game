@@ -115,8 +115,8 @@ void SettingsState::initText()
 }
 
 //Constructors/destructors
-SettingsState::SettingsState(StateData& state_data)
-	:State(state_data)
+SettingsState::SettingsState(StateData& state_data, AudioManager& audio)
+	:State(state_data, audio)
 {
 	this->initVariables();
 	this->initBackground();

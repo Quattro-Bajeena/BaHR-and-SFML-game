@@ -33,7 +33,7 @@ private:
 	void updateAnimations(const float& dt);
 	
 public:
-	Player(std::string name, const sf::Vector2f& pos);
+	Player(std::string name, const sf::Vector2f& pos, AudioManager& audio);
 	~Player();
 
 	//Functions
@@ -47,6 +47,7 @@ public:
 	void changeCurrGunAdjacent(int direction);
 	void changeCurrGunPos(int pos);
 
+	void looseHealth(int damage);
 	//Accesors
 	const std::string getName() const;
 	

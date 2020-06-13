@@ -179,8 +179,8 @@ void WorldEditorState::startPlacingRoom()
 
 
 //Constuctor
-WorldEditorState::WorldEditorState(StateData& state_data)
-	:State(state_data)
+WorldEditorState::WorldEditorState(StateData& state_data, AudioManager& audio)
+	:State(state_data, audio)
 {
 	this->loadFiles();
 	this->initVariables();

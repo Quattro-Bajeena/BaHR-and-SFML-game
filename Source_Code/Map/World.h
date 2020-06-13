@@ -9,12 +9,14 @@ class World
 {
 private:
 	GameStatistics* const statistics;
+	AudioManager* const audio;
 
 	//Room variables
 	std::map<std::string, std::string> roomFiles;
 	std::vector<Room*> rooms;
 	Room* currentRoom;
 	sf::Texture& tileSheet;
+	
 
 	bool editing;
 
@@ -28,8 +30,8 @@ private:
 
 public:
 	World(sf::Texture& tileSheet);
-	World(sf::Texture& tileSheet, GameStatistics& statistics);
-	World(std::string file_name, sf::Texture& tileSheet, GameStatistics& statistics);
+	World(sf::Texture& tileSheet, GameStatistics& statistics, AudioManager& audio);
+	World(std::string file_name, sf::Texture& tileSheet, GameStatistics& statistics, AudioManager& audio);
 	~World();
 
 	//Functions

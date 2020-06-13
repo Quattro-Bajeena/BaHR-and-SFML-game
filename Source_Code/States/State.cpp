@@ -3,8 +3,8 @@
 #include "State.h"
 
 
-State::State(StateData& state_data)
-	: stateData(state_data),
+State::State(StateData& state_data, AudioManager& audio)
+	: stateData(state_data),audio(audio),
 	window(*state_data.window),
 	quit(false), paused(false), states(*state_data.states), gridSize(state_data.gridSize),
 	keytime(0.f), keytimeMax(0.3f), clickTime(0.f), clickTimeMax(0.1f)

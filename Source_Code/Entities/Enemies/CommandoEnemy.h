@@ -6,7 +6,7 @@ class CommandoEnemy :
 private:
 
 public:
-    CommandoEnemy(sf::Vector2f position);
+    CommandoEnemy(sf::Vector2f position, AudioManager& audio);
 
     //Functions
     void shoot(sf::Vector2f targetPos);

@@ -2,7 +2,8 @@
 #include "SpreadGun.h"
 #include "RNG.h"
 
-SpreadGun::SpreadGun()
+SpreadGun::SpreadGun(AudioManager& audio)
+    :Gun(audio)
 {
     this->name = "SPREAD GUN";
     this->model = gunModels::SPREAD;
@@ -22,6 +23,7 @@ SpreadGun::SpreadGun()
 std::vector<Bullet> SpreadGun::shootBullet()
 {
     if ( this->shootTimer >= this->shootTimerMax && this->reloading == false && this->magazine->isEmpty() == false) {
+        this->audio.playRandom("spread_shoot");
         this->magazine->shoot(1);
         
         this->shootTimer = 0;

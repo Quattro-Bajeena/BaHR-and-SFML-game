@@ -1,18 +1,10 @@
 #include "stdafx.h"
 #include "Revolver.h"
 
-Revolver::Revolver(std::string name, sf::Texture& texture,
-	int clip_size, int capacity, int damage,
-	float shoot_time_max, float reload_time_max,
-	float bullet_radius, float max_speed, float max_distance, sf::Color bullet_color)
-	:Gun(name, texture,
-		clip_size, capacity, damage,
-		shoot_time_max, reload_time_max, bullet_radius, max_speed, max_distance,
-		bullet_color)
-{
-}
 
-Revolver::Revolver()
+
+Revolver::Revolver(AudioManager& audio)
+    :Gun(audio)
 {
     this->name = "REVOLVER";
     this->model = gunModels::REVOLVER;
@@ -33,6 +25,7 @@ std::vector<Bullet> Revolver::shootBullet()
 {
     this->requestingShoot = true;
     if (this->readyToShoot == true && this->shootTimer >= this->shootTimerMax && this->reloading == false && this->magazine->isEmpty() == false) {
+        this->audio.playRandom("revolver_shoot");
         this->magazine->shoot(1);
         this->shootTimer = 0.f;
         this->readyToShoot = false;

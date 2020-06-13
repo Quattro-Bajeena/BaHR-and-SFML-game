@@ -124,18 +124,18 @@ void Room::createRandomEnemy(const sf::Vector2f& enemy_pos)
 	int type_num = RNG::get().randomI(0,100);
 
 	if (type_num > 35) {
-		enemies.push_back(new RegularEnemy(enemy_pos));
+		enemies.push_back(new RegularEnemy(enemy_pos, *this->audio));
 	}
 	else if (type_num > 10) {
-		enemies.push_back(new CommandoEnemy(enemy_pos));
+		enemies.push_back(new CommandoEnemy(enemy_pos, *this->audio));
 	}
 
 	else if (type_num > 2) {
-		enemies.push_back(new StationaryEnemy(enemy_pos));
+		enemies.push_back(new StationaryEnemy(enemy_pos, *this->audio));
 	}
 
 	else if (type_num >= 0) {
-		enemies.push_back(new BossEnemy(enemy_pos));
+		enemies.push_back(new BossEnemy(enemy_pos, *this->audio));
 	}
 
 	
@@ -188,10 +188,10 @@ void Room::createAmmo(enemyType type, const sf::Vector2f& position)
 	}
 }
 
-Room::Room( GameStatistics& statistics, const std::string& type,
+Room::Room( GameStatistics& statistics, AudioManager& audio, const std::string& type,
 	const std::string& room_file, sf::Texture& tile_sheet,
 	int offsetX, int offsetY)
-	:tileSheet(tile_sheet), statistics(&statistics), tileMapType(type), offset(offsetX,offsetY)
+	:tileSheet(tile_sheet), statistics(&statistics), tileMapType(type), offset(offsetX,offsetY), audio(&audio)
 {
 	this->map = std::make_unique<TileMap>(room_file, tileSheet, offsetX, offsetY);
 	this->spawnTime = 0.f;
@@ -210,7 +210,7 @@ Room::Room( GameStatistics& statistics, const std::string& type,
 }
 
 Room::Room(const std::string& type, const std::string& room_file, sf::Texture& tile_sheet)
-	:tileSheet(tile_sheet), tileMapType(type), offset(0, 0), statistics(nullptr)
+	:tileSheet(tile_sheet), tileMapType(type), offset(0, 0), statistics(nullptr), audio(nullptr)
 {
 	this->map = std::make_unique<TileMap>(room_file, tileSheet, offset.x, offset.y);
 	this->spawnTime = 0.f;

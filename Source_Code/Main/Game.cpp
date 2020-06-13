@@ -47,17 +47,18 @@ void Game::initStateData()
     this->stateData.folderPaths["WORLD"] = "Assets/World/";
     this->stateData.folderPaths["TILEMAPS"] = "Assets/World/Tilemaps/";
     this->stateData.folderPaths["STATISTICS"] = "Assets/Statistics/";
+    this->stateData.folderPaths["AUDIO"] = "Assets/Audio/";
 }
 
 
 void Game::initStates()
 {
-    this->states.push(new MenuState(this->stateData, *this->statistics ));
+    this->states.push(new MenuState(this->stateData, *this->statistics, *this->audio));
 }
 
 void Game::initStatistics()
 {
-    std::map<std::string, std::string> file_paths = { { "SCORE_BOARD" , "Assets/Statistics/score_board.txt" } , {"ENEMY_KILLS", "Assets/Statistics/enemy_kills.txt"} };
+    std::map<std::string, std::string> file_paths = { { "SCORE_BOARD" , this->stateData.folderPaths.at("STATISTICS")+"score_board.txt" } , {"ENEMY_KILLS",  this->stateData.folderPaths.at("STATISTICS")+"enemy_kills.txt"} };
     this->statistics = std::make_unique<GameStatistics>(file_paths);
     this->statistics->load();
 }
@@ -103,10 +104,49 @@ void Game::initAssets()
     Assets::Get().weaponTextures[gunModels::MAGIC] = &Assets::Get().textures.at("MAGIC_GUN");
 
    //Sounds
-   Assets::Get().soundBuffers["HIT"].loadFromFile("Assets/Sounds/uguu.wav");
+   //Assets::Get().soundBuffers["HIT"].loadFromFile("Assets/Sounds/uguu.wav");
    //Assets::Get().sounds["HIT"].setBuffer(Assets::Get().soundBuffers.at("HIT"));
 
    
+}
+
+void Game::initAudioManager()
+{
+    this->audio = std::make_unique<AudioManager>(this->stateData.folderPaths.at("AUDIO"));
+    this->audio->addSound("player_hit", "Player/uguu.wav");
+
+    this->audio->addSound("normal_shoot", "Gun sounds/Normal/normal shot.wav");
+    this->audio->addSound("normal_reload", "Gun sounds/Normal/normal reload.wav");
+
+
+    this->audio->addSound("shotgun_shoot", "Gun sounds/Shotgun/shotgun shot 1.wav");
+    this->audio->addSound("shotgun_shoot", "Gun sounds/Shotgun/shotgun shot 2.wav");
+    this->audio->addSound("shotgun_shoot", "Gun sounds/Shotgun/shotgun shot 3.wav");
+    this->audio->addSound("shotgun_shoot", "Gun sounds/Shotgun/shotgun shot 4.wav");
+    this->audio->addSound("shotgun_reload", "Gun sounds/Shotgun/shotgun reload.wav");
+    this->audio->addSound("shotgun_change", "Gun sounds/Shotgun/change weapon.wav");
+
+    this->audio->addSound("spread_reload", "Gun sounds/Spread/spread reload.wav");
+    //this->audio->addSound("spread_shoot", "Gun sounds/Spread/spread shoot.wav");
+    this->audio->addSound("spread_shoot", "Gun sounds/Spread/spread shoot 2.wav");
+
+    this->audio->addSound("revolver_reload", "Gun sounds/Revolver/reload.wav");
+    this->audio->addSound("revolver_shoot", "Gun sounds/Revolver/revolver shoot.wav");
+    //this->audio->addSound("revolver_shoot", "Gun sounds/Revolver/revolver shoot 2.wav");
+
+    this->audio->addSound("canon_shoot", "Gun sounds/Canon/canon shot.wav");
+
+    this->audio->addSound("change_weapon", "Gun sounds/Common/change weapon.wav");
+    this->audio->addSound("change_weapon", "Gun sounds/Common/change weapon 2.wav");
+    this->audio->addSound("change_weapon", "Gun sounds/Common/change weapon 3.wav");
+
+    this->audio->addSound("empty_weapon", "Gun sounds/Common/empty 1");
+    this->audio->addSound("empty_weapon", "Gun sounds/Common/empty 2");
+    this->audio->addSound("empty_weapon", "Gun sounds/Common/empty 3");
+
+    this->audio->addSound("reload_weapon", "Gun sounds/Common/reload 1.wav");
+
+
 }
 
 
@@ -126,8 +166,10 @@ Game::Game() {
     auto t6 = std::chrono::high_resolution_clock::now();
     this->initStatistics();
     auto t7 = std::chrono::high_resolution_clock::now();
-    this->initStates(); //last
+    this->initAudioManager();
     auto t8 = std::chrono::high_resolution_clock::now();
+    this->initStates(); //last 
+    auto t9 = std::chrono::high_resolution_clock::now();
     
     std::cout << "Init Variables: " << std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count() << " ms\n";
     std::cout << "Init Grpahic Settings: " << std::chrono::duration_cast<std::chrono::milliseconds>(t3 - t2).count() << " ms\n";
@@ -135,7 +177,8 @@ Game::Game() {
     std::cout << "Init State Data: " << std::chrono::duration_cast<std::chrono::milliseconds>(t5 - t4).count() << " ms\n";
     std::cout << "Init Assets: " << std::chrono::duration_cast<std::chrono::milliseconds>(t6 - t5).count() << " ms\n";
     std::cout << "Init Statistcs: " << std::chrono::duration_cast<std::chrono::milliseconds>(t7 - t6).count() << " ms\n";
-    std::cout << "Init States: " << std::chrono::duration_cast<std::chrono::milliseconds>(t8 - t7).count() << " ms\n";
+    std::cout << "Init Audio: " << std::chrono::duration_cast<std::chrono::milliseconds>(t8 - t7).count() << " ms\n";
+    std::cout << "Init States: " << std::chrono::duration_cast<std::chrono::milliseconds>(t9 - t8).count() << " ms\n";
 }
 
 Game::~Game()
@@ -189,19 +232,24 @@ void Game::update()
 {
     this->updateSFMLEvents();
     if (this->states.empty() == false) {
-        //Update State at the top
-        this->states.top()->update(this->dt);
 
-        while(this->states.empty() == false && this->states.top()->getQuit()) {//must be in that order so it wont check getQuit on empty stakc
+        if (this->window->hasFocus()) {
+            //Update State at the top
+            this->states.top()->update(this->dt);
+            this->audio->update(this->dt);
 
-            //deleting state at the top
-            delete this->states.top();
-            this->states.pop();
+            while (this->states.empty() == false && this->states.top()->getQuit()) {//must be in that order so it wont check getQuit on empty stakc
 
-            //refereshes the state that we're going back to
-            if (this->states.empty() == false)
-                this->states.top()->refreshGui(); 
+                //deleting state at the top
+                delete this->states.top();
+                this->states.pop();
+
+                //refereshes the state that we're going back to
+                if (this->states.empty() == false)
+                    this->states.top()->refreshGui();
+            }
         }
+       
  
     }
     //Application end

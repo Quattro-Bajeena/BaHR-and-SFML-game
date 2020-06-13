@@ -13,7 +13,8 @@ void Entity::initVariables()
 	this->invincibilityTimerMax = 0.5f;
 }
 
-Entity::Entity()
+Entity::Entity(AudioManager& audio)
+	:audio(audio)
 {
 	this->initVariables();
 
@@ -58,9 +59,9 @@ void Entity::createAIComponent(enemyType type, enemyState& state)
 	this->aiComponent = std::make_unique < AIComponent>(this->sprite, type, state);
 }
 
-void Entity::createShootingComponent(std::unique_ptr<Gun> default_gun)
+void Entity::createShootingComponent(std::unique_ptr<Gun> default_gun, AudioManager& audio)
 {
-	this->shootingComponent = std::make_unique<ShootingComponent>(std::move(default_gun));
+	this->shootingComponent = std::make_unique<ShootingComponent>(std::move(default_gun), audio);
 }
 
 const sf::Vector2f Entity::getPosition() const
@@ -259,7 +260,7 @@ void Entity::looseHealth(int damage)
 {
 	if (this->invincibility == false) {
 		this->health -= damage;
-		this->hitSound.play();
+		//this->audio.play("player_hit", 30);
 	}
 }
 

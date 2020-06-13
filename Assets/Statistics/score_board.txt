@@ -57,3 +57,10 @@ Mateusz 20
  16
 -unknown- 0
 -unknown- 10
+-unknown- 212
+-unknown- 6
+-unknown- 108
+-unknown- 10
+-unknown- 0
+-unknown- 22
+-unknown- 138

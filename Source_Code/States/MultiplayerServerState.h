@@ -40,7 +40,7 @@ private:
     void updateGameLogic(const float& dt);
  
 public:
-    MultiplayerServerState(StateData& state_data, GameStatistics& stats);
+    MultiplayerServerState(StateData& state_data, GameStatistics& stats, AudioManager& audio);
     ~MultiplayerServerState();
 
     

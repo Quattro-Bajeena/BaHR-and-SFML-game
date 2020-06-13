@@ -71,8 +71,8 @@ void EndScreenState::initGui()
 }
 
 //Constructor
-EndScreenState::EndScreenState(StateData& state_data, GameStatistics& stats)
-	:State(state_data), statistics(stats)
+EndScreenState::EndScreenState(StateData& state_data, GameStatistics& stats, AudioManager& audio)
+	:State(state_data, audio), statistics(stats)
 {
 	this->initVariables();
 	this->initBackground();
@@ -102,7 +102,7 @@ void EndScreenState::updateButtons()
 	if (this->buttons["RETRY"]->isReleased()) {
 		this->statistics.reset();
 		this->endState();
-		this->states.push(new GameState(this->stateData,this->statistics));
+		this->states.push(new GameState(this->stateData,this->statistics, this->audio));
 	}
 
 	//Return to menu

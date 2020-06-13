@@ -66,7 +66,7 @@ private:
     void receive();
     void receivePlayerState();
 public:
-    MultiplayerClientState(StateData& state_data);
+    MultiplayerClientState(StateData& state_data, AudioManager& audio);
 
     void updateInput(const float& dt);
     void update(const float& dt);

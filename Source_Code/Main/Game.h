@@ -1,5 +1,4 @@
 #pragma once
-
 #include "MenuState.h"
 
 class Game
@@ -15,6 +14,7 @@ private:
 
 	std::stack<State*> states;
 	std::unique_ptr<GameStatistics> statistics;
+	std::unique_ptr<AudioManager> audio;
 
 	//GUI
 
@@ -28,6 +28,7 @@ private:
 	void initStates();
 	void initStatistics();
 	void initAssets();
+	void initAudioManager();
 
 	//Functions
 

@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "CanonGun.h"
 
-CanonGun::CanonGun()
+CanonGun::CanonGun(AudioManager& audio)
+    :Gun(audio)
 {
     this->name = "CANON";
     this->model = gunModels::CANNON;
@@ -22,6 +23,7 @@ std::vector<Bullet> CanonGun::shootBullet()
 {
     this->requestingShoot = true;
     if (this->shootTimer >= this->shootTimerMax && this->reloading == false && this->magazine->isEmpty() == false) {
+        this->audio.playRandom("canon_shoot", 30, 0.7);
         this->magazine->shoot(1);
         this->shootTimer = 0.f;
         this->readyToShoot = false;

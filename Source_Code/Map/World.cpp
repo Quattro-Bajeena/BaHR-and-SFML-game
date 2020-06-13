@@ -23,7 +23,7 @@ void World::clear()
 }
 
 World::World(sf::Texture& tileSheet)
-	:tileSheet(tileSheet), statistics(nullptr)
+	:tileSheet(tileSheet), statistics(nullptr), audio(nullptr)
 {
 	this->currentRoom = nullptr;
 	this->initRooms();
@@ -31,16 +31,16 @@ World::World(sf::Texture& tileSheet)
 }
 
 //Constructor / destructor
-World::World(sf::Texture& tileSheet, GameStatistics& statistics)
-	:tileSheet(tileSheet), statistics(&statistics)
+World::World(sf::Texture& tileSheet, GameStatistics& statistics, AudioManager& audio)
+	:tileSheet(tileSheet), statistics(&statistics), audio(&audio)
 {
 	this->currentRoom = nullptr;
 	this->initRooms();
 	this->editing = false;
 }
 
-World::World(std::string file_name, sf::Texture& tileSheet, GameStatistics& statistics)
-	:tileSheet(tileSheet), statistics(&statistics)
+World::World(std::string file_name, sf::Texture& tileSheet, GameStatistics& statistics, AudioManager& audio)
+	:tileSheet(tileSheet), statistics(&statistics), audio(&audio)
 {
 	this->currentRoom = nullptr;
 	this->initRooms();
@@ -57,7 +57,7 @@ World::~World()
 
 void World::addPlayer(std::string name, const sf::Vector2f& pos)
 {
-	this->players.emplace_back(new Player(name, pos));
+	this->players.emplace_back(new Player(name, pos, *this->audio));
 	this->player = this->players.back();
 }
 
@@ -73,7 +73,7 @@ void World::addRoom(std::string room_type, int offsetX, int offsetY,
 		}
 	}
 
-	this->rooms.emplace_back(new Room( *this->statistics, room_type,
+	this->rooms.emplace_back(new Room( *this->statistics, *this->audio, room_type,
 		this->roomFiles.at(room_type), this->tileSheet, offsetX, offsetY));
 
 	this->rooms.back()->setEnemies(enemy_spawn, spawn_time, enemy_limit);

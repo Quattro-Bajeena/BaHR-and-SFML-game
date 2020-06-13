@@ -5,23 +5,23 @@ std::unique_ptr<Gun> ShootingComponent::createGun(gunModels model)
 {
 	switch (model) {
 	case gunModels::NORMAL:
-		return std::move(std::make_unique<NormalGun>());
+		return std::move(std::make_unique<NormalGun>(this->audio));
 		break;
 
 	case gunModels::REVOLVER:
-		return std::move(std::make_unique<Revolver>());
+		return std::move(std::make_unique<Revolver>(this->audio));
 		break;
 	case gunModels::SPREAD:
-		return std::move(std::make_unique<SpreadGun>());
+		return std::move(std::make_unique<SpreadGun>(this->audio));
 		break;
 	case gunModels::SHOTGUN:
-		return std::move(std::make_unique<ShotGun>());
+		return std::move(std::make_unique<ShotGun>(this->audio));
 		break;
 	case gunModels::CANNON:
-		return std::move(std::make_unique<CanonGun>());
+		return std::move(std::make_unique<CanonGun>(this->audio));
 		break;
 	case gunModels::MAGIC:
-		return std::move(std::make_unique<MagicGun>());
+		return std::move(std::make_unique<MagicGun>(this->audio));
 		break;
 	default:
 		return nullptr;
@@ -29,7 +29,8 @@ std::unique_ptr<Gun> ShootingComponent::createGun(gunModels model)
 }
 
 //Public
-ShootingComponent::ShootingComponent(std::unique_ptr<Gun> default_gun)
+ShootingComponent::ShootingComponent(std::unique_ptr<Gun> default_gun, AudioManager& audio)
+	:audio(audio)
 {
 	this->currentGunPos = 0;
 	this->swapTime = 0.f;
@@ -84,6 +85,7 @@ const float ShootingComponent::getReloadTime() const
 void ShootingComponent::shoot()
 {
 	std::vector<Bullet> bullets_shot = this->currentGun->shootBullet();
+
 	this->bullets.insert(this->bullets.end(), bullets_shot.begin(), bullets_shot.end());
 }
 

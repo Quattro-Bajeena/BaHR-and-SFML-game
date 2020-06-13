@@ -2,7 +2,8 @@
 #include "MagicGun.h"
 #include "RNG.h"
 
-MagicGun::MagicGun()
+MagicGun::MagicGun(AudioManager& audio)
+    :Gun(audio)
 {
     this->name = "MAGIC_GUN";
     this->model = gunModels::MAGIC;

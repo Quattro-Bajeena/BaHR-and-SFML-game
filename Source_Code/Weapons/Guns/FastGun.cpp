@@ -1,15 +1,8 @@
 #include "stdafx.h"
 #include "FastGun.h"
 
-FastGun::FastGun(std::string name, sf::Texture& texture,
-    int clip_size, int capacity, int damage,
-    float shoot_time_max, float reload_time_max, float bullet_radius,
-    float max_speed, float max_distance,
-    sf::Color bullet_color)
-    :Gun(name, texture,
-        clip_size, capacity, damage,
-        shoot_time_max, reload_time_max, bullet_radius, max_speed, max_distance,
-        bullet_color)
+FastGun::FastGun(AudioManager& audio)
+    :Gun(audio)
 {
 }
 

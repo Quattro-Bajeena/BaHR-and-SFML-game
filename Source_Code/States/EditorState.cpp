@@ -97,8 +97,8 @@ void EditorState::initGui()
 }
 
 //Constuctor
-EditorState::EditorState(StateData& state_data)
-	:State(state_data)
+EditorState::EditorState(StateData& state_data, AudioManager& audio)
+	:State(state_data, audio)
 {
 	this->initVariables();
 	this->initView();

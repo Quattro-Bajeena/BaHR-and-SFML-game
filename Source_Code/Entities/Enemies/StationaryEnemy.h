@@ -6,7 +6,7 @@ class StationaryEnemy :
 private:
 
 public:
-    StationaryEnemy(sf::Vector2f position);
+    StationaryEnemy(sf::Vector2f position, AudioManager& audio);
 
     //Functions
     void shoot(sf::Vector2f targetPos);

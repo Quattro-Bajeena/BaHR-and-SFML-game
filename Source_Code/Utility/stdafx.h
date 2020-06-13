@@ -25,6 +25,7 @@
 #include <utility>
 //#include <list>
 #include <chrono>
+#include <queue>
 
 //SFML
 #include<SFML/System.hpp>

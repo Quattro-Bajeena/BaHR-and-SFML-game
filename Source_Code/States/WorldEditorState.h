@@ -71,7 +71,7 @@ private:
 	void startPlacingRoom();
 
 public:
-	WorldEditorState(StateData& state_data);
+	WorldEditorState(StateData& state_data, AudioManager& audio);
 	virtual ~WorldEditorState();
 
 	//Function

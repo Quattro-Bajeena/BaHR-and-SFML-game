@@ -6,7 +6,7 @@ class MagicGun :
 private:
 
 public:
-	MagicGun();
+	MagicGun(AudioManager& audio);
 	~MagicGun() = default;
 
 	std::vector<Bullet> shootBullet();

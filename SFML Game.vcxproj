@@ -68,6 +68,7 @@
     <ClCompile Include="Source_Code\States\State.cpp" />
     <ClCompile Include="Source_Code\States\WorldEditorState.cpp" />
     <ClCompile Include="Source_Code\Utility\Assets.cpp" />
+    <ClCompile Include="Source_Code\Utility\AudioManager.cpp" />
     <ClCompile Include="Source_Code\Utility\GameStatistics.cpp" />
     <ClCompile Include="Source_Code\Utility\GraphicSettings.cpp" />
     <ClCompile Include="Source_Code\Utility\RNG.cpp" />
@@ -133,6 +134,7 @@
     <ClInclude Include="Source_Code\States\State.h" />
     <ClInclude Include="Source_Code\States\WorldEditorState.h" />
     <ClInclude Include="Source_Code\Utility\Assets.h" />
+    <ClInclude Include="Source_Code\Utility\AudioManager.h" />
     <ClInclude Include="Source_Code\Utility\GameStatistics.h" />
     <ClInclude Include="Source_Code\Utility\GraphicSettings.h" />
     <ClInclude Include="Source_Code\Utility\RNG.h" />

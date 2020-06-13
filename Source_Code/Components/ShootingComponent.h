@@ -6,11 +6,13 @@
 class Entity;
 class Enemy;
 class Player;
+class AudioManager;
 
 class ShootingComponent
 {
 private:
 	sf::Text debugText;
+	AudioManager& audio;
 
 	std::vector<std::unique_ptr<Gun>> guns;
 	Gun* currentGun;
@@ -24,7 +26,7 @@ private:
 	std::unique_ptr<Gun> createGun(gunModels model);
 
 public:
-	ShootingComponent(std::unique_ptr<Gun> default_gun);
+	ShootingComponent(std::unique_ptr<Gun> default_gun, AudioManager& audio);
 	~ShootingComponent();
 
 

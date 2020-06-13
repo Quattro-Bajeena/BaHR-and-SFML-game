@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "BossEnemy.h"
 
-BossEnemy::BossEnemy(sf::Vector2f position)
-	:Enemy(position)
+BossEnemy::BossEnemy(sf::Vector2f position, AudioManager& audio)
+	:Enemy(position, audio)
 {
 	this->type = enemyType::BOSS;
 

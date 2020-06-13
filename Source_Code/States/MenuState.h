@@ -36,7 +36,7 @@ private:
 	void initText();
 
 public:
-	MenuState(StateData& state_data, GameStatistics& statistics);
+	MenuState(StateData& state_data, GameStatistics& statistics, AudioManager& audio);
 	virtual ~MenuState();
 
 	//Function

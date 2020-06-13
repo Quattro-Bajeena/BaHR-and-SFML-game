@@ -2,13 +2,14 @@
 #include "Bullet.h"
 #include "Assets.h"
 #include "Utility.h"
+#include "AudioManager.h"
 
 
 class Magazine
 {
 private:
 	
-
+	
 	bool infinite;
 
 	const int clipSize;
@@ -67,6 +68,8 @@ class Gun
 private:
 
 protected:
+	AudioManager& audio;
+
 	gunModels model;
 	sf::Sprite sprite;
 	sf::Sound shootSound;
@@ -107,8 +110,8 @@ public:
 	Gun(std::string name, sf::Texture& texture,
 		int clip_size, int capacity, int damage,
 		float shoot_time_max, float reload_time_max, float bullet_radius,
-		float max_speed, float max_distance, sf::Color bullet_color);
-	Gun();
+		float max_speed, float max_distance, sf::Color bullet_color, AudioManager& audio);
+	Gun(AudioManager& audio);
 	virtual ~Gun();
 
 	//Accesors

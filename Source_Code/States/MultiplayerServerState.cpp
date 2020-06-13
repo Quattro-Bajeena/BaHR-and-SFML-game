@@ -59,7 +59,7 @@ void MultiplayerServerState::listen()
 void MultiplayerServerState::playerJoin(sf::TcpSocket& client)
 {
 	std::string player_id = "player_id__" + std::to_string(this->clientsNum);
-	this->players.emplace_back(new Player(player_id, this->world->randomFreeTile()));
+	this->players.emplace_back(new Player(player_id, this->world->randomFreeTile(), this->audio));
 
 	sf::Packet start_packet;
 	start_packet << "connected" << this->players.back()->getName() << this->players.back()->getPosition().x << this->players.back()->getPosition().y;
@@ -170,8 +170,8 @@ void MultiplayerServerState::updateGameLogic(const float& dt)
 	this->resetScrollWheel();
 }
 
-MultiplayerServerState::MultiplayerServerState(StateData& state_data, GameStatistics& stats)
-	:GameState(state_data, stats)
+MultiplayerServerState::MultiplayerServerState(StateData& state_data, GameStatistics& stats, AudioManager& audio)
+	:GameState(state_data, stats, audio)
 {
 	this->initConnection();
 }

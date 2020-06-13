@@ -27,7 +27,7 @@ private:
 	void initGui();
 
 public:
-	EndScreenState(StateData& state_data, GameStatistics& stats);
+	EndScreenState(StateData& state_data, GameStatistics& stats, AudioManager& audio);
 	virtual ~EndScreenState();
 
 	void updateInput(const float& dt);

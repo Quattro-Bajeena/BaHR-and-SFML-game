@@ -6,7 +6,7 @@ class SpreadGun :
 private:
 
 public:
-	SpreadGun();
+	SpreadGun(AudioManager& audio);
 	~SpreadGun() = default;
 
 	std::vector<Bullet> shootBullet();

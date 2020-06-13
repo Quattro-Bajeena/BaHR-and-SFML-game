@@ -1,20 +1,10 @@
 #include "stdafx.h"
 #include "NormalGun.h"
 
-NormalGun::NormalGun(std::string name, sf::Texture& texture,
-    int clip_size, int capacity, int damage,
-    float shoot_time_max, float reload_time_max, float bullet_radius,
-    float max_speed, float max_distance,
-    sf::Color bullet_color)
-    :Gun(name,texture,
-        clip_size, capacity, damage,
-        shoot_time_max, reload_time_max, bullet_radius, max_speed, max_distance,
-        bullet_color)
-{
-}
 
-NormalGun::NormalGun()
-    :Gun()
+
+NormalGun::NormalGun(AudioManager& audio)
+    :Gun(audio)
 {
     this->name = "NORMAL_GUN";
     this->model = gunModels::NORMAL;
@@ -36,6 +26,7 @@ NormalGun::NormalGun()
 std::vector<Bullet> NormalGun::shootBullet()
 {
     if (this->shootTimer >= this->shootTimerMax  && this->reloading == false && this->magazine->isEmpty() == false) {
+        this->audio.playRandom("normal_shoot");
         this->magazine->shoot(1);
         this->shootTimer = 0.f;
         return std::vector<Bullet>{

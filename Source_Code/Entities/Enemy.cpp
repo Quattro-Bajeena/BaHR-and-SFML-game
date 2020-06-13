@@ -4,7 +4,9 @@
 
 
 
-Enemy::Enemy(sf::Vector2f position){
+Enemy::Enemy(sf::Vector2f position, AudioManager& audio)
+	:Entity(audio)
+{
 
 	
 	this->setPosition(position);

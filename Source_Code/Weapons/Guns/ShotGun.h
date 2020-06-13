@@ -7,7 +7,7 @@ class ShotGun :
 private:
 
 public:
-	ShotGun();
+	ShotGun(AudioManager& audio);
 	~ShotGun() = default;
 
 	std::vector<Bullet> shootBullet();

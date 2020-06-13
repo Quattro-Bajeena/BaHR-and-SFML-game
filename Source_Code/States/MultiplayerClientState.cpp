@@ -137,7 +137,7 @@ void MultiplayerClientState::receive()
 				std::string id;
 				sf::Vector2f pos;
 				packet >> id >> pos.x >> pos.y;
-				this->player = new Player(id, pos);
+				this->player = new Player(id, pos, this->audio);
 				std::cout << "succesfully connected\n";
 			}
 		}
@@ -166,8 +166,8 @@ void MultiplayerClientState::receivePlayerState()
 }
 
 //CONSTRUCTOR PUBLIC
-MultiplayerClientState::MultiplayerClientState(StateData& state_data)
-    :State(state_data)
+MultiplayerClientState::MultiplayerClientState(StateData& state_data, AudioManager& audio)
+    :State(state_data, audio)
 {
     this->initConnection();
 	this->initPlayer();

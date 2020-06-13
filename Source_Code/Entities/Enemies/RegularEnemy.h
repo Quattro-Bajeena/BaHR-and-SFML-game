@@ -6,7 +6,7 @@ class RegularEnemy :
 private:
 
 public:
-    RegularEnemy(sf::Vector2f position);
+    RegularEnemy(sf::Vector2f position, AudioManager& audio);
 
     //Functions
     void shoot(sf::Vector2f targetPos);

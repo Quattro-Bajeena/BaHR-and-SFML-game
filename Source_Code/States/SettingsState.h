@@ -25,7 +25,7 @@ private:
 	void initText();
 
 public:
-	SettingsState(StateData& state_data);
+	SettingsState(StateData& state_data, AudioManager& audio);
 	virtual ~SettingsState();
 
 	void refreshGui();

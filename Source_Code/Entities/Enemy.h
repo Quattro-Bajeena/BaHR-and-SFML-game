@@ -40,7 +40,7 @@ protected:
 	void updateColor();
 
 public:
-	Enemy(sf::Vector2f position);
+	Enemy(sf::Vector2f position, AudioManager& audio);
 		
 	//Accesors
 	bool isDead();

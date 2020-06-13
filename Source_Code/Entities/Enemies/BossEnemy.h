@@ -6,7 +6,7 @@ class BossEnemy :
 private:
 
 public:
-    BossEnemy(sf::Vector2f position);
+    BossEnemy(sf::Vector2f position, AudioManager& audio);
 
     //Functions
     void shoot(sf::Vector2f targetPos);

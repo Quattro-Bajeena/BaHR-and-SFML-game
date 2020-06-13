@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "CommandoEnemy.h"
 
-CommandoEnemy::CommandoEnemy(sf::Vector2f position)
-	:Enemy(position)
+CommandoEnemy::CommandoEnemy(sf::Vector2f position, AudioManager& audio)
+	:Enemy(position, audio)
 {
 	this->type = enemyType::COMMANDO;
 

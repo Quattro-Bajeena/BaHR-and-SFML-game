@@ -7,7 +7,7 @@ private:
 
 public:
 
-	CanonGun();
+	CanonGun(AudioManager& audio);
 	~CanonGun() = default;
 
 	std::vector<Bullet> shootBullet();

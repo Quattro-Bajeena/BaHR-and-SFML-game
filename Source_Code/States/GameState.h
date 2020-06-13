@@ -67,7 +67,7 @@ protected:
 	void renderGui(sf::RenderTarget* target = nullptr) const;
 
 public:
-	GameState(StateData& state_data, GameStatistics &stats);
+	GameState(StateData& state_data, GameStatistics &stats, AudioManager& audio);
 	virtual ~GameState();
 
 	//Function

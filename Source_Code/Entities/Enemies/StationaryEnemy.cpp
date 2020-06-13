@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "StationaryEnemy.h"
 
-StationaryEnemy::StationaryEnemy(sf::Vector2f position)
-	:Enemy(position)
+StationaryEnemy::StationaryEnemy(sf::Vector2f position, AudioManager& audio)
+	:Enemy(position, audio)
 {
 	this->type = enemyType::STATIONARY;
 

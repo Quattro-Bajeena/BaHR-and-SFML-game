@@ -42,7 +42,7 @@ void GameState::initText()
 
 void GameState::initPlayer()
 {
-	player = new Player(this->statistics.getName(),this->world->randomFreeTile());
+	player = new Player(this->statistics.getName(),this->world->randomFreeTile(), this->audio);
 
 }
 
@@ -95,13 +95,13 @@ void GameState::initGui()
 
 void GameState::initWorld()
 {
-	this->world = std::make_unique< World>(this->stateData.folderPaths.at("WORLD")+"test_world.txt",Assets::Get().textures.at("TILE_MAP"),this->statistics);
+	this->world = std::make_unique< World>(this->stateData.folderPaths.at("WORLD")+"test_world.txt",Assets::Get().textures.at("TILE_MAP"),this->statistics, this->audio);
 	
 }
 
 //Constuctors / destructors
-GameState::GameState(StateData& state_data, GameStatistics& stats)
-	:State(state_data), statistics(stats), playerName(stats.getName())
+GameState::GameState(StateData& state_data, GameStatistics& stats, AudioManager& audio)
+	:State(state_data, audio), statistics(stats), playerName(stats.getName())
 {
 	this->initVariables();
 	this->initWorld();
@@ -130,7 +130,7 @@ void GameState::loose()
 	this->statistics.update();
 	this->statistics.save();
 	
-	this->states.push(new EndScreenState(this->stateData, this->statistics));
+	this->states.push(new EndScreenState(this->stateData, this->statistics, this->audio));
 	this->endState();
 }
 

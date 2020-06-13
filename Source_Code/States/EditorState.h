@@ -47,7 +47,7 @@ private:
 	void initGui();
 
 public:
-	EditorState(StateData& state_data);
+	EditorState(StateData& state_data, AudioManager& audio);
 	virtual ~EditorState();
 
 	//Function

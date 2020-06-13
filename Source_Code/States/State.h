@@ -1,10 +1,10 @@
 #pragma once
-
 #include "PowerUp.h"
 #include "GameStatistics.h"
 #include "GraphicSettings.h"
 #include "Assets.h"
 #include "Gui.h"
+#include "AudioManager.h"
 
 class State;
 
@@ -34,6 +34,7 @@ protected:
 	//Resources 
 	StateData& stateData;
 	sf::RenderWindow& window;
+	AudioManager& audio;
 	std::stack<State*>& states;
 
 	//GUI
@@ -64,7 +65,7 @@ protected:
 	//Initializers
 
 public:
-	State(StateData& state_data);
+	State(StateData& state_data, AudioManager& audio);
 	virtual ~State();
 
 	//Accesors

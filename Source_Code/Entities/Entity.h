@@ -7,9 +7,9 @@
 #include "AnimationComponent.h"
 #include "ShootingComponent.h"
 #include "AIComponent.h"
-#include "Assets.h"
 #include "RNG.h"
 #include "Utility.h"
+
 
 class HitboxComponent;
 class MovementComponent;
@@ -27,7 +27,8 @@ protected:
 	//Assets
 	sf::Sprite sprite;
 	//Sounds
-	sf::Sound hitSound;
+
+	AudioManager& audio;
 
 	std::unique_ptr<HitboxComponent> hitboxComponent;
 	std::unique_ptr<MovementComponent> movementComponent;
@@ -53,14 +54,14 @@ protected:
 	void createMovementComponent(const float maxVelocity, const float maxRollVelocity, const float acceleration, const float deceleration);
 	void createAnimationComponent(sf::Texture& texture_sheet);
 	void createAIComponent(enemyType type, enemyState& state);
-	void createShootingComponent(std::unique_ptr<Gun> default_gun);
+	void createShootingComponent(std::unique_ptr<Gun> default_gun, AudioManager& audio);
 
 	//Calculating
 	sf::Vector2f calculateDir(const sf::Vector2f& position);
 	sf::Vector2f rotateVector(const sf::Vector2f& org, const float rotation);
 public:
 
-	Entity();
+	Entity(AudioManager& audio);
 	virtual ~Entity();
 
 	//Setters

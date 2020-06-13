@@ -95,10 +95,11 @@ const Magazine::MagazineInfo Magazine::getMagazineInfo() const
 
 Gun::Gun(std::string name, sf::Texture& texture, int clip_size, int capacity,
 	int damage, float shoot_time_max, float reload_time_max,
-	float bullet_radius, float max_speed, float max_distance, sf::Color bullet_color)
+	float bullet_radius, float max_speed, float max_distance, sf::Color bullet_color, AudioManager& audio)
 	:name(name),
 	damage(damage),shootTimerMax(shoot_time_max), reloadTimeMax(reload_time_max), bulletRadius(bullet_radius),
-	maxSpeed(max_speed), maxDistance(max_distance), bulletColor(bullet_color)
+	maxSpeed(max_speed), maxDistance(max_distance), bulletColor(bullet_color),
+	audio(audio)
 {
 	this->sprite.setTexture(texture);
 	this->magazine = std::make_unique< Magazine>(clip_size, capacity, 0, 0, false);
@@ -112,7 +113,8 @@ Gun::Gun(std::string name, sf::Texture& texture, int clip_size, int capacity,
 
 }
 
-Gun::Gun()
+Gun::Gun(AudioManager& audio)
+	:audio(audio)
 {
 	this->damageModifier = 1.f;
 	this->reloadTimer = 0.f;

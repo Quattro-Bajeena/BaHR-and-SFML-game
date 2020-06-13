@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "ShotGun.h"
 
-ShotGun::ShotGun()
+ShotGun::ShotGun(AudioManager& audio)
+    :Gun(audio)
 
 {
     this->name = "SHOT GUN";
@@ -22,6 +23,7 @@ ShotGun::ShotGun()
 std::vector<Bullet> ShotGun::shootBullet()
 {
     if (this->readyToShoot == true && this->shootTimer >= this->shootTimerMax && this->reloading == false && this->magazine->isEmpty() == false) {
+        this->audio.playRandom("shotgun_shoot");
         this->magazine->shoot(1);
 
         this->shootTimer = 0;
@@ -44,6 +46,7 @@ std::vector<Bullet> ShotGun::shootBullet()
                 ));
         }
 
+        
         return bullets;
         
     }

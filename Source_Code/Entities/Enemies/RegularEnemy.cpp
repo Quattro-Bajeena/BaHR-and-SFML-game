@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "RegularEnemy.h"
 
-RegularEnemy::RegularEnemy(sf::Vector2f position)
-	:Enemy(position)
+RegularEnemy::RegularEnemy(sf::Vector2f position, AudioManager& audio)
+	:Enemy(position, audio)
 {
 	this->type = enemyType::REGULAR;
 	this->shootTimerMax = 0;

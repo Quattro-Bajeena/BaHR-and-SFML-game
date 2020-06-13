@@ -222,6 +222,9 @@
     <ClCompile Include="Source_Code\States\MultiplayerClientState.cpp">
       <Filter>States</Filter>
     </ClCompile>
+    <ClCompile Include="Source_Code\Utility\AudioManager.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source_Code\Components\AIComponent.h">
@@ -394,6 +397,9 @@
     </ClInclude>
     <ClInclude Include="Source_Code\States\MultiplayerClientState.h">
       <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="Source_Code\Utility\AudioManager.h">
+      <Filter>Utility</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
