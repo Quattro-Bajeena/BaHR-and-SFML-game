@@ -10,8 +10,8 @@ NormalGun::NormalGun(AudioManager& audio)
     this->model = gunModels::NORMAL;
     this->sprite.setTexture(Assets::Get().textures.at("NORMAL_GUN"));
     this->defaultBounds = this->sprite.getGlobalBounds();
-    this->magazine = std::make_unique< Magazine>(16, 1000, 0, 0, false);
-    this->damage = 6;
+    this->magazine = std::make_unique< Magazine>(24, 400, 0, 0, false);
+    this->damage = 7;
     this->shootTimerMax = 0.2f;
     this->reloadTimeMax = 0.55f;
     this->bulletRadius = 15.f;

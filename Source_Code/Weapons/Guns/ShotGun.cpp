@@ -15,7 +15,7 @@ ShotGun::ShotGun(AudioManager& audio)
     this->reloadTimeMax = 1.f;
     this->bulletRadius = 12.f;
     this->maxSpeed = 1500.f;
-    this->maxDistance = 800.f;
+    this->maxDistance = 600.f;
     this->bulletColor = sf::Color::Blue;
     this->gunDistance = 30.f;
 }

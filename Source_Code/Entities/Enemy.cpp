@@ -37,6 +37,21 @@ bool Enemy::isDead()
 	else return false;
 }
 
+const int Enemy::getPoints() const
+{
+	return this->points;
+}
+
+const enemyType Enemy::getType() const
+{
+	return this->type;
+}
+
+std::vector<Bullet>& Enemy::getBullets()
+{
+	return this->bullets;
+}
+
 void Enemy::move(const sf::Vector2f& target, const float& dt)
 {
 	sf::Vector2f movementDir = target - this->getCenterPosition();
@@ -77,10 +92,7 @@ void Enemy::shoot(sf::Vector2f targetPos)
 	}
 }
 
-void Enemy::updateBullets(const float dt)
-{
-	//Does nothing all bullet logic is handled in player's updatedeEnemyBullet
-}
+
 
 void Enemy::updateAnimations(const float& dt)
 {
@@ -172,7 +184,6 @@ void Enemy::update(const sf::Vector2f& target, const float& dt)
 
 	this->move(target, dt);
 	this->shoot(target);
-	this->updateBullets(dt);
 
 	std::stringstream ss;
 	ss << std::fixed << std::setprecision(0) <<this->movementComponent->getVelocity().x <<" | "<< this->movementComponent->getVelocity().y << "\n";
@@ -188,21 +199,8 @@ void Enemy::render(sf::RenderTarget& target) const
 	target.draw(this->sprite);
 	this->hitboxComponent->render(target);
 	//this->aiComponent->render(target);
-	target.draw(this->text);
+	//target.draw(this->text);
 
 }
 
-const int Enemy::getPoints() const
-{
-	return this->points;
-}
 
-const enemyType Enemy::getType() const
-{
-	return this->type;
-}
-
-std::vector<Bullet>& Enemy::getBullets()
-{
-	return this->bullets;
-}

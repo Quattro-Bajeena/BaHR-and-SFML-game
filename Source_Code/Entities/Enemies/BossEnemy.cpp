@@ -10,7 +10,7 @@ BossEnemy::BossEnemy(sf::Vector2f position, AudioManager& audio)
 	this->sprite.scale(9, 9);
 	
 	this->canShoot = true;
-	this->damage = 4;
+	this->damage = 6;
 	this->shootTimerMax = 5;
 
 	this->speed = 20;
@@ -34,7 +34,7 @@ void BossEnemy::shoot(sf::Vector2f targetPos)
 {
 	if (this->aiComponent->isAggro() && this->shootTimer >= this->shootTimerMax && this->canShoot == true) {
 		this->bullets.emplace_back(Bullet(this->getCenterPosition(), this->calculateDir(targetPos), sf::Color::Black,
-			this->damage, 50, 500, 1000));
+			this->damage, 50, 300, 1000));
 		this->shootTimer = 0.f;
 	}
 }

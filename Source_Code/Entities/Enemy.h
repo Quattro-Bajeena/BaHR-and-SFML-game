@@ -44,19 +44,18 @@ public:
 		
 	//Accesors
 	bool isDead();
+	const int getPoints()const;
+	const enemyType getType() const;
+	std::vector<Bullet>& getBullets();
 
 	//Function
 	void move(const sf::Vector2f& target, const float& dt);
 	virtual void shoot(sf::Vector2f targetPos);
-	void updateBullets(const float dt);
 	virtual void updateAnimations(const float& dt);
 	void update(const sf::Vector2f& target, const float& dt);
 	void render(sf::RenderTarget& target) const;
 
-	//Accesors
-	const int getPoints()const;
-	const enemyType getType() const;
-	std::vector<Bullet>& getBullets();
+	
 
 };
 

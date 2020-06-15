@@ -1,5 +1,5 @@
-start_room -5 -5 0 0 1
-h_corridor 5 -2 0 0 5
+start_room -5 -5 0 0 0
+h_corridor 5 -2 0 0 3
 corridor 15 -7 0 2 10
 corridor_corner_1 21 8 0 0 0
 h_corridor 26 8 0 0 5

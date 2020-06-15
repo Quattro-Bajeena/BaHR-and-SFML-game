@@ -10,12 +10,12 @@ SpreadGun::SpreadGun(AudioManager& audio)
     this->sprite.setTexture(Assets::Get().textures.at("SPREAD_GUN"));
     this->defaultBounds = this->sprite.getGlobalBounds();
     this->magazine = std::make_unique< Magazine>(60, 600, 0, 0, false);
-    this->damage = 8;
+    this->damage = 10;
     this->shootTimerMax = 0.2f;
     this->reloadTimeMax = 0.5f;
     this->bulletRadius = 14.f;
-    this->maxSpeed = 1000.f;
-    this->maxDistance = 2000.f;
+    this->maxSpeed = 900.f;
+    this->maxDistance = 2500.f;
     this->bulletColor = sf::Color::Red;
     this->gunDistance = 30.f;
 }

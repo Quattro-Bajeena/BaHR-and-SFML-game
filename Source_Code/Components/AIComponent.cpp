@@ -51,7 +51,7 @@ AIComponent::AIComponent(sf::Sprite& sprite, enemyType type, enemyState& state)
 	this->roamDir = util::normalize(sf::Vector2f(RNG::get().randomF(-1,1), RNG::get().randomF(-1, 1)));
 	switch (this->type) {
 	case enemyType::REGULAR:
-		this->aggroDistance = 800.f;
+		this->aggroDistance = 1000.f;
 		break;
 	case enemyType::COMMANDO:
 		this->aggroDistance = 1300.f;
@@ -60,7 +60,7 @@ AIComponent::AIComponent(sf::Sprite& sprite, enemyType type, enemyState& state)
 		this->aggroDistance = 1500.f;
 		break;
 	case enemyType::BOSS:
-		this->aggroDistance = 700.f;
+		this->aggroDistance = 900.f;
 		break;
 
 	default:

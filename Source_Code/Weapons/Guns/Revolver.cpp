@@ -11,8 +11,8 @@ Revolver::Revolver(AudioManager& audio)
     this->sprite.setTexture(Assets::Get().textures.at("REVOLVER_GUN"));
     this->defaultBounds = this->sprite.getGlobalBounds();
     this->magazine = std::make_unique< Magazine>(12, 350, 0, 0, false);
-    this->damage = 12;
-    this->shootTimerMax = 0.2f;
+    this->damage = 25;
+    this->shootTimerMax = 0.3f;
     this->reloadTimeMax = 0.3f;
     this->bulletRadius = 12.f;
     this->maxSpeed = 1400.f;

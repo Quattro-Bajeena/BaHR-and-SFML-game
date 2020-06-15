@@ -11,7 +11,7 @@ StationaryEnemy::StationaryEnemy(sf::Vector2f position, AudioManager& audio)
 
 	this->canShoot = true;
 	this->damage = 2;
-	this->shootTimerMax = 1.2f;
+	this->shootTimerMax = 1.5f;
 	this->speed = 0;
 	this->health = 500;
 	this->maxHealth = this->health;
@@ -32,7 +32,7 @@ void StationaryEnemy::shoot(sf::Vector2f targetPos)
 {
 	if (this->aiComponent->isAggro() && this->shootTimer >= this->shootTimerMax && this->canShoot == true) {
 		bullets.emplace_back(Bullet(this->getCenterPosition(), this->calculateDir(targetPos), sf::Color::Yellow,
-			this->damage, 30, 600, 2000));
+			this->damage, 30, 400, 2000));
 		this->shootTimer = 0.f;
 	}
 }
