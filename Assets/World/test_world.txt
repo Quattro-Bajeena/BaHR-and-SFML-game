@@ -1,5 +1,5 @@
-desert1 24 3 1 0.5 20
-desert1 9 -12 1 0.5 10
-plains 9 18 1 0.3 25
-corridor 9 3 0 0 0
-default -6 3 0 0 10
+desert1 24 3 0 0.5 0
+desert1 9 -12 0 0.5 0
+plains 9 18 0 0.3 0
+corridor 9 3 0 0 1
+default -6 3 0 0 0

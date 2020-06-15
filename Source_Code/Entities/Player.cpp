@@ -27,7 +27,7 @@ Player::Player(std::string name, const sf::Vector2f& pos, AudioManager& audio)
 
 	this->hitboxComponent->addHitboxPreset("ROLL",60.f, 60.f, 70.f, 110.f);
 
-
+	
 
 }
 

@@ -94,7 +94,7 @@ void GameState::initGui()
 
 void GameState::initWorld()
 {
-	this->world = std::make_unique< World>(this->stateData.folderPaths.at("WORLD")+"test_world.txt",Assets::Get().textures.at("TILE_MAP"),this->statistics, this->audio);
+	this->world = std::make_unique< World>(this->stateData.folderPaths.at("WORLD")+"level_1.txt",Assets::Get().textures.at("TILE_MAP"),this->statistics, this->audio);
 	
 }
 

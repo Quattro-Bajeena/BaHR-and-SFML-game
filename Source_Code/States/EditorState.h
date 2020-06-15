@@ -1,13 +1,10 @@
 #pragma once
-
 #include "State.h"
 #include "PauseMenu.h"
-#include "Button.h"
-#include "TextureSelector.h"
+#include "Gui.h"
 #include"TileMap.h"
 
 class State;
-class Gui;
 class PauseMenu;
 class TileMap;
 
@@ -23,7 +20,8 @@ private:
 	std::unique_ptr<PauseMenu> pmenu;
 	std::vector<std::string> mapNames;
 
-	std::map<std::string, gui::Button*> buttons;
+	std::map<std::string, std::unique_ptr<gui::Button>> buttons;
+	std::map<std::string, std::unique_ptr<gui::DropDownList>> lists;
 	sf::RectangleShape sidebar;
 
 	sf::IntRect textureRect;
@@ -36,6 +34,10 @@ private:
 	short int type;
 	float cameraSpeed;
 	int layer;
+	sf::Vector2i mapSize;
+
+	bool sidebarActive;
+	std::pair<std::vector<int>, std::vector<int>> mapSizes;
 
 	//Functions
 	void initView();

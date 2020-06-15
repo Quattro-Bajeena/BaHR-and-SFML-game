@@ -21,7 +21,7 @@ void WorldEditorState::initView()
 		this->stateData.gridSize * 15,
 		this->stateData.gridSize * 15
 	);
-
+	
 }
 
 
@@ -80,25 +80,25 @@ void WorldEditorState::loadFiles()
 {
 	namespace fs = std::filesystem;
 
-	std::cout << "-------------\n";
+	//std::cout << "-------------\n";
 	std::string level_path = this->stateData.folderPaths.at("WORLD");
-	std::cout << "Levels: " << "\n";
+	//std::cout << "Levels: " << "\n";
 	for (const auto& entry : fs::directory_iterator(level_path)) {
 		if (entry.path().filename().has_extension()) {
 			std::string filename = entry.path().filename().stem().string();
-			std::cout<< "-" << filename << "\n";
+			//std::cout<< "-" << filename << "\n";
 			this->worldsStr.push_back(filename);
 		}
 
 	}
 
-	std::cout << "-------------\n";
+	//std::cout << "-------------\n";
 	std::string room_path = this->stateData.folderPaths.at("TILEMAPS");
-	std::cout << "Tile Maps: " << "\n";
+	//std::cout << "Tile Maps: " << "\n";
 	for (const auto& entry : fs::directory_iterator(room_path)) {
 
 		std::string filename = entry.path().filename().stem().string();
-		std::cout << "-" << filename << "\n";
+		//std::cout << "-" << filename << "\n";
 		this->roomFiles[filename] = entry.path().string();
 	}
 }
@@ -145,7 +145,7 @@ void WorldEditorState::initGui()
 	std::vector<std::string> enemy_spawn_times_str;
 	for (float time : this->enemySpawnTimes) {
 		std::string time_str = std::to_string(time);
-		time_str = time_str.erase(2, time_str.length() - (2+1));
+		time_str = time_str.erase(3, time_str.length() - 3);
 		time_str += " [s]";
 		enemy_spawn_times_str.emplace_back(time_str);
 	}
@@ -191,7 +191,7 @@ void WorldEditorState::initGui()
 
 void WorldEditorState::initEnemyOptions()
 {
-	this->enemyLimits = { 0, 5, 10, 15, 20, 25 };
+	this->enemyLimits = { 0, 1, 3, 5, 10, 15, 20, 25 };
 	this->enemySpawnTimes = {0, 0.3f, 0.5f, 1, 2, 5 };
 }
 
@@ -204,6 +204,9 @@ void WorldEditorState::startPlacingRoom()
 	this->placingNewRoom = true;
 	this->tempRoom = new Room(this->roomType, this->roomPath, Assets::Get().textures.at("TILE_MAP"));
 	this->placeRect.setSize(sf::Vector2f(this->tempRoom->getBounds().width, this->tempRoom->getBounds().height));
+	this->renderTexture.create(
+		this->stateData.gridSize * this->tempRoom->getSizeInTiles().x,
+		this->stateData.gridSize * this->tempRoom->getSizeInTiles().y);
 }
 
 
@@ -414,6 +417,10 @@ void WorldEditorState::updateGui(const float& dt)
 
 
 	this->cursorText.setPosition(this->mousePosWindow.x + 100.f * this->stateData.scale.x, this->mousePosWindow.y - 50.f * this->stateData.scale.y);
+	std::string type;
+	if (this->selectedRoom != nullptr)
+		type = this->selectedRoom->getTileMapType();
+	else type = this->roomType;
 	std::stringstream ss;
 	ss << this->mousePosView.x << " | " << this->mousePosView.y << "\n"
 		<<"mouse pos grid "<<this->mousePosGrid.x << " | " << this->mousePosGrid.y << "\n"
@@ -422,8 +429,8 @@ void WorldEditorState::updateGui(const float& dt)
 		<<"spawn: "<<this->enemySpawn << "\n"
 		<<"enemy limit: "<<this->enemyLimit<<"\n"
 		<<"enemy time: " << this->enemySpawnTime << "\n"
-		<<"room type"<< this->roomType << "\n";
-
+		<<"room type: "<< type << "\n";
+	
 	this->cursorText.setString(ss.str());
 
 }
@@ -490,9 +497,10 @@ void WorldEditorState::renderGui(sf::RenderTarget& target) const
 
 		target.draw(this->selectorRect);
 	}
-	else if(this->tempRoom){
+	else if(this->tempRoom != nullptr){
+		
 		this->renderTexture.clear();
-
+		
 		this->tempRoom->fullRender(this->renderTexture);
 
 		this->renderTexture.display();

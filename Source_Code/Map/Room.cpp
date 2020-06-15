@@ -212,7 +212,7 @@ Room::Room( GameStatistics& statistics, AudioManager& audio, const std::string& 
 Room::Room(const std::string& type, const std::string& room_file, sf::Texture& tile_sheet)
 	:tileSheet(tile_sheet), tileMapType(type), offset(0, 0), statistics(nullptr), audio(nullptr)
 {
-	this->map = std::make_unique<TileMap>(room_file, tileSheet, offset.x, offset.y);
+	this->map = std::make_unique<TileMap>(room_file, tileSheet, 0, 0);
 	this->spawnTime = 0.f;
 	this->powerUpTime = 0.f;
 
@@ -238,6 +238,11 @@ Room::~Room()
 const sf::IntRect Room::getTileBounds() const
 {
 	return this->map->getTileBounds();
+}
+
+const sf::Vector2i Room::getSizeInTiles() const
+{
+	return this->map->getWorldGridSize();
 }
 
 const sf::FloatRect Room::getBounds() const
@@ -274,6 +279,11 @@ const std::string Room::getAsString() const
 const EnemyInfo Room::getEnemyInfo() const
 {
 	return EnemyInfo(this->allowSpawnEnemies, this->spawnTimeMax, this->enemyLimit);
+}
+
+const std::string Room::getTileMapType() const
+{
+	return this->tileMapType;
 }
 
 void Room::setEnemies(bool enemy_spawn, float spawn_time, int enemy_limit)
@@ -317,13 +327,14 @@ void Room::update(Player* player, const float& dt)
 
 	//Updating Enemies collison with the map
 	for (Enemy* enemy : this->enemies) {
-		map->updateCollision(enemy, dt);
+		this->map->updateCollision(enemy, dt);
 	}
 
 	//movement of bullets, bullets collision with player and map, destroying far away bullets
 	//movement of the enemis, player collision with enemies, enemies death from player
 	//Spawn of new enemies if it's enabled on this map
 	this->updateEnemies(*player, dt);
+
 
 	//Timer of power ups, collision with player, destroying old power ups
 	//Spawing new if it;s allowed

@@ -103,7 +103,7 @@ void ShootingComponent::reload()
 void ShootingComponent::changeCurrGunAdjacent(int direction)
 {
 	if (this->swapTime >= this->swapTimeMax) {
-		if (direction > 0) {
+		if (direction < 0) {
 			if (this->currentGunPos + 1 == this->guns.size()) {
 				this->currentGunPos = 0;
 			}
@@ -112,7 +112,7 @@ void ShootingComponent::changeCurrGunAdjacent(int direction)
 			}
 			
 		}
-		else if (direction < 0) {
+		else if (direction > 0) {
 			if (this->currentGunPos == 0) {
 				this->currentGunPos = this->guns.size() - 1;
 			}

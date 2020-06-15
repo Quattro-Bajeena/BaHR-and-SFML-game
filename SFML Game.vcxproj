@@ -151,6 +151,9 @@
     <ClInclude Include="Source_Code\Weapons\Guns\ShotGun.h" />
     <ClInclude Include="Source_Code\Weapons\Guns\SpreadGun.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{131552CD-FBF2-4CD8-A35C-854957F46080}</ProjectGuid>

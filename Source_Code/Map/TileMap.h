@@ -9,8 +9,8 @@ class Entity;
 class TileMap
 {
 private:
+	
 	void clear();
-
 	float gridSizeF;
 	int gridSizeI;
 
@@ -44,22 +44,29 @@ public:
 	virtual ~TileMap();
 
 	//Accesors
-	const sf::Texture* getTileSheet() const;
+	const sf::Texture* const getTileSheet() const;
 	const sf::Vector2f getSize() const;
+	const sf::Vector2i getWorldGridSize() const;
 	const sf::FloatRect getBounds() const;
 	const sf::IntRect getTileBounds() const;
 	const int getLayerSize(const int x, const int y, const int z) const;
 	const sf::Vector2f randomFreeTile();
+	void clearTiles();
 
 	//Function
-
+	//Editingh
 	void addTile(const int x, const int y, const int z,
 		const sf::IntRect& texture_rect, bool collision = false, short int type = TileTypes::DEFAULT);
 	void removeTile(const int x, const int y, const int z);
+	void changeMaxSize(const int width, const int height);
+	
 
+	//Saving/Loading
 	void saveToFile(const std::string file_name);
 	void loadFromFile(const std::string file_name, sf::Texture tile_sheet);
 
+
+	//Gameplay
 	void updateCollision(Entity* entity, const float& dt);
 	const bool checkCollision(sf::FloatRect bounds) const;
 

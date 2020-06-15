@@ -194,8 +194,13 @@ void World::update(Player* player, const float& dt)
 			break;
 		}
 	}
+
 	//Updating that room (enemies, power ups in it)
 	this->currentRoom->update(player, dt);
+
+	/*for (Room* room : this->rooms) {
+		room->update(player, dt);
+	}*/
 }
 
 void World::render(sf::RenderTarget& target, const sf::Vector2i& gridPosition) const

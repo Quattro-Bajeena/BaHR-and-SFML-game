@@ -6,6 +6,7 @@ gui::TextureSelector::TextureSelector(float x, float y,
 	int grid_size,
 	const sf::Texture* texture_sheet,
 	sf::Font& font, std::string buttonText)
+	:orgScale(scale)
 {
 	this->active = false;
 	this->hidden = false;
@@ -49,7 +50,7 @@ gui::TextureSelector::TextureSelector(float x, float y,
 		x - offset, y, 100.f, 50.f, scale,
 		&font, buttonText, 30,
 		sf::Color(15, 15, 15, 255), sf::Color(250, 250, 250, 255), sf::Color(10, 10, 10, 255),
-		sf::Color(100, 100, 100, 150), sf::Color(150, 150, 150, 200), sf::Color(20, 20, 20, 50));
+		sf::Color(140, 140, 140, 190), sf::Color(150, 150, 150, 200), sf::Color(20, 20, 20, 50));
 
 	this->scale(scale);
 }
@@ -82,6 +83,8 @@ const bool gui::TextureSelector::GetKeytime()
 
 void gui::TextureSelector::scale(const sf::Vector2f& scale)
 {
+	
+
 	this->hideBtn->scale(scale);
 	this->bounds.setPosition(this->bounds.getPosition().x * scale.x, this->bounds.getPosition().y * scale.y);
 	this->bounds.scale(scale);
@@ -92,8 +95,10 @@ void gui::TextureSelector::scale(const sf::Vector2f& scale)
 	this->sheet.setPosition(this->sheet.getPosition().x * scale.x, this->sheet.getPosition().y * scale.y);
 	this->sheet.scale(scale);
 
-	this->textureRect.width = this->gridSize * scale.x;
-	this->textureRect.height = this->gridSize * scale.y;
+	//this->textureRect.width = this->gridSize * scale.x;
+	//this->textureRect.height = this->gridSize * scale.y;
+
+	this->gridSize *= scale.x;
 }
 
 
@@ -144,8 +149,8 @@ void gui::TextureSelector::update(const sf::Vector2i& mousePosWindow, const floa
 				);
 		}
 		//Update texture recatngle
-		this->textureRect.left = static_cast<int>(this->selector.getPosition().x - this->bounds.getPosition().x);
-		this->textureRect.top = static_cast<int>(this->selector.getPosition().y - this->bounds.getPosition().y);
+		this->textureRect.left = static_cast<int>((this->selector.getPosition().x - this->bounds.getPosition().x) / this->orgScale.x);
+		this->textureRect.top = static_cast<int>((this->selector.getPosition().y - this->bounds.getPosition().y) / this->orgScale.x);
 	}
 
 }

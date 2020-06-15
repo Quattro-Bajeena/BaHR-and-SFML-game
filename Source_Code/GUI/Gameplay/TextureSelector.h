@@ -16,7 +16,7 @@ namespace gui {
 		sf::Vector2u mousePosGrid;
 		sf::IntRect textureRect;
 
-
+		const sf::Vector2f orgScale;
 	public:
 		TextureSelector(float x, float y,
 			float width, float height, sf::Vector2f scale,

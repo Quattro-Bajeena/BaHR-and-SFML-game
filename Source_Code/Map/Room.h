@@ -71,12 +71,14 @@ public:
 
 	//Accesors
 	const sf::IntRect getTileBounds() const;
+	const sf::Vector2i getSizeInTiles() const;
 	const sf::FloatRect getBounds() const;
 	const sf::Vector2f randomFreeTile() const;
 	const bool checkCollision(sf::FloatRect bounds) const;
 	const std::vector<Enemy*>& getEnemies();
 	const std::string getAsString() const;
 	const EnemyInfo getEnemyInfo() const;
+	const std::string getTileMapType() const;
 
 
 	//Setters
