@@ -114,7 +114,9 @@ const sf::FloatRect Entity::getNextPositionBounds(const float& dt) const
 	if (this->hitboxComponent && this->movementComponent) {
 		return this->hitboxComponent->getNextPosition(this->movementComponent->getVelocity(), dt);
 	}
-	return sf::FloatRect();
+	else return sf::FloatRect();
+	
+		
 }
 
 const float Entity::getDistance(const sf::Vector2f& position) const

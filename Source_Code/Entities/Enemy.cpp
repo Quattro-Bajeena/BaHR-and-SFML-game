@@ -18,9 +18,11 @@ void Enemy::initVariables()
 	this->state = enemyState::FULL;
 
 	this->text.setFont(Assets::Get().font);
-	this->text.setCharacterSize(30 * this->size);
+	this->text.setCharacterSize(50);
 	this->text.setPosition(this->getPosition());
-	this->text.setFillColor(sf::Color::Red);
+	this->text.setFillColor(sf::Color::Yellow);
+	this->text.setOutlineColor(sf::Color::Black);
+	this->text.setOutlineThickness(5.f);
 
 	this->animationSwitchTimer = 0.f;
 	this->animationSwitchTimerMax = 1.f;
@@ -41,7 +43,7 @@ void Enemy::move(const sf::Vector2f& target, const float& dt)
 	float distance = this->getDistance(target);
 
 	sf::Vector2f finalMove = this->aiComponent->nextMove(util::normalize(movementDir) , distance);
-
+	//std::cout << finalMove.x << " | " << finalMove.y << "\n";
 	this->movementComponent->move(finalMove.x, finalMove.y, dt);
 	this->text.setPosition(this->getPosition());
 }
@@ -173,7 +175,7 @@ void Enemy::update(const sf::Vector2f& target, const float& dt)
 	this->updateBullets(dt);
 
 	std::stringstream ss;
-	ss << this->health << "\n";
+	ss << std::fixed << std::setprecision(0) <<this->movementComponent->getVelocity().x <<" | "<< this->movementComponent->getVelocity().y << "\n";
 	this->text.setString(ss.str());
 	
 }
@@ -186,7 +188,7 @@ void Enemy::render(sf::RenderTarget& target) const
 	target.draw(this->sprite);
 	this->hitboxComponent->render(target);
 	//this->aiComponent->render(target);
-	//target.draw(this->text);
+	target.draw(this->text);
 
 }
 

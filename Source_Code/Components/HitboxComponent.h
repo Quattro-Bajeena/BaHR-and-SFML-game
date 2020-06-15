@@ -8,6 +8,7 @@ class HitboxComponent
 private:
 	sf::Sprite &sprite;
 	sf::RectangleShape hitbox;
+	sf::RectangleShape hitboxNextPos;
 	sf::RectangleShape center;
 	sf::FloatRect nextPosition;
 	sf::Vector2f centerPosition;
@@ -27,10 +28,10 @@ public:
 	virtual ~HitboxComponent();
 
 	//Accesors
-	const sf::Vector2f& getPosition() const;
-	const sf::Vector2f& getCenterPosition() const;
+	const sf::Vector2f getPosition() const;
+	const sf::Vector2f getCenterPosition() const;
 	const sf::FloatRect getGlobalBounds() const;
-	const sf::FloatRect& getNextPosition(const sf::Vector2f& velocity, const float& dt);
+	const sf::FloatRect getNextPosition(const sf::Vector2f& velocity, const float& dt);
 
 	const bool checkCollision(sf::FloatRect object) const;
 	const bool checkContain(sf::FloatRect object) const;

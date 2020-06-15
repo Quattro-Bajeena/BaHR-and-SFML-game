@@ -21,6 +21,12 @@ HitboxComponent::HitboxComponent(sf::Sprite& sprite,
     this->hitbox.setOutlineThickness(-1.f);
     this->hitbox.setOutlineColor(sf::Color::Red);
 
+    this->hitboxNextPos.setPosition(this->sprite.getPosition().x + offset_x, this->sprite.getPosition().y + offset_y);
+    this->hitboxNextPos.setSize(sf::Vector2f(width, height));
+    this->hitboxNextPos.setFillColor(sf::Color::Transparent);
+    this->hitboxNextPos.setOutlineThickness(-1.f);
+    this->hitboxNextPos.setOutlineColor(sf::Color::Magenta);
+
     this->centerPosition = sf::Vector2f(
         this->hitbox.getPosition().x + this->hitbox.getGlobalBounds().width / 2,
         this->hitbox.getPosition().y + this->hitbox.getGlobalBounds().height / 2
@@ -40,12 +46,12 @@ HitboxComponent::~HitboxComponent()
 }
 //Accesors
 
-const sf::Vector2f& HitboxComponent::getPosition() const
+const sf::Vector2f HitboxComponent::getPosition() const
 {
     return this->hitbox.getPosition();
 }
 //Gets hitboxCenter
-const sf::Vector2f& HitboxComponent::getCenterPosition() const
+const sf::Vector2f HitboxComponent::getCenterPosition() const
 {
     return this->centerPosition;
 }
@@ -55,10 +61,11 @@ const sf::FloatRect HitboxComponent::getGlobalBounds() const
     return this->hitbox.getGlobalBounds();
 }
 
-const sf::FloatRect& HitboxComponent::getNextPosition(const sf::Vector2f& velocity, const float& dt)
+const sf::FloatRect HitboxComponent::getNextPosition(const sf::Vector2f& velocity, const float& dt)
 {
     this->nextPosition.left = this->hitbox.getPosition().x + velocity.x * dt;
     this->nextPosition.top = this->hitbox.getPosition().y + velocity.y * dt;
+    this->hitboxNextPos.setPosition(this->nextPosition.left, this->nextPosition.top);
     return this->nextPosition;
 }
 
@@ -110,6 +117,9 @@ void HitboxComponent::changeHitbox(const float& offset_x, const float& offset_y,
 {
     this->offsetX = offset_x;
     this->offsetY = offset_y; //bruh tu był bład ze offsetY = offset_x
+    this->nextPosition.width = width;
+    this->nextPosition.height = height;
+    this->hitboxNextPos.setSize(sf::Vector2f(width, height));
     this->hitbox.setSize(sf::Vector2f(width, height));
 }
 
@@ -120,10 +130,9 @@ void HitboxComponent::addHitboxPreset(const std::string key, const float& offset
 
 void HitboxComponent::setHitbox(const std::string key)
 {
-    this->offsetX = this->hitboxPresets.at(key).left;
-    this->offsetY = this->hitboxPresets.at(key).top;
-
-    this->hitbox.setSize(sf::Vector2f(this->hitboxPresets.at(key).width, this->hitboxPresets.at(key).height));
+    this->changeHitbox(
+        this->hitboxPresets.at(key).left, this->hitboxPresets.at(key).top,
+        this->hitboxPresets.at(key).width, this->hitboxPresets.at(key).height);
 }
 
 bool HitboxComponent::intersects(const sf::FloatRect& frect)
@@ -133,7 +142,7 @@ bool HitboxComponent::intersects(const sf::FloatRect& frect)
 
 void HitboxComponent::update()
 {
-    
+  
     
     this->hitbox.setPosition(this->sprite.getPosition().x + this->offsetX,
         this->sprite.getPosition().y + this->offsetY);
@@ -149,6 +158,7 @@ void HitboxComponent::update()
 void HitboxComponent::render(sf::RenderTarget& target) const
 {
     //target.draw(this->hitbox);
+    //target.draw(this->hitboxNextPos);
     //target.draw(this->center);
 }
 
