@@ -74,7 +74,7 @@ public:
 	const bool getClickTime();
 
 	//Functions
-	void endState();
+	virtual void endState();
 	void pauseState();
 	void unpauseState();
 	virtual void refreshGui();

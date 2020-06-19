@@ -43,12 +43,22 @@ void GameState::initText()
 void GameState::initPlayer()
 {
 	player = new Player(this->statistics.getName(),this->world->randomFreeTile(), this->audio);
+	this->player->recieveGun(gunModels::NORMAL);
+	this->player->recieveAmmo(1);
+	this->player->recieveGun(gunModels::SPREAD);
+	this->player->recieveGun(gunModels::SHOTGUN);
+	this->player->recieveGun(gunModels::REVOLVER);
+	this->player->recieveGun(gunModels::CANNON);
+	this->player->recieveGun(gunModels::MAGIC);
+	this->player->changeCurrGunPos(0);
+	
+	
 
 }
 
 void GameState::initSound()
 {
-	this->audio.playMusic("track_1");
+	this->audio.playMusic("track_1",10.f);
 }
 
 void GameState::initGui()
@@ -76,7 +86,7 @@ void GameState::initGui()
 	this->texts["SCORE"].setFont(Assets::Get().font);
 	this->texts["SCORE"].setCharacterSize(50 * this->stateData.scale.x);
 	this->texts["SCORE"].setPosition(50.f * this->stateData.scale.x, 120.f * this->stateData.scale.y);
-	this->texts["SCORE"].setOutlineThickness(static_cast<int>(3.f * this->stateData.scale.x));
+	this->texts["SCORE"].setOutlineThickness(static_cast<int>(4 * this->stateData.scale.x));
 	this->texts["SCORE"].setOutlineColor(sf::Color::Black);
 
 	this->texts["HEALTH"].setFont(Assets::Get().font);
@@ -127,13 +137,19 @@ GameState::~GameState()
 
 void GameState::loose()
 {
-	
 
 	this->statistics.update();
 	this->statistics.save();
 	
+	
 	this->states.push(new EndScreenState(this->stateData, this->statistics, this->audio));
 	this->endState();
+}
+
+void GameState::endState()
+{
+	this->audio.stopMusic();
+	this->quit = true;
 }
 
 
@@ -184,7 +200,7 @@ void GameState::updateGui(const float& dt)
 	this->texts.at("PLAYER_INFO").setString(ss.str());
 	this->texts.at("PLAYER_INFO").setPosition(this->player->getCenterPosition().x, this->player->getCenterPosition().y);
 	
-	this->texts.at("SCORE").setString("ECTS: " + std::to_string(this->statistics.getCurrentScore()));
+	this->texts.at("SCORE").setString("POINTS: " + std::to_string(this->statistics.getCurrentScore()));
 	this->texts.at("HEALTH").setString("Health: " + std::to_string(this->player->getHealth()));
 
 	this->healthBar->update(this->player->getHealth());
@@ -282,7 +298,7 @@ void GameState::update(const float& dt) {
 
 		this->world->update(this->player, dt); //Updating Enemies and PowerUps
 		this->world->updateCollision(this->player, dt); //Player's collision with map
-		this->world->updateBulletCollisions(this->player->getBullets());//Player's bullets collison with map and enemies
+		this->world->updateBulletCollisions(this->player->getBullets());//Player's bullets collison with map
 
 		this->player->update(dt);
 		this->player->updateWeapon(this->mousePosView, dt); //updating gun position, handling reloads
@@ -338,10 +354,10 @@ void GameState::renderGui(sf::RenderTarget* target) const
 	//Static on screen UI
 	target->setView(target->getDefaultView()); // render UI
 	target->draw(this->texts.at("SCORE"));
-	target->draw(this->texts.at("HEALTH"));
+	//target->draw(this->texts.at("HEALTH"));
 	
 	this->healthBar->render(target);
-	this->healthBar2->render(true, *target);
+	//this->healthBar2->render(true, *target);
 	this->weaponSlot->render(*target);
 	
 

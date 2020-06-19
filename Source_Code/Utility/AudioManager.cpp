@@ -9,6 +9,8 @@ AudioManager::AudioManager(std::string path)
 	this->sweepTimeMax = 5.f;
 	this->maxSounds = 50;
 	this->currentMusic = nullptr;
+	this->musicMuted = false;
+	this->currentMusicVolume = 100;
 }
 
 void AudioManager::addMusic(std::string key, std::string file_name, bool loop)
@@ -25,6 +27,7 @@ void AudioManager::playMusic(std::string key, float volume)
 	if (currentMusic != nullptr) {
 		this->currentMusic->stop();
 	}
+	this->currentMusicVolume = volume;
 	this->music.at(key).setVolume(volume);
 	this->music.at(key).play();
 	this->currentMusic = &this->music.at(key);
@@ -34,6 +37,40 @@ void AudioManager::stopMusic()
 {
 	if(this->currentMusic != nullptr)
 		this->currentMusic->stop();
+}
+
+void AudioManager::pauseMusic()
+{
+	if (this->currentMusic != nullptr)
+		this->currentMusic->pause();
+}
+
+void AudioManager::resumeMusic()
+{
+	if (this->currentMusic != nullptr)
+		this->currentMusic->play();
+}
+
+void AudioManager::resumeMusic(std::string key)
+{
+	if (this->currentMusic == &this->music.at(key)) {
+		this->currentMusic->play();
+	}
+	else this->playMusic(key);
+}
+
+void AudioManager::toggleMuteMusic()
+{
+	
+	if (this->musicMuted == false) {
+		this->musicMuted = true;
+		this->currentMusic->setVolume(0);
+	}
+	else {
+		this->musicMuted = false;
+		this->currentMusic->setVolume(this->currentMusicVolume);
+	}
+	
 }
 
 void AudioManager::addSound(std::string key, std::string file_name)

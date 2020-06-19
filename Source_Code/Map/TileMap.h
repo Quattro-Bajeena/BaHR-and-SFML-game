@@ -26,6 +26,8 @@ private:
 
 	sf::RectangleShape collisionBox;
 	sf::RectangleShape boundary;
+	bool showBoundary;
+	bool showCollision;
 
 	int offsetX;
 	int offsetY;
@@ -59,6 +61,9 @@ public:
 		const sf::IntRect& texture_rect, bool collision = false, short int type = TileTypes::DEFAULT);
 	void removeTile(const int x, const int y, const int z);
 	void changeMaxSize(const int width, const int height);
+	void showCollisionTiles();
+	void showMapBoundary();
+
 	
 
 	//Saving/Loading

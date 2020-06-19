@@ -9,6 +9,10 @@ private:
 	std::queue<sf::Sound> currentSounds;
 
 	sf::Music* currentMusic;
+	int currentMusicVolume;
+
+
+	bool musicMuted;
 	float lastSoundTime;
 	float sweepTime;
 	float sweepTimeMax;
@@ -20,6 +24,10 @@ public:
 	void addMusic(std::string key, std::string file_name, bool loop = true);
 	void playMusic(std::string key, float volume = 20);
 	void stopMusic();
+	void pauseMusic();
+	void resumeMusic();
+	void resumeMusic(std::string key);
+	void toggleMuteMusic();
 
 	void addSound(std::string key, std::string file_name);
 	void play(std::string key, float volume = 10, float pitch = 1);

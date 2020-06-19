@@ -54,7 +54,7 @@ protected:
 	void createMovementComponent(const float maxVelocity, const float maxRollVelocity, const float acceleration, const float deceleration);
 	void createAnimationComponent(sf::Texture& texture_sheet);
 	void createAIComponent(enemyType type, enemyState& state);
-	void createShootingComponent(std::unique_ptr<Gun> default_gun, AudioManager& audio);
+	void createShootingComponent( AudioManager& audio);
 
 	//Calculating
 	sf::Vector2f calculateDir(const sf::Vector2f& position);
@@ -99,6 +99,7 @@ public:
 	//Functions
 	//Gameplay
 	virtual void Die();
+	virtual void looseHealthInv(int damage);
 	virtual void looseHealth(int damage);
 	virtual void move(const float dir_x, const float dir_y, const float& dt);
 

@@ -18,7 +18,7 @@ void EndScreenState::initBackground()
 void EndScreenState::initButtons()
 {
 	this->buttons["RETRY"] = new gui::Button(
-		1400.f, 140.f, 200.f, 150.f, this->stateData.scale,
+		1610.f, 140.f, 200.f, 150.f, this->stateData.scale,
 		&Assets::Get().font, "New Game", 45,
 		sf::Color(10, 240, 10, 200), sf::Color(230, 255, 230, 255), sf::Color(10, 10, 10, 200),
 		sf::Color(120, 120, 120, 150), sf::Color(150, 200, 150, 200), sf::Color(20, 20, 20, 50)

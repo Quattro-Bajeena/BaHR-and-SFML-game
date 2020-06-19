@@ -8,6 +8,7 @@ private:
 
 	//Current
 	std::string name;
+	std::string defaultName;
 	int currentPoints;
 	std::map<enemyType, int> currentEnemyKills;
 
@@ -32,6 +33,7 @@ public:
 	//Functions
 	void logKill(int points, enemyType type);
 	void setName(const std::string name);
+	void setNameDefault();
 	void reset();
 	void update();
 	void save();

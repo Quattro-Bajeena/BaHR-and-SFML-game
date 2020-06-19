@@ -26,6 +26,7 @@ private:
 	std::unique_ptr<Gun> createGun(gunModels model);
 
 public:
+	ShootingComponent(AudioManager& audio);
 	ShootingComponent(std::unique_ptr<Gun> default_gun, AudioManager& audio);
 	~ShootingComponent();
 

@@ -55,6 +55,7 @@ protected:
 
 	//Functions 
 	void loose();
+	void endState() override;
 
 	void updateView(const float& dt);
 	void updateInput(const float& dt);

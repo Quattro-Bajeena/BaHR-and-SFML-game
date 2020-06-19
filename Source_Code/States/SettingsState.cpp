@@ -103,7 +103,7 @@ void SettingsState::initText()
 	this->optionsText.setFont(Assets::Get().font);
 	this->optionsText.setPosition(sf::Vector2f(100.f * this->stateData.scale.x, 100.f * this->stateData.scale.y));
 	this->optionsText.setCharacterSize(this->fontSize * this->stateData.scale.x);
-	this->optionsText.setFillColor(sf::Color::Yellow);
+	this->optionsText.setFillColor(sf::Color(230, 200, 50));
 	this->optionsText.setOutlineThickness(7 * static_cast<int>(this->stateData.scale.x));
 	this->optionsText.setOutlineColor(sf::Color::Black);
 

@@ -50,12 +50,14 @@ TileMap::TileMap(float grid_size, int width, int height, int offsetX, int offset
 			}
 		}
 	}
-
+	this->showCollision = false;
+	this->showBoundary = false;
 	this->boundary.setSize(this->maxSizeWorldF);
 	this->boundary.setPosition(offsetX * gridSizeF, offsetY * gridSizeF);
 	this->boundary.setFillColor(sf::Color::Transparent);
 	this->boundary.setOutlineColor(sf::Color::Magenta);
 	this->boundary.setOutlineThickness(8.f);
+	
 }
 
 TileMap::TileMap(const std::string file_name, sf::Texture& tile_sheet, int offsetX, int offsetY)
@@ -79,6 +81,7 @@ TileMap::TileMap(const std::string file_name, sf::Texture& tile_sheet, int offse
 		int trX = 0;
 		int trY = 0;
 		bool collision = false;
+		this->showCollision = false;
 		int short type = TileTypes::DEFAULT;
 
 		in_file >> size.x >> size.y >> gridSize >> layers;// >> texture_file;
@@ -121,7 +124,7 @@ TileMap::TileMap(const std::string file_name, sf::Texture& tile_sheet, int offse
 					sf::IntRect(trX, trY,
 						this->gridSizeI,
 						this->gridSizeI),
-					collision, type)
+					collision,this->showCollision, type)
 				);
 		}
 
@@ -348,7 +351,7 @@ void TileMap::loadFromFile(const std::string file_name, sf::Texture tile_sheet)
 					sf::IntRect(trX, trY,
 						this->gridSizeI,
 						this->gridSizeI),
-					collision, type)
+					collision,this->showCollision, type)
 				);
 		}
 
@@ -368,7 +371,7 @@ void TileMap::addTile(const int x, const int y, const int z,
 	//if the mouse is outside it wont do
 	if (x < this->maxSizeWorldGrid.x && y < this->maxSizeWorldGrid.y && z < layers && x>=0 && y>=0 && this->map[x][y][z].size() < 3) {
 		//ok to add tile
-		this->map[x][y][z].push_back(new Tile(x + offsetX, y + offsetY, this->gridSizeF, this->tileSheet, texture_rect, collision, type));
+		this->map[x][y][z].push_back(new Tile(x + offsetX, y + offsetY, this->gridSizeF, this->tileSheet, texture_rect, collision,this->showCollision, type));
 		//std::cout << "ADDED TILE" << "\n";
 
 	}
@@ -435,6 +438,16 @@ void TileMap::changeMaxSize(const int width, const int height)
 			}
 		}
 	}
+}
+
+void TileMap::showCollisionTiles()
+{
+	this->showCollision = true;
+}
+
+void TileMap::showMapBoundary()
+{
+	this->showBoundary = !this->showBoundary;
 }
 
 void TileMap::updateCollision(Entity* entity, const float& dt) //change to bool?
@@ -591,7 +604,9 @@ void TileMap::render(sf::RenderTarget& target, const sf::Vector2i& gridPosition)
 		}
 	}
 
-	target.draw(this->boundary);
+	if(this->showBoundary == true)
+		target.draw(this->boundary);
+
 	/*for (auto& x : this->map) {
 		for (auto& y : x) {
 			for (auto& z : y) {
@@ -621,7 +636,9 @@ void TileMap::fullRender(sf::RenderTarget& target) const
 				}
 			}
 		}
+
 	}
+	
 	target.draw(this->boundary);
 }
 

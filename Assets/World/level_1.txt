@@ -1,9 +1,10 @@
 start_room -5 -5 0 0 0
 h_corridor 5 -2 0 0 3
-corridor 15 -7 0 2 10
+corridor 15 -7 0 2 5
 corridor_corner_1 21 8 0 0 0
 h_corridor 26 8 0 0 5
 desert1 15 -22 1 2 20
 pond 30 -12 1 1 10
 default 36 3 1 0.5 15
 plains 0 -26 1 5 25
+plains-2 -13 5 1 5 10

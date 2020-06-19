@@ -35,7 +35,7 @@ void CommandoEnemy::shoot(sf::Vector2f targetPos)
 		int spray_angle = RNG::get().randomF(-5,5);
 		sf::Vector2f spray = this->rotateVector(this->calculateDir(targetPos), spray_angle);
 		bullets.emplace_back(Bullet(this->getCenterPosition(), spray, sf::Color::Green,
-			this->damage, 15, 600, 1500));
+			this->damage, 15, 400, 1500));
 		this->shootTimer = 0;
 	}
 

@@ -4,6 +4,7 @@
 void GameStatistics::initVariables()
 {
 	this->name = "";
+	this->defaultName = "-unknown-";
 	this->currentPoints = 0;
 	this->totalPoints = 0;
 	this->enemyTypes.push_back(enemyType::REGULAR);
@@ -76,6 +77,11 @@ void GameStatistics::setName(const std::string name)
 	this->name = name;
 }
 
+void GameStatistics::setNameDefault()
+{
+	this->name = this->defaultName;
+}
+
 void GameStatistics::reset()
 {
 	/*for (enemyType type : this->enemyTypes) {
@@ -90,11 +96,13 @@ void GameStatistics::reset()
 
 void GameStatistics::update()
 {
-	for (enemyType type : this->enemyTypes) {
-		this->totalEnemyKills.at(type) += this->currentEnemyKills.at(type);
+	if (this->name != this->defaultName) {
+		for (enemyType type : this->enemyTypes) {
+			this->totalEnemyKills.at(type) += this->currentEnemyKills.at(type);
+		}
+		this->scoreBoard.emplace_back(this->name, this->currentPoints);
+		this->totalPoints += this->currentPoints;
 	}
-	this->scoreBoard.emplace_back(this->name, this->currentPoints);
-	this->totalPoints += this->currentPoints;
 
 	
 	
@@ -103,24 +111,27 @@ void GameStatistics::update()
 
 void GameStatistics::save()
 {
-	std::ofstream scores_file;
-	scores_file.open(this->filepaths.at("SCORE_BOARD"), std::ios::app);
+	if (this->name != this->defaultName) {
+		std::ofstream scores_file;
+		scores_file.open(this->filepaths.at("SCORE_BOARD"), std::ios::app);
 
-	if (scores_file.is_open()) {
-		scores_file <<this->name<<" "<<std::to_string(this->currentPoints) << "\n";
-	}
-	scores_file.close();
-
-	std::fstream enemies_file;
-	enemies_file.open(this->filepaths.at("ENEMY_KILLS"), std::ios::out);
-
-	if (enemies_file.is_open()) {
-		for (enemyType type : this->enemyTypes) {
-			enemies_file << this->totalEnemyKills.at(type) << " ";
+		if (scores_file.is_open()) {
+			scores_file << this->name << " " << std::to_string(this->currentPoints) << "\n";
 		}
-		enemies_file << "\n";
+		scores_file.close();
+
+		std::fstream enemies_file;
+		enemies_file.open(this->filepaths.at("ENEMY_KILLS"), std::ios::out);
+
+		if (enemies_file.is_open()) {
+			for (enemyType type : this->enemyTypes) {
+				enemies_file << this->totalEnemyKills.at(type) << " ";
+			}
+			enemies_file << "\n";
+		}
+		enemies_file.close();
 	}
-	enemies_file.close();
+	
 }
 
 void GameStatistics::load()

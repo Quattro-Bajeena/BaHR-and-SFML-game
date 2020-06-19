@@ -61,6 +61,7 @@
     <ClCompile Include="Source_Code\States\EditorState.cpp" />
     <ClCompile Include="Source_Code\States\EndScreenState.cpp" />
     <ClCompile Include="Source_Code\States\GameState.cpp" />
+    <ClCompile Include="Source_Code\States\InfoState.cpp" />
     <ClCompile Include="Source_Code\States\MenuState.cpp" />
     <ClCompile Include="Source_Code\States\MultiplayerClientState.cpp" />
     <ClCompile Include="Source_Code\States\MultiplayerServerState.cpp" />
@@ -92,6 +93,7 @@
     <ClCompile Include="Source_Code\Weapons\Guns\SpreadGun.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Source_Code\Components\AIComponent.h" />
     <ClInclude Include="Source_Code\Components\AnimationComponent.h" />
     <ClInclude Include="Source_Code\Components\HitboxComponent.h" />
@@ -127,6 +129,7 @@
     <ClInclude Include="Source_Code\States\EditorState.h" />
     <ClInclude Include="Source_Code\States\EndScreenState.h" />
     <ClInclude Include="Source_Code\States\GameState.h" />
+    <ClInclude Include="Source_Code\States\InfoState.h" />
     <ClInclude Include="Source_Code\States\MenuState.h" />
     <ClInclude Include="Source_Code\States\MultiplayerClientState.h" />
     <ClInclude Include="Source_Code\States\MultiplayerServerState.h" />
@@ -153,6 +156,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="resources.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Assets\Images\icon.ico" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -319,12 +328,12 @@
       <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)sfml\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>sfml-system-s.lib;sfml-window-s.lib;sfml-graphics-s.lib;sfml-audio-s.lib;sfml-network-s.lib;opengl32.lib;winmm.lib;gdi32.lib;freetype.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sfml-main.lib;sfml-system-s.lib;sfml-window-s.lib;sfml-graphics-s.lib;sfml-audio-s.lib;sfml-network-s.lib;opengl32.lib;winmm.lib;gdi32.lib;freetype.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

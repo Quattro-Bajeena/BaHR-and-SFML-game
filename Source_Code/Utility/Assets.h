@@ -16,10 +16,7 @@ public:
 
 	sf::Font font;
 	std::map<std::string, sf::Texture> textures;
-	//std::map<std::string, sf::Music> music;
-
-	//std::map<std::string, sf::SoundBuffer> soundBuffers;
-	//std::map<std::string, sf::Sound> sounds;
+	sf::Image icon;
 
 	//Specific Sets
 	std::map<gunModels, const sf::Texture* > weaponTextures;

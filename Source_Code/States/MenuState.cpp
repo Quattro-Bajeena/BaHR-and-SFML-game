@@ -24,8 +24,8 @@ void MenuState::initGui()
 void MenuState::initButtons()
 {
 	this->buttons["GAME_STATE"] = std::make_unique<gui::Button>( 
-		1400.f, 140.f, 200.f, 150.f, this->stateData.scale,
-		&Assets::Get().font, "New Game", 45, 
+		1400.f, 140.f, 410.f, 150.f, this->stateData.scale,
+		&Assets::Get().font, "New Game", 55, 
 		sf::Color(10, 240, 10, 200), sf::Color(230, 255, 230, 255), sf::Color(10, 10, 10, 200),
 		sf::Color(120, 120, 120, 150), sf::Color(150, 200, 150, 200), sf::Color(20, 20, 20, 50)
 		);
@@ -36,7 +36,7 @@ void MenuState::initButtons()
 		sf::Color(240, 240, 15, 200), sf::Color(255, 255, 230, 255), sf::Color(10, 10, 10, 200),
 		sf::Color(100, 100, 100, 150), sf::Color(180, 180, 130, 200), sf::Color(20, 20, 20, 50));
 
-	this->buttons["SERVER_STATE"] = std::make_unique< gui::Button>(
+	/*this->buttons["SERVER_STATE"] = std::make_unique< gui::Button>(
 		1400.f, 460.f, 200.f, 150.f, this->stateData.scale,
 		&Assets::Get().font, "Create\nServer", 45,
 		sf::Color(240, 240, 15, 200), sf::Color(255, 255, 230, 255), sf::Color(10, 10, 10, 200),
@@ -46,27 +46,41 @@ void MenuState::initButtons()
 		1610.f, 460.f, 200.f, 150.f, this->stateData.scale,
 		&Assets::Get().font, "Multiplayer", 40,
 		sf::Color(240, 240, 15, 200), sf::Color(255, 255, 230, 255), sf::Color(10, 10, 10, 200),
-		sf::Color(100, 100, 100, 150), sf::Color(180, 180, 130, 200), sf::Color(20, 20, 20, 50));
+		sf::Color(100, 100, 100, 150), sf::Color(180, 180, 130, 200), sf::Color(20, 20, 20, 50));*/
 
 	this->buttons["EDITOR_STATE"] = std::make_unique< gui::Button>(
-		1610.f, 140.f, 200.f, 70.f, this->stateData.scale,
+		1610.f, 300, 200.f, 70.f, this->stateData.scale,
 		&Assets::Get().font, "Map Editor", 35,
 		sf::Color(35, 20, 50, 210), sf::Color(250, 250, 250, 255), sf::Color(10, 10, 10, 200),
 		sf::Color(100, 100, 100, 150), sf::Color(140, 110, 160, 200), sf::Color(20, 20, 20, 50));
 
 	this->buttons["WORLD_EDITOR_STATE"] = std::make_unique< gui::Button>(
-		1610.f, 215.f, 200.f, 70.f, this->stateData.scale,
+		1610.f, 375, 200.f, 70.f, this->stateData.scale,
 		&Assets::Get().font, "Level Editor", 35,
 		sf::Color(35, 20, 50, 210), sf::Color(250, 250, 250, 255), sf::Color(10, 10, 10, 200),
 		sf::Color(100, 100, 100, 150), sf::Color(140, 110, 160, 200), sf::Color(20, 20, 20, 50));
 
+	this->buttons["INFO_STATE"] = std::make_unique< gui::Button>(
+		1400.f, 460.f, 200.f, 150.f, this->stateData.scale,
+		&Assets::Get().font, "Tutorial", 50,
+		sf::Color(255, 180, 50, 230), sf::Color(255, 220, 210, 255), sf::Color(10, 10, 10, 200),
+		sf::Color(100, 100, 100, 150), sf::Color(200, 180, 130, 200), sf::Color(20, 20, 20, 50));
+
 	this->buttons["EXIT_STATE"] = std::make_unique< gui::Button>(
-		1610.f, 300.f, 200.f, 150.f, this->stateData.scale,
+		1610.f, 460.f, 200.f, 150.f, this->stateData.scale,
 		&Assets::Get().font, "Quit", 50,
-		sf::Color(255, 65, 65, 200), sf::Color(255, 220, 220, 255), sf::Color(10, 10, 10, 200),
+		sf::Color(255, 65, 65, 230), sf::Color(255, 220, 220, 255), sf::Color(10, 10, 10, 200),
 		sf::Color(90, 90, 90, 150), sf::Color(200, 150, 150, 200), sf::Color(20, 20, 20, 50));
 
-	this->textBox = std::make_unique< gui::TextBox>(1400.f, 680.f, 410.f, 80.f, this->stateData.scale,
+	this->buttons["MUTE_MUSIC"] = std::make_unique< gui::Button>(
+		50, 950, 100, 80, this->stateData.scale,
+		&Assets::Get().font, "Mute", 40,
+		sf::Color(220, 220, 220, 230), sf::Color(250, 250, 250, 255), sf::Color(10, 10, 10, 200),
+		sf::Color(90, 90, 90, 150), sf::Color(150, 150, 150, 200), sf::Color(20, 20, 20, 50));
+
+	
+
+	this->textBox = std::make_unique< gui::TextBox>(1400.f, 620.f, 410.f, 80.f, this->stateData.scale,
 		Assets::Get().font, "insert_name", 50, 15, 
 		sf::Color(40, 40, 40, 255), sf::Color(20, 20, 20, 255), sf::Color(5, 5, 5, 255),
 		sf::Color(200, 200, 200, 200), sf::Color(230, 230, 230, 230), sf::Color(240, 240, 240, 255));
@@ -92,8 +106,27 @@ void MenuState::initText()
 	this->texts["ENEMY_KILLS"].setFillColor(sf::Color(200, 230, 30, 255));
 	this->texts["ENEMY_KILLS"].setOutlineColor(sf::Color::Black);
 
-	this->textsOrgPos["SCORE_BOARD"] = this->texts.at("SCORE_BOARD").getPosition();
-	this->textsOrgPos["ENEMY_KILLS"] = this->texts.at("ENEMY_KILLS").getPosition();
+	this->texts["CREATOR_INFO"].setFont(Assets::Get().font);
+	this->texts["CREATOR_INFO"].setPosition(sf::Vector2f(1200, 850 ));
+	this->texts["CREATOR_INFO"].setCharacterSize(fontSize1 * 0.6);
+	this->texts["CREATOR_INFO"].setFillColor(sf::Color(250, 200, 50));
+	this->texts["CREATOR_INFO"].setOutlineThickness(3);
+	this->texts["CREATOR_INFO"].setOutlineColor(sf::Color::Black);
+
+	
+
+
+	for (auto& [key, text] : this->texts) {
+		this->orgTextParams[key].first = text.getPosition();
+		this->orgTextParams[key].second = text.getCharacterSize();
+	}
+
+	std::string text = R"(
+	'Boy and His Robot' (name subject to change)
+	 ver. alpha 0.8
+		-Mateusz Oleszek, 2020
+	)";
+	this->texts["CREATOR_INFO"].setString(text);
 }
 
 MenuState::MenuState(StateData& state_data,GameStatistics& statistics, AudioManager& audio)
@@ -105,7 +138,7 @@ MenuState::MenuState(StateData& state_data,GameStatistics& statistics, AudioMana
 	this->initButtons();
 	this->initText();
 	this->refreshGui();
-
+	this->audio.playMusic("menu_track");
 }
 
 MenuState::~MenuState()
@@ -117,9 +150,11 @@ MenuState::~MenuState()
 
 void MenuState::refreshGui() //updating after going back from finished game or changing graphics settings
 {
+	this->audio.resumeMusic("menu_track");
+
 	for (auto& [key, text] : this->texts) {
-		text.setCharacterSize(this->fontSize1 * this->stateData.scale.x);
-		text.setPosition(this->textsOrgPos.at(key).x * this->stateData.scale.x, this->textsOrgPos.at(key).y * this->stateData.scale.y);
+		text.setCharacterSize(this->orgTextParams.at(key).second * this->stateData.scale.x);
+		text.setPosition(this->orgTextParams.at(key).first.x * this->stateData.scale.x, this->orgTextParams.at(key).first.y * this->stateData.scale.y);
 		text.setOutlineThickness(static_cast<int>(7.f * this->stateData.scale.x));
 	}
 
@@ -165,7 +200,11 @@ void MenuState::updateButtons()
 
 	//New game
 	if (this->buttons["GAME_STATE"]->isReleased()) {
-		this->statistics.setName(this->textBox->isStringDefault() ? "-unknown-" : this->textBox->getText());
+
+		if (this->textBox->isStringDefault())
+			this->statistics.setNameDefault();
+		else this->statistics.setName(this->textBox->getText());
+
 		this->states.push(new GameState(this->stateData, this->statistics, this->audio));
 	}
 
@@ -183,17 +222,24 @@ void MenuState::updateButtons()
 		this->states.push(new SettingsState(this->stateData, this->audio));
 	}
 
-	if (this->buttons["SERVER_STATE"]->isReleased()) {
+	if (this->buttons["INFO_STATE"]->isReleased()) {
+		this->states.push(new InfoState(this->stateData, this->audio));
+	}
+
+	/*if (this->buttons["SERVER_STATE"]->isReleased()) {
 		this->states.push(new MultiplayerServerState(this->stateData, this->statistics, this->audio));
 	}
 
 	if (this->buttons["MULTIPLAYER_STATE"]->isReleased()) {
 		this->states.push(new MultiplayerClientState(this->stateData, this->audio));
-	}
+	}*/
 
 	//Quit the state
 	if (this->buttons["EXIT_STATE"]->isReleased()) {
 		this->endState();
+	}
+	if (this->buttons["MUTE_MUSIC"]->isReleased()) {
+		this->audio.toggleMuteMusic();
 	}
 }
 
@@ -224,8 +270,8 @@ void MenuState::update(const float& dt)
 void MenuState::renderButtons(sf::RenderTarget& target) const
 {
 
-	for (auto& it : this->buttons) {
-		it.second->render(target);
+	for (auto& [key, button] : this->buttons) {
+		button->render(target);
 	}
 
 	this->textBox->render(target);
@@ -240,8 +286,10 @@ void MenuState::render(sf::RenderTarget* target) const
 	target->draw(this->background);
 
 	this->renderButtons(*target);
-	target->draw(this->texts.at("SCORE_BOARD"));
-	target->draw(this->texts.at("ENEMY_KILLS"));
+	for (auto& [key, text] : this->texts) {
+		target->draw(text);
+	}
+
 	target->draw(mouseText);
 }
 

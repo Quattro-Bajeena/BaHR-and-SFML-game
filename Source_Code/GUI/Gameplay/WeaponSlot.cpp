@@ -12,7 +12,7 @@ gui::WeaponSlot::WeaponSlot(int x, int y, int width, int height,
     this->background.setFillColor(sf::Color(100, 100, 100, 200));
     this->background.setScale(scale);
 
-    this->ammoBar = std::make_unique<gui::Bar>(x + width*7.5/10, y, width*2.5/10, height, this->magazineInfo.clipSize, false, scale, sf::Color::Yellow, sf::Color::Black, 5, font);
+    this->ammoBar = std::make_unique<gui::Bar>(x + width*7.5/10, y, width*2.5/10, height, this->magazineInfo.clipSize, false, scale, sf::Color(230, 200, 50), sf::Color::Black, 5, font);
     this->ammoBar->update(this->magazineInfo.bulletsLoaded);
     this->currentGun = model;
 

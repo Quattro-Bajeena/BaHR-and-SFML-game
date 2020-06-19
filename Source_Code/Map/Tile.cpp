@@ -8,7 +8,7 @@ Tile::Tile()
 }
 
 Tile::Tile(int grid_x, int grid_y, float gridSizeF, const sf::Texture& texture, const sf::IntRect& rect,
-	bool collision, short int type)
+	bool collision, bool show_collision, short int type)
 {
 	this->shape.setSize(sf::Vector2f(gridSizeF, gridSizeF));
 	this->shape.setFillColor(sf::Color::White);
@@ -21,7 +21,7 @@ Tile::Tile(int grid_x, int grid_y, float gridSizeF, const sf::Texture& texture, 
 	this->type = type;
 
 
-	if (this->collision) {
+	if (this->collision == true && show_collision == true) {
 		this->shape.setOutlineColor(sf::Color::Red);
 		this->shape.setFillColor(sf::Color(255, 200, 200, 255));
 		this->shape.setOutlineThickness(-2.f);
@@ -67,6 +67,7 @@ const std::string Tile::getAsString() const
 
 	return ss.str();
 }
+
 
 
 //Functions

@@ -15,7 +15,7 @@ Player::Player(std::string name, const sf::Vector2f& pos, AudioManager& audio)
 	this->createAnimationComponent(Assets::Get().textures.at("PLAYER_SHEET"));
 	this->createHitboxComponent(50.f, 18.f, 90.f, 180.f);
 
-	this->createShootingComponent(std::move(std::make_unique<NormalGun>(this->audio)), this->audio);
+	this->createShootingComponent( this->audio);
 	this->sprite.scale(6, 6);
 	
 	this->animationComponent->addAnimation("WALK_STRAIGHT", 12.f, 0, 1, 13, 32, 32);
@@ -47,9 +47,9 @@ void Player::initVariables() {
 	this->rollingUp = false;
 	this->rollTimer = 1.f; //how much time bewteen rolls
 
-	this->invincibility = true;
+	this->invincibility = false;
 	this->invincibilityTimer = 0.f;
-	this->invincibilityTimerMax = 0.5f; //how long default invinvibility lasts
+	this->invincibilityTimerMax = 1.f; //how long default invinvibility lasts
 	
 
 	this->debugText.setFont(Assets::Get().font);
@@ -72,6 +72,7 @@ void Player::roll(const float& dt)
 		this->movementComponent->startRoll();
 		this->hitboxComponent->setHitbox("ROLL");
 		this->invincibility = true;
+		this->invincibilityTimer = 0.f;
 
 		if (this->movementComponent->getState(movement_states::MOVING_UP) && rollingUp == false) {
 			rollingUp = true;
@@ -219,7 +220,20 @@ void Player::looseHealth(int damage)
 {
 	if (this->invincibility == false) {
 		this->health -= damage;
-		this->audio.play("player_hit", 20);
+		float volume_multiplier =  1 + damage * 0.2 ;
+		this->audio.play("player_hit", 50.f * volume_multiplier);
+	}
+}
+
+void Player::looseHealthInv(int damage)
+{
+	
+	if (this->invincibility == false) {
+		
+		this->health -= damage;
+		this->invincibility = true;
+		this->invincibilityTimer = 0.f;
+		this->audio.play("player_hit", 100);
 	}
 }
 
@@ -331,14 +345,17 @@ void Player::update(const float& dt) {
 	this->shootingComponent->update(this->getCenterPosition(), dt);
 	this->updateAnimations(dt);
 
-
+	if (this->invincibility == true && this->invincibilityTimer >= this->invincibilityTimerMax) {
+		this->invincibility = false;
+		this->invincibilityTimer = 0.f;
+	}
 	if (this->health <= 0) {
 		this->dead = true;
 	}
 	if (this->dead == true) {
-		
-		this->audio.play("player_hit", 30, 0.6);
+		this->audio.play("player_death", 50, 0.6);
 	}
+	
 }
 
 

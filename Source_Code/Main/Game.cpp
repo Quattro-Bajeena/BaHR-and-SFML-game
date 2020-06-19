@@ -27,6 +27,7 @@ void Game::initWindow()
 
     this->window->setFramerateLimit(this->gfxSettings.frameRateLimit);
     this->window->setVerticalSyncEnabled(this->gfxSettings.vsync);
+    this->window->setIcon(48, 48,Assets::Get().icon.getPixelsPtr());
 }
 
 void Game::initGraphicSettings()
@@ -68,6 +69,9 @@ void Game::initAssets()
     
     Assets::Get().font.loadFromFile("Assets/Fonts/impact.ttf");
 
+    Assets::Get().icon.loadFromFile("Assets/Images/game_icon.png");
+    
+
     //Entites
     Assets::Get().textures["PLAYER_SHEET"].loadFromFile("Assets/Images/Sprites/Player/player_sprite_sheet.png");
     Assets::Get().textures["REGULAR_ENEMY"].loadFromFile("Assets/Images/Sprites/Enemies/regular enemy spritesheet.png");
@@ -84,6 +88,7 @@ void Game::initAssets()
     //Backgrouds
     Assets::Get().textures["MENU_BACKGROUND"].loadFromFile("Assets/Images/Backgrounds/background.png");
     Assets::Get().textures["END_SCREEN_BACKGROUND"].loadFromFile("Assets/Images/Backgrounds/end_screen_background.png");
+    Assets::Get().textures["CONTROLS"].loadFromFile("Assets/Images/Backgrounds/tutorial_screen.png");
 
     //Tiles
     Assets::Get().textures["TILE_MAP"].loadFromFile("Assets/Images/Tiles/Tilemap.png");
@@ -95,6 +100,7 @@ void Game::initAssets()
     Assets::Get().textures["SHOTGUN_GUN"].loadFromFile("Assets/Images/Sprites/Weapons/shotgun.png");
     Assets::Get().textures["CANON_GUN"].loadFromFile("Assets/Images/Sprites/Weapons/canon gun.png");
     Assets::Get().textures["MAGIC_GUN"].loadFromFile("Assets/Images/Sprites/Weapons/magic gun.png");
+    Assets::Get().textures["NULL_GUN"].loadFromFile("Assets/Images/Sprites/Weapons/no gun.png");
 
     Assets::Get().weaponTextures[gunModels::NORMAL] = &Assets::Get().textures.at("NORMAL_GUN");
     Assets::Get().weaponTextures[gunModels::REVOLVER] = &Assets::Get().textures.at("REVOLVER_GUN");
@@ -102,6 +108,7 @@ void Game::initAssets()
     Assets::Get().weaponTextures[gunModels::SHOTGUN] = &Assets::Get().textures.at("SHOTGUN_GUN");
     Assets::Get().weaponTextures[gunModels::CANNON] = &Assets::Get().textures.at("CANON_GUN");
     Assets::Get().weaponTextures[gunModels::MAGIC] = &Assets::Get().textures.at("MAGIC_GUN");
+    Assets::Get().weaponTextures[gunModels::null] = &Assets::Get().textures.at("NULL_GUN");
 
    //Sounds
    //Assets::Get().soundBuffers["HIT"].loadFromFile("Assets/Sounds/uguu.wav");
@@ -115,8 +122,10 @@ void Game::initAudioManager()
     this->audio = std::make_unique<AudioManager>(this->stateData.folderPaths.at("AUDIO"));
 
     this->audio->addMusic("track_1", "Music/my_first_track.wav");
+    this->audio->addMusic("menu_track", "Music/menu_track.wav");
 
-    this->audio->addSound("player_hit", "Player/uguu.wav");
+    this->audio->addSound("player_death", "Player/uguuu.wav");
+    this->audio->addSound("player_hit", "Player/clang.wav");
 
     this->audio->addSound("normal_shoot", "Gun sounds/Normal/normal shot.wav");
     this->audio->addSound("normal_reload", "Gun sounds/Normal/normal reload.wav");
@@ -160,11 +169,11 @@ Game::Game() {
     auto t2 = std::chrono::high_resolution_clock::now();
     this->initGraphicSettings();
     auto t3 = std::chrono::high_resolution_clock::now();
-    this->initWindow();
-    auto t4 = std::chrono::high_resolution_clock::now();
-    this->initStateData();
-    auto t5 = std::chrono::high_resolution_clock::now();
     this->initAssets();
+    auto t4 = std::chrono::high_resolution_clock::now();
+    this->initWindow();
+    auto t5 = std::chrono::high_resolution_clock::now();
+    this->initStateData();
     auto t6 = std::chrono::high_resolution_clock::now();
     this->initStatistics();
     auto t7 = std::chrono::high_resolution_clock::now();
@@ -175,9 +184,9 @@ Game::Game() {
     
     std::cout << "Init Variables: " << std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count() << " ms\n";
     std::cout << "Init Grpahic Settings: " << std::chrono::duration_cast<std::chrono::milliseconds>(t3 - t2).count() << " ms\n";
-    std::cout << "Init Window: " << std::chrono::duration_cast<std::chrono::milliseconds>(t4 - t3).count() << " ms\n";
-    std::cout << "Init State Data: " << std::chrono::duration_cast<std::chrono::milliseconds>(t5 - t4).count() << " ms\n";
-    std::cout << "Init Assets: " << std::chrono::duration_cast<std::chrono::milliseconds>(t6 - t5).count() << " ms\n";
+    std::cout << "Init Assets: " << std::chrono::duration_cast<std::chrono::milliseconds>(t4 - t3).count() << " ms\n";
+    std::cout << "Init Window: " << std::chrono::duration_cast<std::chrono::milliseconds>(t5 - t4).count() << " ms\n";
+    std::cout << "Init State Data: " << std::chrono::duration_cast<std::chrono::milliseconds>(t6 - t5).count() << " ms\n";
     std::cout << "Init Statistcs: " << std::chrono::duration_cast<std::chrono::milliseconds>(t7 - t6).count() << " ms\n";
     std::cout << "Init Audio: " << std::chrono::duration_cast<std::chrono::milliseconds>(t8 - t7).count() << " ms\n";
     std::cout << "Init States: " << std::chrono::duration_cast<std::chrono::milliseconds>(t9 - t8).count() << " ms\n";

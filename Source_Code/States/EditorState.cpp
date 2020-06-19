@@ -68,6 +68,7 @@ void EditorState::initButtons()
 void EditorState::initTileMap()
 {
 	this->tileMap = std::make_unique< TileMap>(static_cast<float>(this->stateData.gridSize), this->mapSize.x, this->mapSize.y, 0, 0, 1, Assets::Get().textures.at("TILE_MAP"));
+	this->tileMap->showCollisionTiles();
 }
 
 void EditorState::initGui()
@@ -148,7 +149,7 @@ EditorState::EditorState(StateData& state_data, AudioManager& audio)
 	this->initGui();
 	
 
-	
+	this->audio.stopMusic();
 }
 
 
@@ -359,7 +360,6 @@ void EditorState::update(const float& dt)
 		this->pmenu->updateTextBox(this->textReceived, this->unicodeText, this->mousePosWindow);
 		this->updatePauseMenuButtons();
 	}
-	this->updateButtons();
 	this->resetScrollWheel();
 
 

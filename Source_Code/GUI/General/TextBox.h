@@ -34,7 +34,7 @@ namespace gui {
 			const sf::Font& font, const std::string default_text, int character_size, int character_limit,
 			sf::Color text_idle_color, sf::Color text_hover_color, sf::Color text_active_color,
 			sf::Color idle_Color, sf::Color hover_Color, sf::Color active_Color,
-			sf::Color outline_idle_Color = sf::Color::Black, sf::Color outline_hover_Color = sf::Color(10,10,0), sf::Color outline_active_Color = sf::Color::Yellow,
+			sf::Color outline_idle_Color = sf::Color::Black, sf::Color outline_hover_Color = sf::Color(10,10,0), sf::Color outline_active_Color = sf::Color(230, 200, 50),
 			short unsigned id = 0);
 		~TextBox();
 

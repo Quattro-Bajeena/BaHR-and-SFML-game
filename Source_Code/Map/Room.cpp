@@ -40,7 +40,7 @@ void Room::updateEnemies(Player& player, const float& dt)
 		(*enemy)->update(player.getCenterPosition(), dt); //Updating movement of the enemy
 		if (player.checkCollision((*enemy)->getGlobalBounds()) == true) {
 			//Dying from collison with enemies
-			player.Die();
+			player.looseHealthInv(player.getMaxHealth() / 4);
 		}
 		if ((*enemy)->isDead() == true) { //Enemy death
 			this->statistics->logKill((*enemy)->getPoints(), (*enemy)->getType());

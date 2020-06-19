@@ -59,9 +59,9 @@ void Entity::createAIComponent(enemyType type, enemyState& state)
 	this->aiComponent = std::make_unique < AIComponent>(this->sprite, type, state);
 }
 
-void Entity::createShootingComponent(std::unique_ptr<Gun> default_gun, AudioManager& audio)
+void Entity::createShootingComponent( AudioManager& audio)
 {
-	this->shootingComponent = std::make_unique<ShootingComponent>(std::move(default_gun), audio);
+	this->shootingComponent = std::make_unique<ShootingComponent>( audio);
 }
 
 const sf::Vector2f Entity::getPosition() const
@@ -256,6 +256,15 @@ sf::Vector2f Entity::rotateVector(const sf::Vector2f& org, const float rotation)
 void Entity::Die()
 {
 	this->looseHealth(this->health);
+}
+
+void Entity::looseHealthInv(int damage)
+{
+	if (this->invincibility == false) {
+		this->health -= damage;
+		this->invincibility = true;
+		this->invincibilityTimer = 0.f;
+	}
 }
 
 void Entity::looseHealth(int damage)

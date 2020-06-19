@@ -4,6 +4,7 @@
 #include "EditorState.h"
 #include "SettingsState.h"
 #include "WorldEditorState.h"
+#include "InfoState.h"
 
 class GameState;
 class MultiplayerServerState;
@@ -23,7 +24,7 @@ private:
 	GameStatistics& statistics;
 	std::map<std::string, std::unique_ptr<gui::Button>> buttons;
 	std::map<std::string, sf::Text> texts;
-	std::map<std::string, sf::Vector2f> textsOrgPos;
+	std::map<std::string, std::pair<sf::Vector2f, int>> orgTextParams;
 
 	std::unique_ptr<gui::TextBox> textBox;
 	float fontSize1;

@@ -226,7 +226,7 @@ WorldEditorState::WorldEditorState(StateData& state_data, AudioManager& audio)
 	this->initGui(); //GUI after world
 	this->initPauseMenu();
 
-
+	this->audio.stopMusic();
 }
 
 

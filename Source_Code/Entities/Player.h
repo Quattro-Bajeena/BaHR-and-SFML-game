@@ -47,7 +47,8 @@ public:
 	void changeCurrGunAdjacent(int direction);
 	void changeCurrGunPos(int pos);
 
-	void looseHealth(int damage);
+	void looseHealth(int damage) override;
+	void looseHealthInv(int damage) override;
 	//Accesors
 	const std::string getName() const;
 	
