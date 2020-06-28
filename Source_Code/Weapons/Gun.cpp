@@ -29,6 +29,11 @@ void Magazine::refillAmmo(float percent)
 	else this->bulletsAll = this->capacity;
 }
 
+void Magazine::loadMagazine()
+{
+	this->bulletsLoaded = this->clipSize;
+}
+
 
 void Magazine::reload(){
 
@@ -190,6 +195,11 @@ void Gun::reload()
 		this->reloading = true;
 	}
 	
+}
+
+void Gun::loadMagazine()
+{
+	this->magazine->loadMagazine();
 }
 
 void Gun::refillAmmo()

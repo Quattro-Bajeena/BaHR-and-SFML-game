@@ -296,11 +296,11 @@ void GameState::update(const float& dt) {
 
 		this->updatePlayerInput(dt); //Player move and shoot
 
-		this->world->update(this->player, dt); //Updating Enemies and PowerUps
+		this->world->update(this->player, dt); //Updating Enemies
 		this->world->updateCollision(this->player, dt); //Player's collision with map
 		this->world->updateBulletCollisions(this->player->getBullets());//Player's bullets collison with map
 
-		this->player->update(dt);
+		this->player->update(dt); //updating movement/hitbox/shooting/animations components and timers, checking if dead
 		this->player->updateWeapon(this->mousePosView, dt); //updating gun position, handling reloads
 		this->player->updateBullets(this->world->getEnemies(), dt); //Collision of player bullets withe enemies
 		

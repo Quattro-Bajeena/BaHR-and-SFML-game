@@ -42,11 +42,12 @@ TileMap::TileMap(float grid_size, int width, int height, int offsetX, int offset
 	this->map.resize(this->maxSizeWorldGrid.x, std::vector<std::vector<std::vector<Tile*>>>());
 	for (int x = 0; x < this->maxSizeWorldGrid.x; x++) {
 
+		this->map[x].resize(this->maxSizeWorldGrid.y, std::vector<std::vector<Tile*>>());
 		for (int y = 0; y < this->maxSizeWorldGrid.y; y++) {
-			this->map[x].resize(this->maxSizeWorldGrid.y, std::vector<std::vector<Tile*>>());
-
+			
+			this->map[x][y].resize(this->layers, std::vector<Tile*>());
 			for (int z = 0; z < this->layers; z++) {
-				this->map[x][y].resize(this->layers, std::vector<Tile*>());
+				
 			}
 		}
 	}

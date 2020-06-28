@@ -171,6 +171,7 @@ void ShootingComponent::addGun(gunModels model)
 	this->guns.emplace_back(this->createGun(model));
 	this->currentGun = this->guns.back().get();
 	this->currentGun->refillAmmo(0.2);
+	this->currentGun->loadMagazine();
 	this->currentGunPos = this->guns.size() - 1;
 }
 
@@ -178,7 +179,7 @@ void ShootingComponent::addGun(gunModels model)
 void ShootingComponent::updateBullets(const std::vector<Entity*>& entities, sf::Vector2f center_pos, const float& dt)
 {
 	//Damaging the enemies
-	for (auto bullet = bullets.begin(); bullet != bullets.end(); )
+	for (auto bullet = this->bullets.begin(); bullet != this->bullets.end(); )
 	{
 		bullet->move(dt);
 		for (auto enemy = entities.begin(); enemy != entities.end(); ++enemy) {

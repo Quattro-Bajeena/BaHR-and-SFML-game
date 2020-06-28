@@ -57,6 +57,7 @@ public:
 
 	void refillAmmo();
 	void refillAmmo(float percent);
+	void loadMagazine();
 	void reload();
 	bool shoot(int amount);
 	
@@ -129,6 +130,7 @@ public:
 	//Functions
 	virtual std::vector<Bullet> shootBullet() = 0;
 	virtual void reload();
+	void loadMagazine();
 	void refillAmmo();
 	void refillAmmo(float percent);
 	void update(sf::Vector2f start_pos, sf::Vector2f dir, const float& dt);
